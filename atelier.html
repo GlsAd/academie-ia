@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capacités & Éthiques — Jeu de cartes IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  
+  :root{
+    /* --- DESIGN SYSTEM : IA ACADEMIE --- */
+    --bg-gradient: linear-gradient(135deg, #020024 0%, #0030CB 100%);
+    --cta-gradient: linear-gradient(90deg, #0055FF 0%, #00F0FF 100%);
+    --text-main: #FFFFFF;
+    --text-secondary: #E0E0E0;
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    
+    /* --- COULEURS DES CARTES --- */
+    --auto: #00F0FF; /* Cyan */
+    --auto-light: rgba(0, 240, 255, 0.1);
+    --aug: #a5b4fc; /* Bleu/Violet clair */
+    --aug-light: rgba(165, 180, 252, 0.1);
+    --eth: #FF007A; /* Magenta */
+    --eth-light: rgba(255, 0, 122, 0.1);
+  }
+
+  body{
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-gradient);
+    background-attachment: fixed;
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  a { text-decoration: none; color: inherit; transition: 0.3s; }
+  ul { list-style: none; }
+
+  /* ── NAVBAR ── */
+  .navbar {
+    background: rgba(0, 8, 20, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(to right, #fff, #a5b4fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .nav-links { display: flex; gap: 30px; }
+  .nav-links a { font-size: 0.95rem; font-weight: 400; opacity: 0.8; }
+  .nav-links a:hover, .nav-links a.active { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.5); color: #00F0FF; }
+  .hamburger { display: none; cursor: pointer; font-size: 1.8rem; color: white; }
+
+  /* ── Main layout ── */
+  .shell { max-width: 1000px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* ── Page Header ── */
+  .page-header {
+    margin-bottom: 50px;
+  }
+  
+  .page-header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: #ffffff;
+    letter-spacing: -1px;
+  }
+  
+  .page-header p {
+    font-size: 1.3rem;
+    color: var(--text-main);
+    font-weight: 400;
+  }
+
+  /* ── Scenario bar ── */
+  .scenario-bar {
+    background: linear-gradient(135deg, rgba(0, 85, 255, 0.1) 0%, rgba(0, 240, 255, 0.05) 100%);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-left: 4px solid #00F0FF;
+    border-radius: 16px;
+    padding: 25px 30px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+  
+  .avatar {
+    font-size: 3rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4));
+    flex-shrink: 0;
+  }
+  
+  .scenario-name { font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: #00F0FF; }
+  .scenario-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+
+  /* ── Scénarios Grid ── */
+  .section-label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .scenarios-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 25px; 
+    margin-bottom: 50px; 
+  }
+  
+  .scenario-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sc-badge {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+    align-self: flex-start;
+  }
+
+  .sc-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; color: #00F0FF; }
+  .sc-desc { font-size: 0.95rem; color: #E0E0E0; line-height: 1.6; margin-bottom: 20px; }
+  
+  .sc-frictions {
+    margin-top: auto;
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border-left: 2px solid #FF007A;
+  }
+  .sc-frictions p { font-size: 0.9rem; font-weight: 600; color: #FF007A; margin-bottom: 10px; }
+  .sc-frictions ul { padding-left: 20px; list-style-type: square; }
+  .sc-frictions li { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.4; }
+
+  /* ── Tabs (Filtres) ── */
+  .tabs { display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
+  
+  .tab {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    backdrop-filter: blur(5px);
+  }
+  
+  .tab:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); color: #fff; }
+  
+  .tab.active-all { background: rgba(255,255,255,0.2); border-color: #fff; color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+  .tab.active-auto { background: var(--auto-light); border-color: var(--auto); color: var(--auto); box-shadow: 0 0 15px var(--auto-light); }
+  .tab.active-aug { background: var(--aug-light); border-color: var(--aug); color: var(--aug); box-shadow: 0 0 15px var(--aug-light); }
+  .tab.active-eth { background: var(--eth-light); border-color: var(--eth); color: var(--eth); box-shadow: 0 0 15px var(--eth-light); }
+
+  /* ── Count ── */
+  .count { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 20px; text-align: center; }
+
+  /* ── Grid Cartes ── */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; perspective: 1000px; }
+
+  /* ── Card (flip) ── */
+  .card-wrap { height: 350px; cursor: pointer; }
+  
+  .card-inner {
+    position: relative; width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-wrap.flipped .card-inner { transform: rotateY(180deg); }
+
+  .front, .back {
+    position: absolute; inset: 0;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 22px 20px 22px 26px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    overflow-y: auto;
+  }
+
+  .front::-webkit-scrollbar, .back::-webkit-scrollbar { width: 6px; }
+  .front::-webkit-scrollbar-track, .back::-webkit-scrollbar-track { background: transparent; }
+  .front::-webkit-scrollbar-thumb, .back::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
+  .front::-webkit-scrollbar-thumb:hover, .back::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+  
+  .back { transform: rotateY(180deg); background: rgba(15, 23, 42, 0.8); }
+
+  .card-wrap:hover .front, .card-wrap:hover .back {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  .front::before, .back::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 5px; height: 100%; border-radius: 16px 0 0 16px;
+  }
+  
+  .type-auto .front::before, .type-auto .back::before { background: var(--auto); box-shadow: 0 0 10px var(--auto); }
+  .type-aug .front::before, .type-aug .back::before { background: var(--aug); box-shadow: 0 0 10px var(--aug); }
+  .type-eth .front::before, .type-eth .back::before { background: var(--eth); box-shadow: 0 0 10px var(--eth); }
+
+  .card-family { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .type-auto .card-family { color: var(--auto); }
+  .type-aug .card-family { color: var(--aug); }
+  .type-eth .card-family { color: var(--eth); }
+
+  .card-icon { font-size: 2.2rem; line-height: 1; display: block; margin-bottom: 12px; }
+  .card-name { font-size: 1.15rem; font-weight: 600; line-height: 1.3; margin-bottom: 10px; color: #fff; }
+  .card-desc { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+  .card-hint {
+    position: absolute; bottom: 15px; right: 20px;
+    font-size: 0.75rem; color: rgba(255,255,255,0.4); font-style: italic;
+  }
+
+  .back-section { margin-bottom: 15px; }
+  .back-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .back-question { font-size: 0.95rem; font-weight: 500; line-height: 1.5; margin-bottom: 12px; color: #fff; }
+  .back-example {
+    font-size: 0.85rem; color: #d0d0d0; line-height: 1.5;
+    padding: 10px 12px; background: rgba(0,0,0,0.3); border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .shell { padding: 30px 20px; }
+    .page-header h1 { font-size: 2.2rem; }
+    .page-header p { font-size: 1.1rem; }
+    .hamburger { display: block; }
+    .nav-links {
+      position: absolute; top: 70px; left: 0; width: 100%;
+      background: rgba(0, 8, 20, 0.95); backdrop-filter: blur(15px);
+      flex-direction: column; align-items: center; padding: 40px 0;
+      transform: translateY(-150%); transition: transform 0.4s ease;
+      z-index: 99; border-bottom: 1px solid var(--glass-border);
+    }
+    .nav-links.active { transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="logo">IA Académie</a>
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="#">Intro IA</a></li>
+    <li><a href="atelier.html" class="active">Atelier Cartes</a></li>
+    <li><a href="#">Prompting</a></li>
+    <li><a href="#">Agentique</a></li>
+  </ul>
+</nav>
+
+<div class="shell">
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>Capacités & Éthiques<br>Comprendre les enjeux de l'IA</h1>
+    <p>Ce que l'IA peut faire. Ce qu'elle devrait peut-être ne pas faire. Et comment décider.</p>
+  </div>
+
+  <!-- SCENARIO BAR (Julie) -->
+  <div class="scenario-bar">
+    <div class="avatar">👩‍💼</div>
+    <div class="scenario-content">
+      <div class="scenario-name">Cas Pratique : Julie, Responsable Innovation — Maison Clarté</div>
+      <div class="scenario-text">
+        Maison Clarté est une chaîne retail lifestyle (20 boutiques + e-commerce). Julie n'est pas développeuse, elle est le pont entre les besoins humains et les outils technologiques.<br>
+        <strong>Sa contrainte :</strong> les solutions IA doivent fonctionner pour une vendeuse de 22 ans ultra-connectée, un manager de 50 ans adepte du papier, et un client en ligne pressé.<br><br>
+        
+        <div style="border: 1px solid rgba(165, 180, 252, 0.4); border-radius: 8px; padding: 15px; background: rgba(165, 180, 252, 0.05); color: #E0E0E0; box-shadow: inset 0 0 10px rgba(165, 180, 252, 0.1);">
+          <strong>Divisez-vous en groupes et choisissez l'un des 3 scénarios ci-dessous.</strong> Utilisez ensuite les cartes pour décider comment <em>Automatiser</em>, <em>Augmenter</em> l'humain, et évaluer l'<em>Éthique</em> de vos choix.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Les 3 scénarios à disposition</div>
+  <div class="scenarios-grid">
+    
+    <!-- Scénario A -->
+    <div class="scenario-card">
+      <div class="sc-badge">Utilisateurs finaux : employés internes (responsables de boutique)</div>
+      <h4 class="sc-title">Les rapports que personne ne lit mais que tout le monde produit</h4>
+      <p class="sc-desc">Chaque semaine, les 20 responsables de boutique remplissent manuellement un rapport de performance : ventes, stocks, incidents, retours, ambiance équipe. Ça prend entre 45 minutes et 2 heures selon les personnes. Ces rapports remontent à la direction régionale — qui en lisent en moyenne 30%, souvent en diagonale. Personne ne sait vraiment si le format actuel est utile. Mais tout le monde continue parce que "ça a toujours été comme ça".</p>
+      <div class="sc-frictions">
+        <p>Frictions visibles :</p>
+        <ul>
+          <li>20 rapports × ~1h30 = 30 heures humaines perdues chaque semaine</li>
+          <li>Format libre = données incomparables d'une boutique à l'autre</li>
+          <li>La direction reçoit 20 documents Word le lundi matin et n'a pas le temps de tous les lire</li>
+          <li>Les vraies alertes (rupture de stock critique, problème RH, client difficile) sont noyées dans le reste.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Scénario B -->
+    <div class="scenario-card">
+      <div class="sc-badge">Utilisateurs finaux : employés (interne)</div>
+      <h4 class="sc-title">En boutique, les vendeurs ne savent plus quoi dire</h4>
+      <p class="sc-desc">Les vendeurs en boutique sont souvent confrontés à des questions précises auxquelles ils ne savent pas répondre : composition des produits, compatibilité, disponibilité en stock, délais de réassort. Résultat : ils improvisent, donnent parfois de mauvaises informations, ou renvoient le client vers "le site". Julie doit leur donner un outil simple, utilisable en pleine conversation avec un client, sans les former pendant 3 jours.</p>
+      <div class="sc-frictions">
+        <p>Frictions visibles :</p>
+        <ul>
+          <li>Catalogue de 2 000 références, impossible à mémoriser</li>
+          <li>Les fiches produits existent mais sont dans un intranet peu ergonomique</li>
+          <li>Les vendeurs utilisent leur téléphone personnel pour chercher sur Google</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Scénario C -->
+    <div class="scenario-card">
+      <div class="sc-badge">Utilisateurs finaux : clients (externe) + employés (interne)</div>
+      <h4 class="sc-title">Le service client qui croule sous les mêmes questions</h4>
+      <p class="sc-desc">Le service client de Maison Clarté reçoit 300 messages par semaine. 70% sont des variantes des mêmes 8 questions : délais de livraison, politique de retour, disponibilité produit, suivi de commande. L'équipe est composée de 3 personnes — elles passent leurs journées à répondre aux mêmes choses, et n'ont plus de temps pour les cas complexes qui nécessitent vraiment leur attention, leur empathie.</p>
+      <div class="sc-frictions">
+        <p>Frictions visibles :</p>
+        <ul>
+          <li>Temps de réponse moyen : 48h (l'objectif est 4h)</li>
+          <li>3 agents pour 300 messages/semaine</li>
+          <li>Les réponses varient selon qui répond et quand</li>
+          <li>Les vrais problèmes clients (litige, produit défectueux, geste commercial) sont traités avec le même niveau d'urgence que "où est ma commande ?"</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="tabs">
+    <button class="tab active-all" onclick="filter('all',this)">Toutes les cartes</button>
+    <button class="tab" onclick="filter('auto',this)">⚙️ Automatisation</button>
+    <button class="tab" onclick="filter('aug',this)">💡 Augmentation</button>
+    <button class="tab" onclick="filter('eth',this)">⚠️ Éthique</button>
+  </div>
+
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+
+</div>
+
+<script>
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('active');
+}
+
+const cards = [
+  // ── AUTOMATISATION ──
+  {
+    type:'auto', icon:'🔍', name:'Recherche & Extraction',
+    desc:'Scanne instantanément d\'immenses bases de données documentaires pour en extraire la réponse exacte.',
+    question:'(Boutique) Comment éviter aux vendeurs de fouiller dans un intranet peu ergonomique ?',
+    example:'Maison Clarté : Le vendeur pose une question orale à l\'IA sur son outil. L\'IA scanne les 2000 fiches et répond en 2 sec sur la compatibilité.'
+  },
+  {
+    type:'auto', icon:'🤖', name:'Tri & Réponse Auto (Chatbot)',
+    desc:'Analyse l\'intention d\'un message entrant, le classifie et génère une réponse type si la question est récurrente.',
+    question:'(Service Client) Que faire des 70% de messages "Où est ma commande" ?',
+    example:'Maison Clarté : L\'IA détecte les questions sur les délais. Elle lit le statut dans l\'ERP et envoie une réponse automatique personnalisée en 1 minute.'
+  },
+  {
+    type:'auto', icon:'📋', name:'Synthèse de documents',
+    desc:'Lit des dizaines de documents longs et hétérogènes pour en extraire un résumé exécutif clair.',
+    question:'(Rapports) Comment éviter à la direction de lire 20 documents Word le lundi matin ?',
+    example:'Maison Clarté : L\'IA lit les 20 rapports des managers et génère un tableau de bord d\'une page avec uniquement les alertes critiques.'
+  },
+  {
+    type:'auto', icon:'📥', name:'Structuration de données',
+    desc:'Transforme du texte libre en données structurées et comparables.',
+    question:'(Rapports) Comment transformer un format Word libre en indicateurs mesurables ?',
+    example:'Maison Clarté : Les managers dictent leur rapport à l\'oral. L\'IA remplit automatiquement les champs (ventes, moral, incidents) dans la base de données.'
+  },
+  {
+    type:'auto', icon:'🚦', name:'Routage intelligent',
+    desc:'Analyse l\'urgence ou la complexité d\'une demande pour l\'assigner à la bonne personne.',
+    question:'(Service Client) Comment s\'assurer que les litiges urgents ne se noient pas dans la masse ?',
+    example:'Maison Clarté : L\'IA détecte la colère ou le mot "défectueux" dans un mail et le place en priorité haute pour les agents.'
+  },
+
+  // ── AUGMENTATION ──
+  {
+    type:'aug', icon:'✍️', name:'Rédaction empathique',
+    desc:'Co-rédige une réponse en adaptant le ton (chaleureux, professionnel, apaisant) selon la situation.',
+    question:'(Service Client) Comment aider les 3 agents à formuler des réponses parfaites pour les litiges sans y passer des heures ?',
+    example:'Maison Clarté : L\'agent clique sur "Générer geste commercial". L\'IA rédige un email d\'excuse parfaitement tourné, l\'agent n\'a qu\'à le valider.'
+  },
+  {
+    type:'aug', icon:'🧠', name:'Aide à la recommandation',
+    desc:'Suggère des produits complémentaires basés sur le contexte du client en temps réel.',
+    question:'(Boutique) Comment transformer une question sur le stock en opportunité de vente ?',
+    example:'Maison Clarté : L\'IA confirme qu\'un produit est en rupture, mais glisse au vendeur : "Proposez cette alternative, elle correspond à ses critères".'
+  },
+  {
+    type:'aug', icon:'🗣️', name:'Préparation d\'entretien',
+    desc:'Analyse un historique complexe pour préparer un résumé des points à aborder lors d\'une interaction.',
+    question:'(Rapports/Siège) Comment la direction peut-elle mieux soutenir les responsables boutique ?',
+    example:'Maison Clarté : Avant son appel avec un manager, le directeur régional a un briefing IA lui signalant que l\'équipe a un moral en baisse depuis 2 semaines.'
+  },
+  {
+    type:'aug', icon:'🤝', name:'Dégager du temps humain',
+    desc:'L\'IA gère l\'administratif pour que l\'humain se concentre sur l\'écoute et la résolution de problèmes complexes.',
+    question:'(Service Client) Que feront les agents s\'ils ne répondent plus aux questions basiques ?',
+    example:'Maison Clarté : Libérés de 70% des tickets, les agents prennent le temps de passer des appels téléphoniques aux clients ayant eu une mauvaise expérience.'
+  },
+
+  // ── ÉTHIQUE ──
+  {
+    type:'eth', icon:'👤', name:'Désintermédiation (Perte de lien)',
+    desc:'Supprimer un processus manuel, c\'est parfois supprimer un rituel qui créait du lien social.',
+    question:'(Rapports) Si on automatise les rapports, que perd-on dans la relation Siège-Boutique ?',
+    example:'Maison Clarté : Le rapport Word du lundi était le seul moment où le manager pouvait "vider son sac". Si on passe à de la pure donnée, on perd l\'aspect humain.'
+  },
+  {
+    type:'eth', icon:'⚖️', name:'Responsabilité',
+    desc:'Qui assume la faute si l\'IA donne une mauvaise information au client ?',
+    question:'(Boutique) Si le vendeur donne un délai généré par l\'IA et qu\'il est faux, qui le client va-t-il blâmer ?',
+    example:'Maison Clarté : L\'outil boutique doit clairement indiquer la fiabilité de la donnée, et le vendeur reste garant de ce qu\'il annonce au client final.'
+  },
+  {
+    type:'eth', icon:'🏢', name:'Sens au travail & Emploi',
+    desc:'Est-ce qu\'une tâche doit encore exister ? Que fait-on du temps récupéré par les collaborateurs ?',
+    question:'(Rapports) La question n\'est pas "comment l\'IA fait le rapport" mais "ce rapport est-il utile ?"',
+    example:'Maison Clarté : Si les managers gagnent 1h30 par semaine, Julie doit redéfinir comment ce temps doit être réinvesti (formation, temps passé sur la surface de vente).'
+  },
+  {
+    type:'eth', icon:'🔒', name:'Confidentialité & Biais',
+    desc:'Les modèles IA peuvent laisser fuiter des données ou traiter les requêtes de manière inégale.',
+    question:'(Service Client) L\'IA trie-t-elle les tickets avec les mêmes biais qu\'un humain (ex: ignorer les réclamations mal formulées) ?',
+    example:'Maison Clarté : L\'IA de routage doit être auditée pour s\'assurer qu\'elle ne favorise pas uniquement les clients VIP au détriment des nouveaux clients.'
+  }
+];
+
+const labels = {auto:'Automatisation', aug:'Augmentation', eth:'Éthique'};
+
+function filter(type, btn) {
+  document.querySelectorAll('.tab').forEach(t => {
+    t.className = 'tab';
+  });
+  btn.className = 'tab active-' + type;
+
+  const filtered = type === 'all' ? cards : cards.filter(c => c.type === type);
+  const count = document.getElementById('count');
+  count.textContent = filtered.length + ' carte' + (filtered.length > 1 ? 's' : '');
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+
+  filtered.forEach(c => {
+    const wrap = document.createElement('div');
+    wrap.className = `card-wrap type-${c.type}`;
+    wrap.innerHTML = `
+      <div class="card-inner">
+        <div class="front">
+          <div class="card-family">${labels[c.type]}</div>
+          <span class="card-icon">${c.icon}</span>
+          <div class="card-name">${c.name}</div>
+          <div class="card-desc">${c.desc}</div>
+          <div class="card-hint">Cliquez pour retourner ⤻</div>
+        </div>
+        <div class="back">
+          <div class="card-family">${c.icon} ${c.name}</div>
+          <div class="back-section">
+            <div class="back-label">Question pour votre groupe</div>
+            <div class="back-question">${c.question}</div>
+          </div>
+          <div class="back-section">
+            <div class="back-label">Exemple / Impact</div>
+            <div class="back-example">${c.example}</div>
+          </div>
+        </div>
+      </div>`;
+    wrap.addEventListener('click', () => wrap.classList.toggle('flipped'));
+    grid.appendChild(wrap);
+  });
+}
+
+// Initialisation
+filter('all', document.querySelector('.tab'));
+</script>
+</body>
+</html>
