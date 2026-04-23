@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IA Académie - Agentique</title>
+    <title>Salesforce Académie IA - L'Agentique en Action</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -47,10 +47,6 @@
         .logo {
             font-size: 1.4rem;
             font-weight: 700;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
             background: linear-gradient(to right, #fff, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -60,19 +56,17 @@
         .nav-links a { font-size: 0.95rem; font-weight: 400; opacity: 0.7; }
         .nav-links a:hover { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
         .nav-links a.active {
-            opacity: 1;
-            color: #00F0FF;
-            font-weight: 600;
+            opacity: 1; color: #00F0FF; font-weight: 600;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
 
         .hamburger { display: none; cursor: pointer; font-size: 1.8rem; color: white; }
 
-        /* --- COMING SOON --- */
-        .container {
-            max-width: 700px;
+        /* --- PAGE LAYOUT --- */
+        .page-hero {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 100px 20px;
+            padding: 70px 24px 40px;
             text-align: center;
         }
 
@@ -82,43 +76,300 @@
             border: 1px solid var(--glass-border);
             padding: 6px 18px;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 500;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--accent-color);
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
 
-        h1 {
-            font-size: 2.8rem;
+        .page-hero h1 {
+            font-size: 2.6rem;
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             background: linear-gradient(to right, #ffffff, #dbe4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .subtitle {
-            font-size: 1.1rem;
+        .page-hero .subtitle {
+            font-size: 1.05rem;
             color: var(--text-secondary);
             font-weight: 300;
             line-height: 1.7;
-            margin-bottom: 50px;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 14px 32px;
-            background: var(--cta-gradient);
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: white;
-            transition: opacity 0.3s, transform 0.3s;
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
         }
-        .cta-button:hover { opacity: 0.85; transform: translateY(-2px); }
+
+        .section { margin-bottom: 64px; }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-lead {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .section-divider {
+            border: none;
+            border-top: 1px solid var(--glass-border);
+            margin: 0 0 64px;
+        }
+
+        /* --- TABS COMPARATEUR --- */
+        .tab-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 10px 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+            color: var(--text-secondary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .tab-btn:hover { background: rgba(255,255,255,0.12); color: var(--text-main); }
+
+        .tab-btn.active {
+            background: rgba(255,255,255,0.14);
+            color: #00F0FF;
+            font-weight: 600;
+            border-color: rgba(0, 240, 255, 0.35);
+        }
+
+        .tab-panel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 0 16px 16px 16px;
+            padding: 32px;
+            display: none;
+        }
+
+        .tab-panel.active { display: block; }
+
+        .comparateur-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .comp-col h4 {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .comp-col p, .comp-col ul li {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .comp-col ul { display: flex; flex-direction: column; gap: 7px; }
+        .comp-col ul li { display: flex; gap: 8px; align-items: flex-start; }
+        .comp-col ul li::before { content: '→'; color: #00F0FF; flex-shrink: 0; margin-top: 2px; }
+
+        .comp-col .example-box {
+            margin-top: 14px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.83rem;
+            color: #a5b4fc;
+            font-style: italic;
+            line-height: 1.55;
+        }
+
+        /* --- CAPACITY CARDS --- */
+        .cap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .cap-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 26px 20px;
+            text-align: center;
+        }
+
+        .cap-card .cap-icon { font-size: 2rem; margin-bottom: 12px; }
+        .cap-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+        .cap-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55; }
+
+        /* --- HUMAIN VS AGENT --- */
+        .hva-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .hva-col {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 28px 24px;
+        }
+
+        .hva-col.human { border-top: 3px solid #a5b4fc; }
+        .hva-col.agent { border-top: 3px solid #00F0FF; }
+
+        .hva-col h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
+        .hva-col .hva-sub {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .hva-tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .hva-tag {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 500;
+        }
+
+        .hva-col.human .hva-tag {
+            background: rgba(165,180,252,0.12);
+            border: 1px solid rgba(165,180,252,0.3);
+            color: #c7d2fe;
+        }
+
+        .hva-col.agent .hva-tag {
+            background: rgba(0,240,255,0.08);
+            border: 1px solid rgba(0,240,255,0.25);
+            color: #67e8f9;
+        }
+
+        .hva-note {
+            margin-top: 24px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-left: 4px solid #00F0FF;
+            border-radius: 0 12px 12px 0;
+            padding: 18px 22px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* --- 3 PILLARS --- */
+        .pillar-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .pillar-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 28px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+        }
+
+        .pillar-card.ethics::before   { background: linear-gradient(90deg, #f472b6, #e879f9); }
+        .pillar-card.human::before    { background: linear-gradient(90deg, #a5b4fc, #818cf8); }
+        .pillar-card.resource::before { background: linear-gradient(90deg, #4ade80, #22d3ee); }
+
+        .pillar-card .pillar-icon { font-size: 1.8rem; margin-bottom: 12px; }
+        .pillar-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
+        .pillar-card p  { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
+
+        .pillar-card .pillar-points {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .pillar-card .pillar-points li {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 7px;
+            align-items: flex-start;
+            line-height: 1.5;
+        }
+
+        .pillar-card .pillar-points li::before { content: '·'; color: var(--accent-color); flex-shrink: 0; }
+
+        /* --- RESOURCES --- */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .resource-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 22px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .resource-card:hover { border-color: rgba(0,240,255,0.4); transform: translateY(-3px); }
+
+        .resource-card .res-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .resource-card h4 { font-size: 0.95rem; font-weight: 600; line-height: 1.4; }
+        .resource-card p  { font-size: 0.83rem; color: var(--text-secondary); line-height: 1.5; flex: 1; }
+        .resource-card .res-link { font-size: 0.82rem; color: #00F0FF; font-weight: 500; }
+        .resource-card .res-link:hover { text-decoration: underline; }
 
         /* --- FOOTER --- */
         footer {
@@ -127,24 +378,23 @@
             color: rgba(255,255,255,0.3);
             font-size: 0.85rem;
             border-top: 1px solid var(--glass-border);
-            margin-top: 60px;
         }
 
         /* --- MOBILE --- */
         @media (max-width: 768px) {
             .hamburger { display: block; }
             .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px; left: 0; right: 0;
+                display: none; flex-direction: column;
+                position: absolute; top: 70px; left: 0; right: 0;
                 background: rgba(0, 8, 20, 0.97);
-                padding: 20px 30px;
-                gap: 15px;
+                padding: 20px 30px; gap: 15px;
                 border-bottom: 1px solid var(--glass-border);
             }
             .nav-links.active { display: flex; }
-            h1 { font-size: 2rem; }
+            .page-hero h1 { font-size: 2rem; }
+            .comparateur-grid, .cap-grid, .pillar-grid { grid-template-columns: 1fr; }
+            .hva-grid, .resource-grid { grid-template-columns: 1fr; }
+            .tab-panel { border-radius: 0 0 16px 16px; }
         }
     </style>
 </head>
@@ -162,14 +412,269 @@
         </ul>
     </nav>
 
-    <div class="container">
-        <span class="badge">En cours de création</span>
-        <h1>Atelier Agentique</h1>
-        <p class="subtitle">
-            Atelier pratique : découvrir et manipuler les agents IA.<br>
-            Ce module sera disponible prochainement.
-        </p>
-        <a href="index.html" class="cta-button">← Retour au programme</a>
+    <!-- HERO -->
+    <div class="page-hero">
+        <span class="badge">Module 6 · Après-midi</span>
+        <h1>L'Agentique en Action</h1>
+        <p class="subtitle">Ce qu'on a vu en démo, et comment le transposer.<br>De l'assistant ponctuel à l'agent d'entreprise autonome.</p>
+    </div>
+
+    <div class="content-wrapper">
+
+        <!-- SECTION 1 : COMPARATEUR TABS -->
+        <section class="section">
+            <h2 class="section-title">Chatbot, Copilot ou Agent : quelle différence ?</h2>
+            <p class="section-lead">Trois approches de l'IA, trois niveaux d'autonomie très différents. Sélectionnez chaque type pour comparer.</p>
+
+            <div class="tab-bar">
+                <button class="tab-btn active" onclick="switchTab('chatbot', this)">🤖 Chatbot</button>
+                <button class="tab-btn" onclick="switchTab('copilot', this)">🧑‍✈️ Copilot</button>
+                <button class="tab-btn" onclick="switchTab('agent', this)">⚡ Agent IA</button>
+            </div>
+
+            <div id="tab-chatbot" class="tab-panel active">
+                <div class="comparateur-grid">
+                    <div class="comp-col">
+                        <h4>Ce qu'il fait</h4>
+                        <ul>
+                            <li>Répond à des questions prédéfinies selon des règles fixes</li>
+                            <li>Suit un arbre de décision ou un script</li>
+                            <li>Ne s'adapte pas aux situations inattendues</li>
+                            <li>Traitement de tâches répétitives et structurées</li>
+                        </ul>
+                    </div>
+                    <div class="comp-col">
+                        <h4>Cas d'usage type</h4>
+                        <ul>
+                            <li>Réinitialisation de mot de passe</li>
+                            <li>Vérification du statut d'une commande</li>
+                            <li>FAQ produit automatisée</li>
+                            <li>Prise de rendez-vous avec formulaire guidé</li>
+                        </ul>
+                    </div>
+                    <div class="comp-col">
+                        <h4>Exemple concret</h4>
+                        <div class="example-box">
+                            Client : « Où est ma commande ? »<br><br>
+                            Chatbot : « Entrez votre numéro de commande. » → Vérifie la base → « Votre commande sera livrée le 12 mai. »<br><br>
+                            Script fixe, réponse prévisible, aucune adaptation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-copilot" class="tab-panel">
+                <div class="comparateur-grid">
+                    <div class="comp-col">
+                        <h4>Ce qu'il fait</h4>
+                        <ul>
+                            <li>Assiste l'humain en temps réel dans son travail</li>
+                            <li>Génère, résume, traduit, reformule</li>
+                            <li>Suggère — l'humain valide et décide</li>
+                            <li>Intégré dans les outils existants (Word, Salesforce, VS Code)</li>
+                        </ul>
+                    </div>
+                    <div class="comp-col">
+                        <h4>Cas d'usage type</h4>
+                        <ul>
+                            <li>Rédaction d'un email à partir de notes</li>
+                            <li>Résumé d'une réunion de 2h en 5 bullet points</li>
+                            <li>Génération d'un premier jet de code</li>
+                            <li>Synthèse d'un dossier client avant un rendez-vous</li>
+                        </ul>
+                    </div>
+                    <div class="comp-col">
+                        <h4>Exemple concret</h4>
+                        <div class="example-box">
+                            Vendeur dans Salesforce : « Résume les interactions des 30 derniers jours avec ce client. »<br><br>
+                            Einstein Copilot analyse les emails, appels et notes → génère un résumé structuré → le vendeur le relit, ajuste, et l'utilise pour préparer son RDV.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-agent" class="tab-panel">
+                <div class="comparateur-grid">
+                    <div class="comp-col">
+                        <h4>Ce qu'il fait</h4>
+                        <ul>
+                            <li>Agit de façon autonome pour atteindre un objectif</li>
+                            <li>Enchaîne des actions sans approbation à chaque étape</li>
+                            <li>Utilise des outils : recherche web, API, envoi d'emails</li>
+                            <li>Prend des décisions, s'adapte aux résultats intermédiaires</li>
+                        </ul>
+                    </div>
+                    <div class="comp-col">
+                        <h4>Cas d'usage type</h4>
+                        <ul>
+                            <li>Agent service client 24/7 qui résout et escalade</li>
+                            <li>Agent de qualification de leads qui enrichit et priorise</li>
+                            <li>Agent RH qui gère les demandes de congés</li>
+                            <li>Agent e-commerce qui gère retours et remboursements</li>
+                        </ul>
+                    </div>
+                    <div class="comp-col">
+                        <h4>Exemple concret (démo Agentforce)</h4>
+                        <div class="example-box">
+                            Client : « Je veux retourner mon article. »<br><br>
+                            Agent Agentforce : vérifie la politique de retour → consulte la commande dans le CRM → génère l'étiquette retour → envoie l'email de confirmation → met à jour le dossier client → escalade uniquement si cas complexe.<br><br>
+                            Zéro intervention humaine pour 80% des cas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- SECTION 2 : 4 CAPACITES D'UN AGENT -->
+        <section class="section">
+            <h2 class="section-title">Les 4 capacités d'un agent IA</h2>
+            <p class="section-lead">Ce qui distingue un vrai agent d'un simple LLM connecté à des outils.</p>
+            <div class="cap-grid">
+                <div class="cap-card">
+                    <div class="cap-icon">🧩</div>
+                    <h3>Raisonner</h3>
+                    <p>L'agent planifie une séquence d'étapes pour atteindre l'objectif. Il décompose un problème complexe en sous-tâches et choisit les outils adaptés à chaque étape.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon">⚡</div>
+                    <h3>Agir</h3>
+                    <p>L'agent peut déclencher des actions concrètes dans des systèmes tiers : envoyer un email, mettre à jour un CRM, passer une commande, appeler une API.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon">🧠</div>
+                    <h3>Mémoriser</h3>
+                    <p>L'agent conserve le contexte de l'interaction — voire des interactions passées — pour adapter ses réponses et décisions en fonction de l'historique.</p>
+                </div>
+                <div class="cap-card">
+                    <div class="cap-icon">🔒</div>
+                    <h3>S'appuyer sur des données de confiance</h3>
+                    <p>Dans un contexte d'entreprise, l'agent accède aux données internes (CRM, ERP, knowledge base) via des connecteurs sécurisés, sans les exposer à des modèles externes.</p>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- SECTION 3 : HUMAIN VS AGENT -->
+        <section class="section">
+            <h2 class="section-title">Humain vs Agent — qui fait quoi ?</h2>
+            <p class="section-lead">Ce n'est pas une compétition. C'est une répartition. La valeur humaine se concentre là où l'agent ne peut pas aller.</p>
+            <div class="hva-grid">
+                <div class="hva-col human">
+                    <h3>Ce que l'humain fait mieux</h3>
+                    <p class="hva-sub">Irremplaçable</p>
+                    <div class="hva-tag-list">
+                        <span class="hva-tag">Jugement dans l'ambiguïté</span>
+                        <span class="hva-tag">Empathie &amp; écoute</span>
+                        <span class="hva-tag">Sens des responsabilités</span>
+                        <span class="hva-tag">Expression de valeurs</span>
+                        <span class="hva-tag">Intuition stratégique</span>
+                        <span class="hva-tag">Gestion de la complexité politique</span>
+                        <span class="hva-tag">Connaissance transversale</span>
+                        <span class="hva-tag">Évaluation de la causalité</span>
+                        <span class="hva-tag">Relation de confiance</span>
+                    </div>
+                </div>
+                <div class="hva-col agent">
+                    <h3>Ce que l'agent fait mieux</h3>
+                    <p class="hva-sub">Performant</p>
+                    <div class="hva-tag-list">
+                        <span class="hva-tag">Exécution rapide et sans fatigue</span>
+                        <span class="hva-tag">Identification de patterns</span>
+                        <span class="hva-tag">Traitement de données massives</span>
+                        <span class="hva-tag">Disponibilité 24/7</span>
+                        <span class="hva-tag">Cohérence des réponses</span>
+                        <span class="hva-tag">Automatisation de workflows</span>
+                        <span class="hva-tag">Mémoire sans oubli</span>
+                        <span class="hva-tag">Multi-tâche simultané</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hva-note">
+                <strong>Clé de lecture :</strong> Les tâches à haute valeur humaine (empathie, décision stratégique, responsabilité) doivent rester sous contrôle humain. Les agents prennent en charge l'exécution répétitive pour libérer du temps sur ce qui compte. La bonne question n'est pas « l'agent va-t-il me remplacer ? » mais « quelles tâches est-ce que je veux qu'il prenne en charge pour que je me concentre sur l'essentiel ? »
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- SECTION 4 : 3 PILIERS RESPONSIBLE AGENTIC ENTERPRISE -->
+        <section class="section">
+            <h2 class="section-title">Les 3 piliers d'un Agentic Enterprise responsable</h2>
+            <p class="section-lead">Déployer des agents sans garde-fous, c'est créer des risques évitables. Ces trois piliers structurent une approche responsable.</p>
+            <div class="pillar-grid">
+                <div class="pillar-card ethics">
+                    <div class="pillar-icon">⚖️</div>
+                    <h3>Ethics by Design</h3>
+                    <p>Intégrer l'éthique dans la conception même des agents, pas en post-production. Salesforce suit 5 principes directeurs pour tout développement IA.</p>
+                    <ul class="pillar-points">
+                        <li>Droits humains — l'IA ne doit pas nuire</li>
+                        <li>Vie privée — données utilisateurs protégées par construction</li>
+                        <li>Sécurité — audits et tests de robustesse systématiques</li>
+                        <li>Transparence — l'agent explique ses décisions</li>
+                        <li>Inclusion — prévention des biais et des inégalités d'accès</li>
+                    </ul>
+                </div>
+                <div class="pillar-card human">
+                    <div class="pillar-icon">🧑‍✈️</div>
+                    <h3>Human at the Helm</h3>
+                    <p>L'humain reste au commande des décisions à fort enjeu. L'agent exécute ; l'humain supervise, recadre, valide.</p>
+                    <ul class="pillar-points">
+                        <li>Revue humaine obligatoire sur les décisions critiques</li>
+                        <li>Tableau de bord Agentforce Command Center pour piloter les agents</li>
+                        <li>Politique d'usage acceptable (Acceptable Use Policy) pour chaque agent</li>
+                        <li>80% des clients estiment que la validation humaine est essentielle</li>
+                    </ul>
+                </div>
+                <div class="pillar-card resource">
+                    <div class="pillar-icon">🌱</div>
+                    <h3>Efficient Resource Use</h3>
+                    <p>L'IA a un coût énergétique réel. Utiliser l'IA de façon sobre, c'est aussi faire un choix stratégique et environnemental.</p>
+                    <ul class="pillar-points">
+                        <li>Choisir le modèle le plus efficace pour la tâche (pas le plus grand)</li>
+                        <li>Héberger dans la région au moindre impact carbone</li>
+                        <li>Configurer des garde-fous de prompt pour éviter les appels inutiles</li>
+                        <li>AI Energy Score : nouvel indicateur de transparence énergétique</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <!-- SECTION 5 : POUR ALLER PLUS LOIN -->
+        <section class="section">
+            <h2 class="section-title">Pour aller plus loin</h2>
+            <p class="section-lead">Les ressources Salesforce pour explorer l'agentique et l'IA responsable.</p>
+            <div class="resource-grid">
+                <a class="resource-card" href="https://www.salesforce.com/agentforce/" target="_blank" rel="noopener">
+                    <span class="res-label">Plateforme · Salesforce</span>
+                    <h4>Agentforce</h4>
+                    <p>La plateforme d'IA agentique de Salesforce. Explorez les cas d'usage par secteur et les démos disponibles.</p>
+                    <span class="res-link">Découvrir →</span>
+                </a>
+                <a class="resource-card" href="https://www.salesforce.com/company/responsible-ai-principles/" target="_blank" rel="noopener">
+                    <span class="res-label">Gouvernance · Salesforce</span>
+                    <h4>Trusted AI Principles</h4>
+                    <p>Les 5 principes directeurs de Salesforce pour développer et déployer une IA responsable : Human Rights, Privacy, Safety, Transparency, Inclusion.</p>
+                    <span class="res-link">Lire les principes →</span>
+                </a>
+                <a class="resource-card" href="https://www.salesforce.com/products/einstein/einstein-trust-layer/" target="_blank" rel="noopener">
+                    <span class="res-label">Sécurité · Salesforce</span>
+                    <h4>Einstein Trust Layer</h4>
+                    <p>La couche de sécurité qui protège vos données d'entreprise avant qu'elles n'atteignent un LLM : anonymisation, journalisation, prévention des fuites.</p>
+                    <span class="res-link">En savoir plus →</span>
+                </a>
+                <a class="resource-card" href="https://www.salesforce.com/news/stories/ai-acceptable-use-policy/" target="_blank" rel="noopener">
+                    <span class="res-label">Politique · Salesforce</span>
+                    <h4>AI Acceptable Use Policy</h4>
+                    <p>Le cadre d'utilisation acceptable de l'IA chez Salesforce — un modèle pour construire votre propre politique interne.</p>
+                    <span class="res-link">Consulter →</span>
+                </a>
+            </div>
+        </section>
+
     </div>
 
     <footer>
@@ -179,6 +684,13 @@
     <script>
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        function switchTab(id, btn) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + id).classList.add('active');
+            btn.classList.add('active');
         }
     </script>
 </body>
