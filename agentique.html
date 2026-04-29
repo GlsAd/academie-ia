@@ -47,6 +47,14 @@
         .logo {
             font-size: 1.4rem;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo svg { flex-shrink: 0; }
+
+        .logo span {
             background: linear-gradient(to right, #fff, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -401,7 +409,10 @@
 <body>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">Salesforce Académie IA</a>
+        <a href="index.html" class="logo">
+          <svg width="36" height="25" viewBox="0 0 273 191" aria-hidden="true"><path fill="#00A1E0" d="M113.7 20.8c8.8-9.2 21-14.9 34.6-14.9 18 0 33.7 10 42.1 24.9 7.3-3.3 15.3-5.1 23.8-5.1 32.5 0 58.9 26.6 58.9 59.5 0 32.8-26.4 59.5-58.9 59.5-4 0-7.9-.4-11.7-1.2-7.4 13.2-21.5 22.1-37.7 22.1-6.8 0-13.2-1.6-18.9-4.3-7.5 17.6-25 30-45.4 30-21.3 0-39.4-13.4-46.4-32.2-3.1.7-6.3 1-9.6 1C20.4 160.1 0 139.6 0 114.1 0 97 9.2 82.1 22.9 74.3c-2.9-6.7-4.5-14.1-4.5-21.9 0-30.4 24.7-55 55.2-55 17.9 0 33.8 8.5 43.9 21.7z"/></svg>
+          <span>Salesforce Académie IA</span>
+        </a>
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Accueil</a></li>
@@ -414,7 +425,7 @@
 
     <!-- HERO -->
     <div class="page-hero">
-        <span class="badge">Module 6 · Après-midi</span>
+        <span class="badge">Module 4 · Après-midi</span>
         <h1>L'Agentique en Action</h1>
         <p class="subtitle">Ce qu'on a vu en démo, et comment le transposer.<br>De l'assistant ponctuel à l'agent d'entreprise autonome.</p>
     </div>
@@ -629,11 +640,11 @@
                 </div>
                 <div class="pillar-card resource">
                     <div class="pillar-icon">🌱</div>
-                    <h3>Efficient Resource Use</h3>
+                    <h3>Optimisation des ressources</h3>
                     <p>L'IA a un coût énergétique réel. Utiliser l'IA de façon sobre, c'est aussi faire un choix stratégique et environnemental.</p>
                     <ul class="pillar-points">
-                        <li>Choisir le modèle le plus efficace pour la tâche (pas le plus grand)</li>
-                        <li>Héberger dans la région au moindre impact carbone</li>
+                        <li>Préférer un modèle de petite taille défini pour la tâche à accomplir, et non pas le plus grand modèle.</li>
+                        <li>Héberger dans une région à faible intensité carbone</li>
                         <li>Configurer des garde-fous de prompt pour éviter les appels inutiles</li>
                         <li>AI Energy Score : nouvel indicateur de transparence énergétique</li>
                     </ul>
@@ -654,13 +665,13 @@
                     <p>La plateforme d'IA agentique de Salesforce. Explorez les cas d'usage par secteur et les démos disponibles.</p>
                     <span class="res-link">Découvrir →</span>
                 </a>
-                <a class="resource-card" href="https://www.salesforce.com/company/responsible-ai-principles/" target="_blank" rel="noopener">
+                <a class="resource-card" href="https://www.salesforce.com/artificial-intelligence/trusted-ai/" target="_blank" rel="noopener">
                     <span class="res-label">Gouvernance · Salesforce</span>
                     <h4>Trusted AI Principles</h4>
                     <p>Les 5 principes directeurs de Salesforce pour développer et déployer une IA responsable : Human Rights, Privacy, Safety, Transparency, Inclusion.</p>
                     <span class="res-link">Lire les principes →</span>
                 </a>
-                <a class="resource-card" href="https://www.salesforce.com/products/einstein/einstein-trust-layer/" target="_blank" rel="noopener">
+                <a class="resource-card" href="https://www.salesforce.com/news/einstein-trust-layer-how-it-works/" target="_blank" rel="noopener">
                     <span class="res-label">Sécurité · Salesforce</span>
                     <h4>Einstein Trust Layer</h4>
                     <p>La couche de sécurité qui protège vos données d'entreprise avant qu'elles n'atteignent un LLM : anonymisation, journalisation, prévention des fuites.</p>

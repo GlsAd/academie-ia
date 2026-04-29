@@ -51,6 +51,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .logo svg { flex-shrink: 0; }
+
+        .logo span {
             background: linear-gradient(to right, #fff, #a5b4fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -295,6 +300,13 @@
             display: flex;
             gap: 20px;
             align-items: flex-start;
+            color: inherit;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+
+        .study-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         .study-icon {
@@ -507,7 +519,10 @@
 <body>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">Salesforce Académie IA</a>
+        <a href="index.html" class="logo">
+          <svg width="36" height="25" viewBox="0 0 273 191" aria-hidden="true"><path fill="#00A1E0" d="M113.7 20.8c8.8-9.2 21-14.9 34.6-14.9 18 0 33.7 10 42.1 24.9 7.3-3.3 15.3-5.1 23.8-5.1 32.5 0 58.9 26.6 58.9 59.5 0 32.8-26.4 59.5-58.9 59.5-4 0-7.9-.4-11.7-1.2-7.4 13.2-21.5 22.1-37.7 22.1-6.8 0-13.2-1.6-18.9-4.3-7.5 17.6-25 30-45.4 30-21.3 0-39.4-13.4-46.4-32.2-3.1.7-6.3 1-9.6 1C20.4 160.1 0 139.6 0 114.1 0 97 9.2 82.1 22.9 74.3c-2.9-6.7-4.5-14.1-4.5-21.9 0-30.4 24.7-55 55.2-55 17.9 0 33.8 8.5 43.9 21.7z"/></svg>
+          <span>Salesforce Académie IA</span>
+        </a>
         <div class="hamburger" onclick="toggleMenu()">☰</div>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Accueil</a></li>
@@ -520,9 +535,9 @@
 
     <!-- HERO -->
     <div class="page-hero">
-        <span class="badge">Module 2 · Matin</span>
+        <span class="badge">Module 1 · Matin</span>
         <h1>Changement de Paradigme de l'IA</h1>
-        <p class="subtitle">Repères pour revenir aux concepts clés après la session.<br>L'IA n'est pas un outil de plus — c'est un changement de collaborateur.</p>
+        <p class="subtitle">Repères pour revenir aux concepts clés après la session.<br>L'IA transforme notre façon de collaborer — voici les repères pour comprendre ce changement.</p>
     </div>
 
     <div class="content-wrapper">
@@ -536,19 +551,19 @@
                     <div class="wave-num">Vague 1</div>
                     <h3>IA Prédictive</h3>
                     <p>Analyse des données historiques pour anticiper des résultats futurs. L'IA fait des recommandations, mais un humain décide.</p>
-                    <div class="example">Ex : Scoring de leads, détection de fraude, suggestions Netflix</div>
+                    <div class="example">Ex : Scoring de leads, détection de fraude, suggestions de recommandations de contenu (films, musique…)</div>
                 </div>
                 <div class="wave-card wave-2">
                     <div class="wave-num">Vague 2</div>
                     <h3>Copilots</h3>
-                    <p>L'IA générative assiste l'humain en temps réel : elle rédige, résume, traduit, génère. Elle augmente la productivité individuelle.</p>
+                    <p>L'IA générative assiste l'humain en temps réel : elle rédige, résume, traduit, génère.</p>
                     <div class="example">Ex : ChatGPT, Copilot dans Word, suggestions Gmail, Einstein GPT</div>
                 </div>
                 <div class="wave-card wave-3">
                     <div class="wave-num">Vague 3 · Maintenant</div>
                     <h3>Agents IA</h3>
                     <p>L'IA agit de façon autonome : elle enchaîne des décisions, déclenche des actions, s'adapte aux situations sans intervention humaine permanente.</p>
-                    <div class="example">Ex : Agentforce, agent service client 24/7, agent de recrutement</div>
+                    <div class="example">Ex : agent service client 24/7, agent de recrutement</div>
                 </div>
             </div>
         </section>
@@ -576,7 +591,7 @@
                     <p class="col-sub">Outil qui agit</p>
                     <ul>
                         <li>Je lui donne un objectif, elle enchaîne des actions</li>
-                        <li>Navigue sur le web, envoie des emails, déclenche des workflows</li>
+                        <li>Navigue sur le web, envoie des emails, déclenche des processus de travail</li>
                         <li>Mémorise le contexte et prend des décisions séquentielles</li>
                         <li>Agit de façon autonome dans un cadre défini</li>
                         <li>Exemples : Agentforce, agents personnalisés, bots de réservation</li>
@@ -602,6 +617,7 @@
                 <div>
                     <h4>Étude : "The Cybernetic Teammate" — Ethan Mollick, Wharton</h4>
                     <p>Des équipes utilisant l'IA ont été comparées à des équipes sans IA. Résultat surprenant : les individus travaillant avec l'IA atteignent presque la même productivité que des équipes entières sans IA. L'IA ne remplace pas l'équipe — elle transforme l'individu en une équipe à lui seul. Mais cette performance n'est possible qu'avec un bon niveau de collaboration humain-IA.</p>
+                    <a href="https://www.oneusefulthing.org/p/the-cybernetic-teammate" target="_blank" rel="noopener" style="display:inline-block; margin-top:14px; font-size:0.88rem; font-weight:600; color:#00F0FF;">En savoir plus →</a>
                 </div>
             </div>
         </section>
@@ -614,11 +630,6 @@
             <p class="section-lead">L'IA n'est pas neutre. Utiliser l'IA de façon responsable commence par connaître ses angles morts.</p>
             <div class="grid-4">
                 <div class="ethic-card">
-                    <div class="ethic-icon">🌱</div>
-                    <h4>Impact écologique</h4>
-                    <p>Faire tourner un grand modèle d'IA consomme bien plus d'énergie qu'une recherche Google. À utiliser de façon ciblée, pas pour tout et n'importe quoi.</p>
-                </div>
-                <div class="ethic-card">
                     <div class="ethic-icon">⚖️</div>
                     <h4>Biais</h4>
                     <p>L'IA a été entraînée sur des données humaines — elle en reproduit les stéréotypes et angles morts, parfois de façon subtile. L'esprit critique reste indispensable.</p>
@@ -626,12 +637,17 @@
                 <div class="ethic-card">
                     <div class="ethic-icon">🔒</div>
                     <h4>Données</h4>
-                    <p>Tout ce que vous envoyez à un outil IA part quelque part. Ne jamais partager de données confidentielles, RH, ou clients sans s'assurer de la politique du fournisseur.</p>
+                    <p>Ne jamais partager de données confidentielles, sensibles comme bancaires, RH, ou clients sans s'assurer de la politique du fournisseur.</p>
                 </div>
                 <div class="ethic-card">
                     <div class="ethic-icon">🧑‍⚖️</div>
                     <h4>Responsabilité</h4>
                     <p>Quand une décision IA est fausse, qui répond ? Cette question doit être tranchée avant tout déploiement. L'humain reste responsable des décisions prises.</p>
+                </div>
+                <div class="ethic-card">
+                    <div class="ethic-icon">🌱</div>
+                    <h4>Impact écologique</h4>
+                    <p>Faire tourner un grand modèle d'IA consomme bien plus d'énergie qu'une recherche Google. À utiliser de façon ciblée, pas pour tout et n'importe quoi.</p>
                 </div>
             </div>
         </section>
@@ -721,7 +737,7 @@
                         <span class="chevron">▼</span>
                     </button>
                     <div class="glossaire-body">
-                        <strong>Retrieval-Augmented Generation</strong> — Technique qui connecte un LLM à une base de données externe (documents internes, CRM, intranet) avant de générer une réponse. Le modèle "cherche" l'information pertinente avant de répondre, ce qui réduit les hallucinations et lui permet de s'appuyer sur des données à jour sans retraining.
+                        <strong>Retrieval-Augmented Generation</strong> — Technique qui connecte un LLM à une base de données externe (documents internes, CRM, intranet) avant de générer une réponse. Le modèle "cherche" l'information pertinente avant de répondre, ce qui réduit les hallucinations et lui permet de s'appuyer sur des données à jour sans ré-entrainement.
                     </div>
                 </div>
 
@@ -775,13 +791,13 @@
             <h2 class="section-title">Pour aller plus loin</h2>
             <p class="section-lead">Lectures recommandées pour approfondir les thèmes de la session.</p>
             <div class="resource-grid">
-                <a class="resource-card" href="https://www.salesforce.com/resources/articles/ai-sustainability/" target="_blank" rel="noopener">
+                <a class="resource-card" href="https://www.salesforce.com/form/sustainability/ai-sustainability/" target="_blank" rel="noopener">
                     <span class="res-label">Rapport · Salesforce</span>
                     <h4>AI Sustainability Outlook 2025</h4>
                     <p>L'état de l'impact environnemental de l'IA et les stratégies pour y répondre : efficacité des modèles, énergie propre, consommation d'eau.</p>
                     <span class="res-link">Lire le rapport →</span>
                 </a>
-                <a class="resource-card" href="https://www.salesforce.com/resources/articles/trusted-ai/" target="_blank" rel="noopener">
+                <a class="resource-card" href="https://www.salesforce.com/artificial-intelligence/trusted-ai/" target="_blank" rel="noopener">
                     <span class="res-label">Rapport · Salesforce</span>
                     <h4>Trusted AI &amp; Agents Impact Report 2025</h4>
                     <p>Comment Salesforce développe l'IA selon 5 principes : Droits humains, Vie privée, Sécurité, Transparence et Inclusion.</p>
