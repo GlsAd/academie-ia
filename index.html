@@ -3,31 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IA Académie - Accueil</title>
-    
+    <title>Salesforce Académie IA — Inscription</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <style>
         /* --- VARIABLES & SETUP --- */
         :root {
-            /* Background: Gradient Moderne basé sur #0030CB */
             --bg-gradient: linear-gradient(135deg, #020024 0%, #0030CB 100%);
-            
-            /* On garde le gradient CTA pour les accents (titres, badges) uniquement */
             --cta-gradient: linear-gradient(90deg, #0055FF 0%, #00F0FF 100%);
-            
             --text-main: #FFFFFF;
-            --text-secondary: #E0E0E0;
             --glass-bg: rgba(255, 255, 255, 0.08);
             --glass-border: rgba(255, 255, 255, 0.15);
-            --accent-color: #a5b4fc;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -39,7 +29,6 @@
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
 
         /* --- NAVBAR --- */
         .navbar {
@@ -73,33 +62,31 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { font-size: 0.95rem; font-weight: 400; opacity: 0.9; }
-        .nav-links a:hover { opacity: 1; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
-        .hamburger { display: none; cursor: pointer; font-size: 1.8rem; color: white; }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero {
-            min-height: 85vh;
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 60px 20px 40px;
             position: relative;
         }
 
         .hero::after {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
             background: #0055FF;
-            filter: blur(150px);
-            opacity: 0.2;
+            filter: blur(160px);
+            opacity: 0.18;
             z-index: -1;
             border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .badge {
@@ -112,7 +99,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 25px;
+            margin-bottom: 28px;
             backdrop-filter: blur(5px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
@@ -120,183 +107,61 @@
         h1 {
             font-size: 3.5rem;
             line-height: 1.2;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             font-weight: 700;
             background: linear-gradient(to right, #ffffff, #dbe4ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        p.subtitle {
-            font-size: 1.1rem;
+        .subtitle {
+            font-size: 1.15rem;
             color: #ccc;
-            max-width: 600px;
-            margin-bottom: 50px;
+            max-width: 620px;
+            margin-bottom: 20px;
             font-weight: 300;
+            line-height: 1.7;
         }
 
-        /* --- BOUTON GLASSMORPHISM --- */
-        .cta-button {
-            /* Fond blanc transparent */
-            background: rgba(255, 255, 255, 0.1); 
-            /* Effet de flou */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            
+        .hero-meta {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 48px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: var(--cta-gradient);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure fine et claire */
-            
-            padding: 18px 45px;
+            border: none;
+            padding: 16px 40px;
             border-radius: 50px;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .cta-button:hover {
-            /* Devient plus blanc/opaque au survol */
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15); /* Glow blanc subtil */
-            border-color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* --- PLANNING SECTION --- */
-        .planning-section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 60px;
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--cta-gradient);
-            margin: 15px auto 0;
-            border-radius: 2px;
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-        }
-
-        .session-block {
-            margin-bottom: 50px;
-        }
-
-        .session-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 25px;
-            color: #fff;
-        }
-
-        .session-header h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .session-icon {
-            font-size: 1.5rem;
-        }
-
-        /* Grid des cartes */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        /* Style des cartes */
-        .schedule-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            padding: 25px;
-            border-radius: 16px;
-            transition: all 0.3s ease;
+            font-size: 1rem;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 85, 255, 0.4);
         }
 
-        .schedule-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.35);
         }
 
-        .card-time {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 10px;
-            display: inline-block;
-            background: var(--cta-gradient);
-            padding: 4px 10px;
-            border-radius: 4px;
-            width: fit-content;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .schedule-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .schedule-card p {
-            font-size: 0.9rem;
-            color: #d0d0d0;
-            margin-bottom: 20px;
-            flex-grow: 1;
-            line-height: 1.5;
-        }
-
-        .card-link {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #00F0FF;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            opacity: 1;
-        }
-
-        .schedule-card:hover .card-link {
-            text-decoration: underline;
-            text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
-        }
-
-        /* --- SURVEY CTA --- */
-        .survey-cta {
-            display: flex;
-            justify-content: center;
-            margin: 10px 0 40px;
-        }
-
-        .survey-cta a {
+        .btn-ghost {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: white;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 14px 40px;
+            padding: 16px 40px;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
@@ -304,11 +169,133 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .survey-cta a:hover {
-            background: rgba(255, 255, 255, 0.25);
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* --- SECTION WRAPPER --- */
+        .section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(to right, #ffffff, #dbe4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.55);
+            margin-bottom: 56px;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: var(--cta-gradient);
+            border-radius: 2px;
+            margin: 16px auto 56px;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+        }
+
+        /* --- PROGRAMME CARDS --- */
+        .programme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .programme-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .programme-card:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
+        }
+
+        .card-slot {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #fff;
+            display: inline-block;
+            background: var(--cta-gradient);
+            padding: 3px 10px;
+            border-radius: 4px;
+            width: fit-content;
+        }
+
+        .programme-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.4;
+        }
+
+        .programme-card p {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.5;
+        }
+
+        /* --- REGISTRATION SECTION --- */
+        .registration-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 48px 40px;
+            max-width: 760px;
+            margin: 0 auto;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .registration-section h2 {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #ffffff, #dbe4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .registration-section .section-divider {
+            margin-bottom: 36px;
+        }
+
+        .form-wrapper {
+            display: flex;
+            justify-content: center;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .form-wrapper iframe {
+            width: 100%;
+            min-height: 820px;
+            border: none;
+            border-radius: 12px;
+            background: transparent;
         }
 
         /* --- FOOTER --- */
@@ -316,7 +303,7 @@
             text-align: center;
             padding: 40px 20px;
             font-size: 0.8rem;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.4);
             border-top: 1px solid var(--glass-border);
             margin-top: 40px;
         }
@@ -325,19 +312,8 @@
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; }
             .section-title { font-size: 1.6rem; }
-            
-            .hamburger { display: block; }
-            .nav-links {
-                position: absolute; top: 70px; left: 0; width: 100%;
-                background: rgba(0, 8, 20, 0.95);
-                backdrop-filter: blur(15px);
-                flex-direction: column; align-items: center;
-                padding: 40px 0;
-                transform: translateY(-150%); transition: transform 0.4s ease;
-                z-index: 99;
-                border-bottom: 1px solid var(--glass-border);
-            }
-            .nav-links.active { transform: translateY(0); }
+            .registration-section { padding: 32px 20px; }
+            .programme-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -346,111 +322,82 @@
     <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">
-          <svg width="36" height="25" viewBox="0 0 273 191" aria-hidden="true"><path fill="#00A1E0" d="M113.7 20.8c8.8-9.2 21-14.9 34.6-14.9 18 0 33.7 10 42.1 24.9 7.3-3.3 15.3-5.1 23.8-5.1 32.5 0 58.9 26.6 58.9 59.5 0 32.8-26.4 59.5-58.9 59.5-4 0-7.9-.4-11.7-1.2-7.4 13.2-21.5 22.1-37.7 22.1-6.8 0-13.2-1.6-18.9-4.3-7.5 17.6-25 30-45.4 30-21.3 0-39.4-13.4-46.4-32.2-3.1.7-6.3 1-9.6 1C20.4 160.1 0 139.6 0 114.1 0 97 9.2 82.1 22.9 74.3c-2.9-6.7-4.5-14.1-4.5-21.9 0-30.4 24.7-55 55.2-55 17.9 0 33.8 8.5 43.9 21.7z"/></svg>
-          <span>Salesforce Académie IA</span>
+            <svg width="36" height="25" viewBox="0 0 273 191" aria-hidden="true"><path fill="#00A1E0" d="M113.7 20.8c8.8-9.2 21-14.9 34.6-14.9 18 0 33.7 10 42.1 24.9 7.3-3.3 15.3-5.1 23.8-5.1 32.5 0 58.9 26.6 58.9 59.5 0 32.8-26.4 59.5-58.9 59.5-4 0-7.9-.4-11.7-1.2-7.4 13.2-21.5 22.1-37.7 22.1-6.8 0-13.2-1.6-18.9-4.3-7.5 17.6-25 30-45.4 30-21.3 0-39.4-13.4-46.4-32.2-3.1.7-6.3 1-9.6 1C20.4 160.1 0 139.6 0 114.1 0 97 9.2 82.1 22.9 74.3c-2.9-6.7-4.5-14.1-4.5-21.9 0-30.4 24.7-55 55.2-55 17.9 0 33.8 8.5 43.9 21.7z"/></svg>
+            <span>Salesforce Académie IA</span>
         </a>
-        <div class="hamburger" onclick="toggleMenu()">☰</div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="index.html" class="active">Accueil</a></li>
-            <li><a href="module1.html">Intro IA</a></li>
-            <li><a href="atelier.html">Atelier</a></li>
-            <li><a href="prompting.html">Prompting</a></li>
-            <li><a href="agentique.html">Agentique</a></li>
-        </ul>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <header class="hero">
-        <span class="badge">Session de Formation</span>
+        <span class="badge">Formation Professionnelle</span>
         <h1>Maîtrisez l'IA<br>avec Salesforce</h1>
         <p class="subtitle">
-            De l’Université à l’Entreprise, équiper chaque collaborateur avec les compétences et outils nécessaires pour utiliser l'IA avec confiance
+            Une journée de formation intensive pour équiper chaque collaborateur avec les compétences et outils nécessaires pour utiliser l'intelligence artificielle avec confiance.
         </p>
-        <a href="#planning" class="cta-button">Voir le programme</a>
+        <p class="hero-meta">Format : présentiel · Durée : 1 journée</p>
+        <div class="hero-actions">
+            <a href="#inscription" class="btn-primary">S'inscrire à la formation</a>
+            <a href="#programme" class="btn-ghost">Voir le programme</a>
+        </div>
     </header>
 
-    <!-- Planning Section -->
-    <section id="planning" class="planning-section">
-        <h2 class="section-title">Planning de la Formation</h2>
+    <!-- Programme -->
+    <section id="programme" class="section">
+        <h2 class="section-title">Programme de la journée</h2>
+        <div class="section-divider"></div>
 
-        <div class="survey-cta">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdh7FRAZE_5C-WHEEUh0T2xPKEbGEBW0-rpfwL7Cf2X2sF14A/viewform?usp=header" target="_blank" rel="noopener noreferrer">
-                📝 Icebreaker
-            </a>
-        </div>
-
-        <!-- MATIN -->
-        <div class="session-block">
-            <div class="session-header">
-                <span class="session-icon">☀️</span>
-                <h3>Matin</h3>
+        <div class="programme-grid">
+            <div class="programme-card">
+                <span class="card-slot">09:00 – 10:30</span>
+                <h3>Introduction à l'IA</h3>
+                <p>Fondamentaux, définitions et impact sur le monde du travail. IA prédictive vs générative.</p>
             </div>
-            
-            <div class="cards-grid">
-                <!-- Card 1 -->
-                <a href="module1.html" class="schedule-card">
-                    <span class="card-time">09:00 - 10:30</span>
-                    <h4>Introduction à l'IA</h4>
-                    <p>Fondamentaux, définitions et impact sur le monde du travail. Comprendre la différence entre IA prédictive et générative.</p>
-                    <span class="card-link">Accéder au module →</span>
-                </a>
-
-                <!-- Card 2 -->
-                <a href="atelier.html" class="schedule-card">
-                    <span class="card-time">10:45 - 12:30</span>
-                    <h4>Capacités de l'IA, usage éthique et responsable</h4>
-                    <p>Capacités de l'IA, usage éthique et responsable en pratique.</p>
-                    <span class="card-link">Accéder au module →</span>
-                </a>
+            <div class="programme-card">
+                <span class="card-slot">10:45 – 12:30</span>
+                <h3>Usage éthique et responsable</h3>
+                <p>Capacités de l'IA, cadre éthique et bonnes pratiques en entreprise.</p>
+            </div>
+            <div class="programme-card">
+                <span class="card-slot">14:00 – 15:30</span>
+                <h3>Prompt Engineering</h3>
+                <p>L'art d'interagir avec les modèles. Maximiser l'efficacité de vos prompts.</p>
+            </div>
+            <div class="programme-card">
+                <span class="card-slot">15:45 – 17:00</span>
+                <h3>Atelier Agentique</h3>
+                <p>Mise en pratique : construire et piloter des agents IA sur des cas concrets.</p>
             </div>
         </div>
+    </section>
 
-        <!-- APRES-MIDI -->
-        <div class="session-block">
-            <div class="session-header">
-                <span class="session-icon">🌙</span>
-                <h3>Après-midi</h3>
-            </div>
-            
-            <div class="cards-grid">
-                <!-- Card 3 -->
-                <a href="prompting.html" class="schedule-card">
-                    <span class="card-time">14:00 - 15:30</span>
-                    <h4>Prompt Engineering</h4>
-                    <p>L'art d'interagir avec les modèles. Apprendre comment maximiser l'efficacité de vos prompts.</p>
-                    <span class="card-link">Accéder au module →</span>
-                </a>
-
-                <!-- Card 4 -->
-                <a href="agentique.html" class="schedule-card">
-                    <span class="card-time">15:45 - 17:00</span>
-                    <h4>Atelier Pratique: agentique</h4>
-                    <p>TBD</p>
-                    <span class="card-link">Accéder au module →</span>
-                </a>
+    <!-- Registration -->
+    <section id="inscription" class="section" style="padding-top: 0;">
+        <div class="registration-section">
+            <h2>Inscription</h2>
+            <div class="section-divider"></div>
+            <div class="form-wrapper">
+                <iframe
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSebr5UkKp1onXpYgVJcMXyoceAe3XK4w4bKR07jB4qUx9TtgQ/viewform?embedded=true"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="Formulaire d'inscription">
+                    Chargement…
+                </iframe>
             </div>
         </div>
+    </section>
 
-        <div class="survey-cta">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfpRXRvVIoD89FZanu3e4SInQTJPW7uNGNzbZXC8eq5pmvjHg/viewform?usp=header" target="_blank" rel="noopener noreferrer">
-                📋 Bilan de la journée
-            </a>
-        </div>
-
+    <!-- Access training -->
+    <section class="section" style="padding-top: 20px; padding-bottom: 80px; text-align: center;">
+        <p style="font-size: 0.9rem; color: rgba(255,255,255,0.45); margin-bottom: 20px;">Vous êtes déjà inscrit·e ?</p>
+        <a href="home.html" class="btn-ghost">Accéder à la formation →</a>
     </section>
 
     <!-- Footer -->
     <footer>
         <p>© 2026 IA Académie - Salesforce</p>
     </footer>
-
-    <!-- Script -->
-    <script>
-        function toggleMenu() {
-            const nav = document.getElementById('navLinks');
-            nav.classList.toggle('active');
-        }
-    </script>
 
 </body>
 </html>
