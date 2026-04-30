@@ -283,6 +283,34 @@
             text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
         }
 
+        /* --- SURVEY CTA --- */
+        .survey-cta {
+            display: flex;
+            justify-content: center;
+            margin: 10px 0 40px;
+        }
+
+        .survey-cta a {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .survey-cta a:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
         /* --- FOOTER --- */
         footer {
             text-align: center;
@@ -345,6 +373,12 @@
     <section id="planning" class="planning-section">
         <h2 class="section-title">Planning de la Formation</h2>
 
+        <div class="survey-cta">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdh7FRAZE_5C-WHEEUh0T2xPKEbGEBW0-rpfwL7Cf2X2sF14A/viewform?usp=header" target="_blank" rel="noopener noreferrer">
+                📝 Icebreaker
+            </a>
+        </div>
+
         <!-- MATIN -->
         <div class="session-block">
             <div class="session-header">
@@ -395,6 +429,12 @@
                     <span class="card-link">Accéder au module →</span>
                 </a>
             </div>
+        </div>
+
+        <div class="survey-cta">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfpRXRvVIoD89FZanu3e4SInQTJPW7uNGNzbZXC8eq5pmvjHg/viewform?usp=header" target="_blank" rel="noopener noreferrer">
+                📋 Bilan de la journée
+            </a>
         </div>
 
     </section>
