@@ -7,7 +7,7 @@
 /* ── DESIGN TOKENS ───────────────────────────────────────────── */
 :root {
     /* Backgrounds */
-    --bg-base:           #06080f;
+    --bg-base:           #0a0818;
     --bg-surface:        rgba(255, 255, 255, 0.04);
     --bg-surface-hover:  rgba(255, 255, 255, 0.07);
     --bg-surface-active: rgba(255, 255, 255, 0.11);
@@ -17,6 +17,11 @@
     --sf-sky:   #1B96FF;
     --sf-cloud: #00A1E0;
 
+    /* Purple accent */
+    --purple:       #7C3AED;
+    --purple-light: #A78BFA;
+    --purple-glow:  rgba(124, 58, 237, 0.28);
+
     /* Text */
     --text-primary:   #FFFFFF;
     --text-secondary: rgba(255, 255, 255, 0.65);
@@ -24,8 +29,8 @@
 
     /* Borders */
     --border:        rgba(255, 255, 255, 0.08);
-    --border-hover:  rgba(255, 255, 255, 0.18);
-    --border-accent: rgba(1, 118, 211, 0.45);
+    --border-hover:  rgba(167, 139, 250, 0.30);
+    --border-accent: rgba(124, 58, 237, 0.40);
 
     /* Semantic */
     --success: #34A853;
@@ -52,9 +57,9 @@
 
     /* Hero ambient background (radial glows over dark base) */
     --bg-hero:
-        radial-gradient(ellipse 80% 55% at 50% -5%,  rgba(1, 118, 211, 0.28) 0%, transparent 70%),
-        radial-gradient(ellipse 45% 35% at 88% 92%,  rgba(27, 150, 255, 0.12) 0%, transparent 65%),
-        #06080f;
+        radial-gradient(ellipse 85% 60% at 50% -8%,  rgba(124, 58, 237, 0.30) 0%, transparent 68%),
+        radial-gradient(ellipse 45% 35% at 88% 92%,  rgba(27, 150, 255, 0.10) 0%, transparent 60%),
+        #0a0818;
 
     /* Legacy aliases — keeps any residual var() references working */
     --accent-color:  var(--sf-sky);
@@ -143,9 +148,9 @@ ul { list-style: none; }
 }
 
 .nav-links a.active {
-    color: var(--sf-sky);
+    color: var(--purple-light);
     font-weight: 600;
-    background: rgba(27, 150, 255, 0.08);
+    background: rgba(124, 58, 237, 0.10);
 }
 
 .hamburger {
@@ -177,8 +182,8 @@ ul { list-style: none; }
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(rgba(167,139,250,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167,139,250,0.04) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none;
     z-index: 0;
@@ -202,8 +207,8 @@ ul { list-style: none; }
     position: absolute;
     inset: 0;
     background-image:
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        linear-gradient(rgba(167,139,250,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167,139,250,0.04) 1px, transparent 1px);
     background-size: 48px 48px;
     pointer-events: none;
     z-index: 0;
@@ -218,9 +223,9 @@ ul { list-style: none; }
 /* ── BADGE ───────────────────────────────────────────────────── */
 .badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.10);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    color: rgba(255, 255, 255, 0.90);
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid rgba(167, 139, 250, 0.30);
+    color: var(--purple-light);
     padding: 6px 16px;
     border-radius: 100px;
     font-size: 0.7rem;
@@ -1648,9 +1653,9 @@ div.section-divider {
 .tab-btn:hover { color: var(--text-primary); }
 
 .tab-btn.active {
-    color: var(--sf-sky);
+    color: var(--purple-light);
     font-weight: 700;
-    border-bottom-color: var(--sf-sky);
+    border-bottom-color: var(--purple-light);
 }
 
 .tab-panel {
