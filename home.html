@@ -80,49 +80,26 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            min-height: 90vh;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 80px 20px;
+            padding: 20px;
             position: relative;
-            overflow: hidden;
-            background:
-                radial-gradient(ellipse 70% 80% at 50% 30%, rgba(0, 161, 224, 0.25) 0%, transparent 65%),
-                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0, 49, 60, 0.6) 0%, transparent 70%),
-                linear-gradient(135deg, #00A1E0 0%, #032D60 30%, #05060f 55%, #00313c 100%);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .hero > * {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 161, 224, 0.18) 0%, transparent 70%);
-            top: -100px;
-            left: -100px;
-            pointer-events: none;
-            z-index: 0;
         }
 
         .hero::after {
             content: '';
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 49, 60, 0.4) 0%, transparent 70%);
-            bottom: -80px;
-            right: -80px;
-            pointer-events: none;
-            z-index: 0;
+            width: 300px;
+            height: 300px;
+            background: #0055FF;
+            filter: blur(150px);
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
         }
 
         .badge {
@@ -145,11 +122,9 @@
             line-height: 1.7;
             margin-bottom: 28px;
             font-weight: 700;
-            background: none;
-            -webkit-background-clip: unset;
-            -webkit-text-fill-color: #ffffff;
-            color: #ffffff;
-            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #ffffff, #dbe4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         p.subtitle {
@@ -358,16 +333,16 @@
         }
 
         .partner-logo-wrap {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: 14px;
             padding: 12px 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.1);
         }
 
         .partner-logo {
