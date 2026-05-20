@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Facilitator Guide — Agentic Academy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ──────────────────────────────────────────────── */
+    :root {
+      --bg-base:           #0a0818;
+      --bg-surface:        rgba(255,255,255,0.04);
+      --bg-surface-hover:  rgba(255,255,255,0.07);
+      --purple:            #7C3AED;
+      --purple-light:      #A78BFA;
+      --purple-glow:       rgba(124,58,237,0.28);
+      --sf-blue:           #0176D3;
+      --sf-sky:            #1B96FF;
+      --text-primary:      #FFFFFF;
+      --text-secondary:    rgba(255,255,255,0.65);
+      --text-muted:        rgba(255,255,255,0.38);
+      --border:            rgba(255,255,255,0.08);
+      --border-hover:      rgba(167,139,250,0.30);
+      --gradient-cta:      linear-gradient(135deg,#0176D3,#7C3AED);
+      --radius-sm:         6px;
+      --radius-md:         12px;
+      --radius-lg:         16px;
+      --font-sans:         "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      --font-mono:         "Courier New",monospace;
+    }
+
+    /* ── RESET ───────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--sf-sky); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.83em;
+      background: rgba(167,139,250,0.12);
+      border: 1px solid rgba(167,139,250,0.20);
+      border-radius: 4px;
+      padding: 1px 6px;
+      color: var(--purple-light);
+    }
+
+    /* ── PAGE HERO ───────────────────────────────────────────── */
+    .page-hero {
+      background:
+        radial-gradient(ellipse 80% 55% at 50% -5%, rgba(124,58,237,0.32) 0%, transparent 68%),
+        radial-gradient(ellipse 40% 30% at 85% 90%, rgba(27,150,255,0.10) 0%, transparent 60%),
+        var(--bg-base);
+      padding: 64px 32px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(167,139,250,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(167,139,250,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .page-hero > * { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(124,58,237,0.12);
+      border: 1px solid rgba(167,139,250,0.30);
+      color: var(--purple-light);
+      padding: 5px 16px;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .page-hero h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .page-hero h1 span {
+      background: var(--gradient-cta);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-hero .hero-sub {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 0;
+    }
+
+    /* ── LAYOUT ──────────────────────────────────────────────── */
+    .page-body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      max-width: 1260px;
+      margin: 0 auto;
+      align-items: start;
+      padding: 0 24px 96px;
+    }
+
+    /* ── SIDEBAR ─────────────────────────────────────────────── */
+    .sidebar {
+      position: sticky;
+      top: 24px;
+      padding: 28px 20px 28px 8px;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(167,139,250,0.20) transparent;
+    }
+
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(167,139,250,0.20); border-radius: 4px; }
+
+    .toc-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      padding-left: 10px;
+    }
+
+    .toc-list, .toc-sublist {
+      list-style: none;
+    }
+
+    .toc-list > li { margin-bottom: 2px; }
+
+    .toc-list a, .toc-sublist a {
+      display: block;
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+      transition: color 0.15s, background 0.15s;
+      border-left: 2px solid transparent;
+      text-decoration: none;
+    }
+
+    .toc-list a:hover { color: var(--text-primary); background: var(--bg-surface-hover); }
+
+    .toc-list a.active {
+      color: var(--purple-light);
+      border-left-color: var(--purple-light);
+      background: rgba(124,58,237,0.08);
+      font-weight: 600;
+    }
+
+    .toc-sublist {
+      padding-left: 12px;
+      margin-top: 3px;
+    }
+
+    .toc-sublist a {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      padding: 4px 10px;
+    }
+
+    .toc-sublist a:hover { color: var(--text-secondary); background: var(--bg-surface); }
+    .toc-sublist a.active { color: var(--purple-light); border-left-color: var(--purple-light); }
+
+    .toc-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 10px 0;
+    }
+
+    /* ── MAIN CONTENT ────────────────────────────────────────── */
+    .main {
+      padding: 56px 0 0 52px;
+      max-width: 880px;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 72px;
+      scroll-margin-top: 32px;
+    }
+
+    /* ── HEADINGS ────────────────────────────────────────────── */
+    h1 { font-size: 2rem; font-weight: 700; }
+
+    h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      padding-left: 16px;
+      border-left: 3px solid var(--purple);
+      margin-bottom: 28px;
+      line-height: 1.3;
+      scroll-margin-top: 32px;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 28px 0 12px;
+    }
+
+    h4 {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--purple-light);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 20px 0 8px;
+    }
+
+    p {
+      font-size: 0.93rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    /* ── TABLES ──────────────────────────────────────────────── */
+    .table-wrap { overflow-x: auto; margin-bottom: 24px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+    }
+
+    thead tr {
+      background: rgba(124,58,237,0.12);
+      border-bottom: 1px solid rgba(167,139,250,0.25);
+    }
+
+    th {
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      color: var(--purple-light);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 9px 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+      vertical-align: top;
+    }
+
+    tbody tr:hover td { background: var(--bg-surface-hover); }
+    tbody tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+    td code, th code {
+      font-size: 0.80em;
+    }
+
+    /* ── CHECKLISTS ──────────────────────────────────────────── */
+    ul.checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    ul.checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.90rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    ul.checklist input[type="checkbox"] {
+      flex-shrink: 0;
+      margin-top: 2px;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--purple);
+      cursor: pointer;
+    }
+
+    ul.checklist input[type="checkbox"]:checked + span {
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    /* ── REGULAR LISTS ───────────────────────────────────────── */
+    ul.bullets, ol.numbered {
+      padding-left: 20px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    ul.bullets li, ol.numbered li {
+      font-size: 0.90rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      padding-left: 4px;
+    }
+
+    ul.bullets li::marker { color: var(--purple-light); }
+    ol.numbered li::marker { color: var(--purple-light); font-weight: 600; }
+
+    /* ── BLOCKQUOTES ─────────────────────────────────────────── */
+    blockquote {
+      border-left: 3px solid var(--purple);
+      background: rgba(124,58,237,0.06);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    blockquote p {
+      color: var(--text-primary);
+      font-style: italic;
+      font-size: 0.93rem;
+      margin-bottom: 0;
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: var(--sf-sky);
+      font-style: normal;
+      font-weight: 500;
+    }
+
+    /* Talk-track callout — distinct from plain blockquotes */
+    .callout {
+      border-left: 3px solid var(--sf-sky);
+      background: rgba(27,150,255,0.05);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 18px 22px;
+      margin: 20px 0;
+    }
+
+    .callout-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--sf-sky);
+      margin-bottom: 10px;
+    }
+
+    .callout p {
+      color: var(--text-secondary);
+      font-style: italic;
+      font-size: 0.88rem;
+      margin-bottom: 0;
+      line-height: 1.7;
+    }
+
+    /* Tip/warning box */
+    .tip-box {
+      border: 1px solid rgba(167,139,250,0.20);
+      background: rgba(124,58,237,0.05);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin: 20px 0;
+    }
+
+    .tip-box .tip-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--purple-light);
+      margin-bottom: 8px;
+    }
+
+    .tip-box p {
+      font-size: 0.88rem;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+
+    .tip-box p:last-child { margin-bottom: 0; }
+
+    /* ── PREFORMATTED / ASCII ────────────────────────────────── */
+    pre {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 20px 0;
+    }
+
+    /* ── AT-A-GLANCE BOX ─────────────────────────────────────── */
+    .glance-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin: 16px 0 28px;
+    }
+
+    .glance-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    .glance-item .gi-label {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .glance-item .gi-value {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ── SECTION DIVIDER ─────────────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 64px 0;
+    }
+
+    /* ── KEY MESSAGE ─────────────────────────────────────────── */
+    .key-message {
+      background: linear-gradient(135deg, rgba(1,118,211,0.08), rgba(124,58,237,0.10));
+      border: 1px solid rgba(167,139,250,0.22);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin: 20px 0 28px;
+    }
+
+    .key-message .km-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--purple-light);
+      margin-bottom: 8px;
+    }
+
+    .key-message p {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      font-style: italic;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    /* ── ACTIVITY DETAILS (collapsible) ──────────────────────── */
+    .activity-wrap {
+      margin-bottom: 16px;
+    }
+
+    details.activity {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    details.activity[open] {
+      border-color: rgba(167,139,250,0.25);
+    }
+
+    details.activity summary {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 22px;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    details.activity summary::-webkit-details-marker { display: none; }
+    details.activity summary:hover { background: var(--bg-surface-hover); }
+
+    .summary-chevron {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      color: var(--text-muted);
+      transition: transform 0.25s;
+    }
+
+    details.activity[open] .summary-chevron {
+      transform: rotate(90deg);
+      color: var(--purple-light);
+    }
+
+    .summary-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #fff;
+      background: var(--gradient-cta);
+      padding: 3px 10px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .summary-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .summary-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    .activity-body {
+      padding: 0 28px 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .activity-body h3 {
+      margin-top: 24px;
+    }
+
+    /* ── EXPAND/COLLAPSE TOGGLE ──────────────────────────────── */
+    .expand-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: transparent;
+      border: 1px solid var(--border-hover);
+      color: var(--purple-light);
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-family: var(--font-sans);
+      font-size: 0.80rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 24px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .expand-toggle:hover {
+      background: rgba(124,58,237,0.10);
+      border-color: var(--purple-light);
+    }
+
+    /* ── QUOTE CARD ──────────────────────────────────────────── */
+    .quote-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--purple);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 22px 26px;
+      margin: 16px 0;
+    }
+
+    .quote-card blockquote {
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .quote-card blockquote p {
+      font-size: 1.05rem;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-primary);
+    }
+
+    .quote-card cite {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.80rem;
+      color: var(--sf-sky);
+    }
+
+    /* ── PERSONA GRID ────────────────────────────────────────── */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .persona-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+    }
+
+    .persona-card .pc-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--purple-light);
+      margin-bottom: 5px;
+    }
+
+    .persona-card .pc-profile {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .persona-card .pc-need {
+      font-size: 0.80rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .page-body {
+        grid-template-columns: 1fr;
+        padding: 0 16px 80px;
+      }
+
+      .sidebar {
+        position: static;
+        max-height: none;
+        padding: 24px 0 0;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 32px;
+      }
+
+      .main { padding: 32px 0 0; }
+
+      .page-hero h1 { font-size: 1.9rem; }
+    }
+
+    @media (max-width: 600px) {
+      .glance-box { grid-template-columns: 1fr 1fr; }
+      .persona-grid { grid-template-columns: 1fr; }
+      table { font-size: 0.80rem; }
+      th, td { padding: 7px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── PAGE HERO ─────────────────────────────────────────────── -->
+<header class="page-hero">
+  <div class="hero-badge">Internal Document · Not for Participants</div>
+  <h1>Agentic Academy — <span>Facilitator Guide</span></h1>
+  <p class="hero-sub">Salesforce × Fondation Simplon &nbsp;·&nbsp; One-day in-person training</p>
+</header>
+
+<!-- ── BODY ──────────────────────────────────────────────────── -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Table of contents">
+    <p class="toc-label">Contents</p>
+    <ul class="toc-list" id="toc">
+      <li><a href="#s1">1. Why This Training Exists</a></li>
+      <li><a href="#s2">2. How the Day Flows</a></li>
+      <li><a href="#s3">3. How to Use the Website</a></li>
+      <li><a href="#s4">4. Facilitation Principles</a></li>
+      <li>
+        <a href="#s5">5. Per-Activity Briefs</a>
+        <ul class="toc-sublist">
+          <li><a href="#a1">#1 Baseline Profil IA</a></li>
+          <li><a href="#a2">#2 Changement de Paradigme</a></li>
+          <li><a href="#a3">#3 AI Card Game</a></li>
+          <li><a href="#a4">#4 Lab Prompting Expert</a></li>
+          <li><a href="#a5">#5 Mon Premier Gem</a></li>
+          <li><a href="#a6">#6 L'Agentique en Action</a></li>
+          <li><a href="#a7">#7 Bilan Profil IA</a></li>
+        </ul>
+      </li>
+      <hr class="toc-divider">
+      <li><a href="#s6">6. Quick Reference Card</a></li>
+      <li><a href="#s7">7. Appendix</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+
+    <!-- ── SECTION 1: WHY ───────────────────────────────────── -->
+    <section class="section" id="s1">
+      <h2>1. Why This Training Exists</h2>
+
+      <h3>The mission</h3>
+      <p>AI is no longer a future topic — it is reshaping how work gets done today. But most employees encounter it through media noise or isolated tool experiments, without a coherent frame to understand what it means for their role, their team, and their organisation.</p>
+      <p><strong style="color:var(--text-primary)">Agentic Academy</strong> was built to close that gap. In a single day, participants leave with:</p>
+      <ul class="checklist">
+        <li><input type="checkbox"><span>A clear mental model of AI — from Predictive to Generative to Agentic — and why the shift matters</span></li>
+        <li><input type="checkbox"><span>Practical confidence: they have used AI tools, written structured prompts, and built a personal AI assistant</span></li>
+        <li><input type="checkbox"><span>An ethical compass: they can distinguish automation from augmentation, and name the traps to avoid</span></li>
+        <li><input type="checkbox"><span>A shared vocabulary to use with colleagues when talking about AI at work</span></li>
+      </ul>
+
+      <h3>Partners and commitment</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Partner</th><th>Role</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Salesforce</strong></td><td>Training design, content, facilitation, Agentforce demo</td></tr>
+            <tr><td><strong>Fondation Simplon</strong></td><td>Pedagogical methodology, access, co-delivery</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Who is in the room</h3>
+      <p>Participants are professionals from public and private organisations. The cohort will be mixed in terms of AI maturity. Expect a distribution roughly matching this persona framework:</p>
+
+      <div class="persona-grid">
+        <div class="persona-card"><div class="pc-name">Débutant curieux</div><div class="pc-profile">Low usage, open attitude</div><div class="pc-need">Reassurance that starting now is fine</div></div>
+        <div class="persona-card"><div class="pc-name">Hésitant informé</div><div class="pc-profile">Has heard of AI, hasn't tried it</div><div class="pc-need">Concrete, low-stakes first wins</div></div>
+        <div class="persona-card"><div class="pc-name">Praticien en chemin</div><div class="pc-profile">Occasional user, wants structure</div><div class="pc-need">A framework (RACE) to consolidate instincts</div></div>
+        <div class="persona-card"><div class="pc-name">Cow-boy</div><div class="pc-profile">Regular user, skips verification</div><div class="pc-need">The critical-thinking reframe</div></div>
+        <div class="persona-card"><div class="pc-name">Expert responsable</div><div class="pc-profile">High proficiency, aware of limits</div><div class="pc-need">Depth on ethics and augmentation</div></div>
+        <div class="persona-card"><div class="pc-name">Sceptique éclairé</div><div class="pc-profile">Informed but doubtful</div><div class="pc-need">Space to voice tension without being dismissed</div></div>
+        <div class="persona-card"><div class="pc-name">Stratège observateur</div><div class="pc-profile">Strategic thinker, low personal use</div><div class="pc-need">The business case and the Benioff quote</div></div>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-label">Note</div>
+        <p>You will see the actual distribution at 09:00 when participants complete the Baseline Profil IA. The Spider Graph makes the room's diversity visible — use it as a conversation starter, not a ranking.</p>
+      </div>
+
+      <h3>What success looks like</h3>
+      <p>By the end of the day, each participant should be able to say:</p>
+      <ul class="checklist">
+        <li><input type="checkbox"><span>"I understand the difference between Generative AI and Agentic AI"</span></li>
+        <li><input type="checkbox"><span>"I can write a structured prompt using RACE and get a useful result"</span></li>
+        <li><input type="checkbox"><span>"I have a personal AI assistant (Gem) configured for a recurring task"</span></li>
+        <li><input type="checkbox"><span>"I know the four ethical considerations to keep in mind when deploying AI"</span></li>
+        <li><input type="checkbox"><span>"I am less afraid and more curious than I was this morning"</span></li>
+      </ul>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── SECTION 2: DAY FLOW ──────────────────────────────── -->
+    <section class="section" id="s2">
+      <h2>2. How the Day Flows</h2>
+
+      <h3>Master schedule</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Time</th><th>Activity</th><th>Format</th><th>Duration</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>Before 09:00</td><td>Room setup, test website and surveys</td><td>Facilitator prep</td><td>—</td></tr>
+            <tr><td>1</td><td>09:00 – 09:30</td><td><strong>Baseline Profil IA</strong> — Spider Graph quiz</td><td>Individual survey + group share</td><td>30 min</td></tr>
+            <tr><td>2</td><td>09:30 – 10:15</td><td><strong>Changement de Paradigme</strong> — AI paradigm shift</td><td>Plenary lecture + Q&amp;A</td><td>45 min</td></tr>
+            <tr><td>—</td><td>10:15 – 10:30</td><td>Break</td><td>—</td><td>15 min</td></tr>
+            <tr><td>3</td><td>10:30 – 11:15</td><td><strong>AI Card Game</strong> — Maison Clarté workshop</td><td>Group exercise (3 rounds)</td><td>45 min</td></tr>
+            <tr><td>—</td><td>11:15 – 11:30</td><td>Debrief + transition</td><td>Plenary</td><td>15 min</td></tr>
+            <tr><td>4</td><td>11:30 – 12:15</td><td><strong>Lab Prompting Expert</strong> — RACE method</td><td>Individual hands-on</td><td>45 min</td></tr>
+            <tr><td>—</td><td>12:15 – 13:15</td><td>Lunch</td><td>—</td><td>60 min</td></tr>
+            <tr><td>5</td><td>13:15 – 14:00</td><td><strong>Mon Premier Gem</strong> — Personal AI assistant</td><td>Individual hands-on</td><td>45 min</td></tr>
+            <tr><td>—</td><td>14:00 – 14:15</td><td>Break</td><td>—</td><td>15 min</td></tr>
+            <tr><td>6</td><td>14:15 – 14:45</td><td><strong>L'Agentique en Action</strong> — Agentforce demo</td><td>Demo + plenary discussion</td><td>30 min</td></tr>
+            <tr><td>7</td><td>14:45 – 15:15</td><td><strong>Bilan Profil IA</strong> — Closing</td><td>Individual survey + group reflection</td><td>30 min</td></tr>
+            <tr><td>—</td><td>~15:15</td><td>End of day</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-label">Timing note</div>
+        <p>The deck targets an end time of approximately 17:00 with breaks at 10:30 and 15:30. The schedule above compresses slightly if you have a smaller group and discussions run tight. Add a 15-minute buffer after the Gem activity if energy is high and the group wants more practice time.</p>
+      </div>
+
+      <h3>Energy curve and facilitation rhythm</h3>
+      <pre>MORNING                        AFTERNOON
+─────────────────────────────────────────────
+High    ·····•····                    •·····
+                  ·····            ···
+Medium                 ·····    ···
+Low                         ···
+
+09:00   10:30   12:30   14:00   15:15
+[Quiz] [Break] [Lunch] [Demo] [Close]</pre>
+
+      <ul class="bullets">
+        <li><strong style="color:var(--text-primary)">09:00 – 10:30 (Immersion):</strong> Energy builds. Start with the quiz to warm the room. The Paradigm Shift module sets the conceptual frame — do not rush it.</li>
+        <li><strong style="color:var(--text-primary)">10:30 – 12:15 (Acculturation):</strong> The Card Game is the day's energy peak. Let the groups run hot. Lab Prompting keeps momentum with individual wins.</li>
+        <li><strong style="color:var(--text-primary)">12:15 – 13:15 (Lunch):</strong> Encourage participants to try a prompt on their phone — the transition from "exercise" to "personal tool" often starts here.</li>
+        <li><strong style="color:var(--text-primary)">13:15 – 14:15 (Mastery):</strong> The Gem activity produces a tangible take-away. This is when participants shift from "I tried AI" to "I have an AI assistant."</li>
+        <li><strong style="color:var(--text-primary)">14:15 – 15:15 (Horizon):</strong> The Agentforce demo shows where the technology is heading. The closing bilan closes the loop on the morning quiz.</li>
+      </ul>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── SECTION 3: WEBSITE ───────────────────────────────── -->
+    <section class="section" id="s3">
+      <h2>3. How to Use the Training Website</h2>
+
+      <p>The training website at <code>home.html</code> is the participant's home screen for the day. It serves three functions: navigation hub, day anchor, and survey gateway.</p>
+
+      <h3>Page map</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Page</th><th>Used when</th><th>What participants do</th></tr></thead>
+          <tbody>
+            <tr><td><code>home.html</code></td><td>Start and end of day</td><td>Launch the Icebreaker; navigate to modules; complete the Bilan</td></tr>
+            <tr><td><code>module1.html</code></td><td>Activity #2</td><td>Follow along with lecture; click glossary terms to expand definitions</td></tr>
+            <tr><td><code>atelier.html</code></td><td>Activity #3</td><td>Read the three Maison Clarté scenarios; filter and flip the AI capability cards</td></tr>
+            <tr><td><code>prompting.html</code></td><td>Activity #4</td><td>Use the live RACE Builder; copy their completed prompt to clipboard</td></tr>
+            <tr><td><em>(no page yet)</em></td><td>Activity #5</td><td>Mon Premier Gem — participants open <strong>gemini.google.com</strong> directly</td></tr>
+            <tr><td><code>agentique.html</code></td><td>Activity #6</td><td>Browse the Chatbot / Copilot / Agent comparator after the live demo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Where the surveys live</h3>
+      <p>Both the Icebreaker and the Bilan are accessible only from <code>home.html</code>:</p>
+      <ul class="bullets">
+        <li><strong>Icebreaker:</strong> Top of the planning section — used at the very start (Activity #1)</li>
+        <li><strong>Bilan:</strong> Bottom of the planning section — used at the very end (Activity #7)</li>
+      </ul>
+
+      <h3>Known divergences between the deck and the website</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Topic</th><th>Deck</th><th>Website</th><th>Use on the day</th></tr></thead>
+          <tbody>
+            <tr><td>Prompting framework</td><td>RTCF (Rôle, Tâche, Contexte, Format)</td><td>RACE (Rôle, Action, Contexte, Exigences)</td><td><strong>Use RACE</strong> — matches the live RACE Builder</td></tr>
+            <tr><td>Activity #5 (Gem)</td><td>Full activity in slides</td><td>No website page yet</td><td>Ask participants to open gemini.google.com directly</td></tr>
+            <tr><td>Module 4 duration</td><td>30 min</td><td>75 min slot on home</td><td>30 min demo + free exploration of <code>agentique.html</code></td></tr>
+            <tr><td>Profil IA quiz</td><td>5-question Spider Graph</td><td>Uses Icebreaker Google Form as proxy</td><td>Walk participants through the 5 dimensions verbally</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── SECTION 4: FACILITATION PRINCIPLES ──────────────── -->
+    <section class="section" id="s4">
+      <h2>4. General Facilitation Principles</h2>
+
+      <h3>Your posture</h3>
+      <p>You are not a lecturer. You are a <strong style="color:var(--text-primary)">guide through a live experience</strong>. The activities are designed so that participants discover the key messages themselves — your role is to create the conditions for that discovery and name what just happened in the debrief.</p>
+      <ul class="bullets">
+        <li><strong>Be curious, not prescriptive.</strong> When a participant says something surprising, explore it: "Tell me more about that."</li>
+        <li><strong>Validate before correcting.</strong> Acknowledge the logic in someone's thinking before offering a reframe.</li>
+        <li><strong>Use "we" not "you".</strong> "What we want to avoid is…" lands better than "You need to remember…"</li>
+      </ul>
+
+      <h3>Handling resistance to AI</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Resistance</th><th>What they're really saying</th><th>Suggested response</th></tr></thead>
+          <tbody>
+            <tr><td>"AI is just a fad"</td><td>I don't want to invest in something that won't last</td><td>Show the three waves — AI is a 10-year evolution, not a trend</td></tr>
+            <tr><td>"I already use it every day"</td><td>This might be too basic for me</td><td>Welcome it: "Great — you'll be a resource for the group in the hands-on sections"</td></tr>
+            <tr><td>"Augmenting jobs = job losses"</td><td>Real fear</td><td>Don't dismiss it. "That's legitimate. Let's hold it for the Ethics round in the Card Game."</td></tr>
+            <tr><td>"I don't trust AI outputs"</td><td>Healthy critical thinking</td><td>"That's exactly the right instinct. Let's channel it into a workflow rather than an objection."</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Managing mixed AI maturity in the room</h3>
+      <p>The Profil IA Spider Graph gives you a live read of the room at 09:00. Use it actively:</p>
+      <ul class="bullets">
+        <li>If the room skews <strong>toward beginners</strong>: slow down Module 2, spend more time on the glossary, pair stronger users with beginners in the Card Game</li>
+        <li>If the room skews <strong>toward experienced users</strong>: move faster through the 3 waves, spend more time on the augmentation round and the ethics debate</li>
+        <li><strong>Never make participants feel judged for their score.</strong> The Spider Graph is a starting point, not a ranking.</li>
+      </ul>
+
+      <h3>Pacing the group exercises</h3>
+      <p>For the Card Game (Activity #3) and the RACE Builder (Activity #4), manage time actively:</p>
+      <ul class="bullets">
+        <li>Announce time checks at the halfway point and at 5 minutes remaining</li>
+        <li>If a group is stuck: ask <em>"What's the simplest task in this scenario that AI could handle tonight, without anyone noticing?"</em></li>
+        <li>If a group is racing ahead: ask <em>"Have you looked at the Ethics cards yet?"</em></li>
+      </ul>
+
+      <h3>The debrief is the learning</h3>
+      <p>The 5–8 minutes of plenary debrief after each group activity is where the learning solidifies. Do not skip it even when you are short on time. Structure it as:</p>
+      <ol class="numbered">
+        <li><strong>What did you decide?</strong> (One spokesperson per group, 30 seconds each)</li>
+        <li><strong>What surprised you?</strong> (Open to the room)</li>
+        <li><strong>What does this tell us about working with AI?</strong> (You land the key message)</li>
+      </ol>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── SECTION 5: ACTIVITIES ────────────────────────────── -->
+    <section class="section" id="s5">
+      <h2>5. Per-Activity Facilitator Briefs</h2>
+
+      <button class="expand-toggle" id="expand-all-btn" aria-label="Expand or collapse all activity briefs">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        Expand all
+      </button>
+
+      <!-- ACTIVITY 1 -->
+      <div class="activity-wrap" id="a1">
+        <details class="activity" open>
+          <summary>
+            <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <span class="summary-badge">#1</span>
+            <span class="summary-title">Baseline Profil IA — Spider Graph Quiz</span>
+            <span class="summary-meta">30 min · Morning</span>
+          </summary>
+          <div class="activity-body">
+            <div class="glance-box">
+              <div class="glance-item"><div class="gi-label">Time</div><div class="gi-value">09:00 – 09:30</div></div>
+              <div class="glance-item"><div class="gi-label">Format</div><div class="gi-value">Individual survey + group share</div></div>
+              <div class="glance-item"><div class="gi-label">Website</div><div class="gi-value">home.html → Icebreaker</div></div>
+              <div class="glance-item"><div class="gi-label">Materials</div><div class="gi-value">Devices; Spider Graph on screen</div></div>
+            </div>
+
+            <h3>Why we run it</h3>
+            <p>This activity does two things simultaneously: it <strong style="color:var(--text-primary)">breaks the ice</strong> by making the room's diversity visible without judgment, and it creates a <strong style="color:var(--text-primary)">personal baseline</strong> each participant will compare against at the end of the day. The Spider Graph becomes the day's red thread.</p>
+
+            <div class="key-message">
+              <div class="km-label">Key message</div>
+              <p>There is no right or wrong starting point. What matters is where you are by 15:15.</p>
+            </div>
+
+            <h3>Main takeaways</h3>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>I know my current AI profile across five dimensions</span></li>
+              <li><input type="checkbox"><span>I can see how diverse the room is — AI maturity is not evenly distributed</span></li>
+              <li><input type="checkbox"><span>I have a personal goal for the day</span></li>
+            </ul>
+
+            <h3>The five dimensions</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Dimension</th><th>Score 1 (low)</th><th>Score 5 (high)</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Fréquence (Usage)</strong></td><td>Never or almost never</td><td>Multiple times per day</td></tr>
+                  <tr><td><strong>Maîtrise (Prompting)</strong></td><td>Need help every time</td><td>Get what I want on the first try</td></tr>
+                  <tr><td><strong>Vigilance (Critical thinking)</strong></td><td>I trust it completely</td><td>I verify everything systematically</td></tr>
+                  <tr><td><strong>Protection (Vision)</strong></td><td>I know nothing about the risks</td><td>I know and apply guardrails</td></tr>
+                  <tr><td><strong>Éthique &amp; Sécurité</strong></td><td>"AI is a passing trend"</td><td>"It will change everything"</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>How to facilitate</h3>
+            <ol class="numbered">
+              <li>Ask everyone to open <code>home.html</code> and click the Icebreaker button (2 min)</li>
+              <li>While they fill in the form, draw or display the Spider Graph axes on screen</li>
+              <li>Once forms are in, ask for a show of hands per dimension per score — sketch the room's aggregate on screen (5 min)</li>
+              <li>Open 5 minutes of discussion: "What surprised you in this room's profile?"</li>
+              <li>Close with the key message and a forward pointer: "We'll run this again at the end of the day."</li>
+            </ol>
+
+            <h3>Talk-track</h3>
+            <div class="callout">
+              <div class="callout-label">Facilitator script</div>
+              <p>"Look at the variety in this room. Some of you use AI daily, some of you have never opened ChatGPT. That's not a problem — it's actually why this format works. The people who've been using it have real experience to share. The people who haven't yet will bring questions that sharpen everyone's thinking. The Spider Graph you just filled in is yours — don't compare it to your neighbour's."</p>
+            </div>
+
+            <h3>Tips &amp; pitfalls</h3>
+            <ul class="bullets">
+              <li>Participants may not know which score to give themselves — encourage them to go with their gut</li>
+              <li>If the room is mostly experienced users, spend less time on the group debrief and more on the "Why does the profile matter?" discussion</li>
+              <li>If someone scores themselves 5 on Vigilance: gently note that means they verify AI outputs <em>every time</em> — worth a quick warm "really?"</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- ACTIVITY 2 -->
+      <div class="activity-wrap" id="a2">
+        <details class="activity" open>
+          <summary>
+            <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <span class="summary-badge">#2</span>
+            <span class="summary-title">Changement de Paradigme — AI Paradigm Shift</span>
+            <span class="summary-meta">45 min · Morning</span>
+          </summary>
+          <div class="activity-body">
+            <div class="glance-box">
+              <div class="glance-item"><div class="gi-label">Time</div><div class="gi-value">09:30 – 10:15</div></div>
+              <div class="glance-item"><div class="gi-label">Format</div><div class="gi-value">Plenary lecture + Q&amp;A</div></div>
+              <div class="glance-item"><div class="gi-label">Website</div><div class="gi-value">module1.html</div></div>
+              <div class="glance-item"><div class="gi-label">Materials</div><div class="gi-value">Slides (deck sections 31–43)</div></div>
+            </div>
+
+            <h3>Why we run it</h3>
+            <p>This module sets the <strong style="color:var(--text-primary)">conceptual frame for the entire day</strong>. Without it, the Card Game is just a task-sorting exercise. The four ethical considerations introduced here will be reactivated in Activity #3. The vocabulary (LLM, Agent, Hallucination) will be used in every subsequent activity.</p>
+
+            <div class="key-message">
+              <div class="km-label">Key message</div>
+              <p>The AI revolution is, above all, a human revolution. AI is a collaborator, not a replacement — the most important question is not "what can AI do?" but "what do we want humans to keep doing?"</p>
+            </div>
+
+            <h3>Main takeaways</h3>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>The three waves: Predictive → Generative (Copilots) → Agentic (Agents)</span></li>
+              <li><input type="checkbox"><span>Generative AI predicts; Agentic AI acts — one answers, the other executes</span></li>
+              <li><input type="checkbox"><span>Four ethical considerations: Bias, Data, Responsibility, Ecological impact</span></li>
+              <li><input type="checkbox"><span>A shared vocabulary: LLM, Prompt, Hallucination, Agent, RAG…</span></li>
+            </ul>
+
+            <h3>Content map — use <code>module1.html</code> to pace</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Section</th><th>Key point</th><th>Time</th></tr></thead>
+                <tbody>
+                  <tr><td>Les 3 vagues de l'IA</td><td>Wave 1: Predictive. Wave 2: Copilots. Wave 3: Agents — now.</td><td>8 min</td></tr>
+                  <tr><td>IA Générative vs Agentique</td><td>"Tool that thinks" vs "Tool that acts"</td><td>7 min</td></tr>
+                  <tr><td>La révolution humaine</td><td>Benioff quote. Mollick / "Cybernetic Teammate". Reallocation, not replacement.</td><td>10 min</td></tr>
+                  <tr><td>Les 4 enjeux éthiques</td><td>Bias, Data, Responsibility, Ecological footprint — brief, each reappears in #3</td><td>8 min</td></tr>
+                  <tr><td>Glossaire (interactive)</td><td>5 min for participants to click through terms on <code>module1.html</code></td><td>5 min</td></tr>
+                  <tr><td>Q&amp;A</td><td>Open floor</td><td>7 min</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Talk-track highlights</h3>
+            <div class="callout">
+              <div class="callout-label">On the three waves</div>
+              <p>"Using historical data to make predictions has been around for a long time. More recently, Generative AI brought the notion of Copilots — assistive AI that augments how people work. Now, Salesforce is leading the way with the third wave: Agentic AI. Agents don't just assist. They take action. Use this with anyone who says AI is a new fad — it is actually a 10-year evolution."</p>
+            </div>
+            <div class="callout">
+              <div class="callout-label">The Benioff quote</div>
+              <p>"'We are the last generation to manage only humans.' — Marc Benioff, Salesforce CEO, World Economic Forum 2026. Think about that for a moment. In the near future, some of us will manage both humans and AI agents. The question is not whether AI will change work — it will. The question is which tasks we want to give it so we can focus on what matters most as humans."</p>
+            </div>
+            <div class="callout">
+              <div class="callout-label">On hallucination — use it to break the ice</div>
+              <p>"The word 'hallucination' always gets a reaction. AI can produce something that looks perfectly right and is completely wrong. It's not lying — it's predicting the most statistically probable output from its training data. That's why human judgment remains indispensable. This word alone is a good reason to always verify before you publish."</p>
+            </div>
+
+            <h3>Tips &amp; pitfalls</h3>
+            <ul class="bullets">
+              <li>Do not skip the ethical considerations, even if short on time — a 5-minute mention is enough, they'll be fully unpacked in Activity #3</li>
+              <li>The glossary on <code>module1.html</code> is interactive — encourage participants to explore it themselves rather than reading every definition aloud</li>
+              <li>If someone says "I use it every day": welcome it, invite them to share a concrete example. It normalises practice and reassures hesitant participants</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- ACTIVITY 3 -->
+      <div class="activity-wrap" id="a3">
+        <details class="activity" open>
+          <summary>
+            <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <span class="summary-badge">#3</span>
+            <span class="summary-title">AI Card Game — Maison Clarté Workshop</span>
+            <span class="summary-meta">45 min · Morning</span>
+          </summary>
+          <div class="activity-body">
+            <div class="glance-box">
+              <div class="glance-item"><div class="gi-label">Time</div><div class="gi-value">10:30 – 11:15</div></div>
+              <div class="glance-item"><div class="gi-label">Format</div><div class="gi-value">Group workshop — 3 rounds</div></div>
+              <div class="glance-item"><div class="gi-label">Website</div><div class="gi-value">atelier.html</div></div>
+              <div class="glance-item"><div class="gi-label">Groups</div><div class="gi-value">4–6 people per group</div></div>
+            </div>
+
+            <h3>Why we run it</h3>
+            <p>This is where theory becomes judgment. After Module 2, participants now apply the Automate/Augment/Ethics framework to a real-world case — <strong style="color:var(--text-primary)">Maison Clarté</strong>, a fictional retail chain. The three rounds are deliberately sequenced: automation is intuitive and fast; augmentation is harder and forces the "what is uniquely human?" question; ethics is the check that prevents over-deployment.</p>
+
+            <div class="key-message">
+              <div class="km-label">Key message</div>
+              <p>Automation is obvious. Augmentation is where the real value is — and it requires first answering the uncomfortable question: "What makes a human irreplaceable in this role?"</p>
+            </div>
+
+            <h3>Main takeaways</h3>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>Automation and augmentation are complementary levers with different risk profiles</span></li>
+              <li><input type="checkbox"><span>The augmentation question is harder — and more strategically important — than automation</span></li>
+              <li><input type="checkbox"><span>Every AI deployment has ethical implications; surface them before implementation, not after</span></li>
+            </ul>
+
+            <h3>The Maison Clarté case</h3>
+            <p>Participants meet <strong>Julie, Head of Innovation at Maison Clarté</strong> (lifestyle retail: 20 boutiques + e-commerce). Three scenarios:</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Scenario</th><th>Users</th><th>The friction</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>A — "Les rapports…"</strong></td><td>Store managers (internal)</td><td>20 weekly reports × ~1.5h = 30 human-hours/week lost. Only 30% read by HQ. Real alerts buried in noise.</td></tr>
+                  <tr><td><strong>B — "Les vendeurs…"</strong></td><td>In-store sales staff (internal)</td><td>2,000-SKU catalogue impossible to memorise. Staff use personal phones to Google. Poor intranet.</td></tr>
+                  <tr><td><strong>C — "Le service client…"</strong></td><td>Customers + staff</td><td>300 messages/week. 70% are 8 recurring questions. 3 agents drowning. 48h response time vs 4h target.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Running the three rounds</h3>
+            <p><strong style="color:var(--text-primary)">Split the room:</strong> Form groups of 4–6. Each group picks one scenario (or you assign them). Groups stay on the same scenario across all three rounds.</p>
+
+            <h4>Round 1 — Automate (8 min)</h4>
+            <p>Using the Automation cards on <code>atelier.html</code>, identify repetitive, low-value tasks that AI could handle. For each card selected, note: which card + what expected result.</p>
+            <div class="tip-box"><div class="tip-label">Facilitator note</div><p>Groups fill this round in 5 minutes. That is expected. The speed itself is part of the lesson.</p></div>
+
+            <h4>Round 2 — Augment (8 min)</h4>
+            <p>Using the Augmentation cards, ask: how could AI make the people in this scenario <em>better</em> at what they do best? Think about empathy, judgment, strategy, relationship.</p>
+            <div class="callout">
+              <div class="callout-label">Critical facilitation note — let the silence happen</div>
+              <p>"This round always starts with a silence. Do not fill it. The question 'what makes a human irreplaceable in this role?' is not one people ask often. Let the discomfort exist. After 60–90 seconds, it unlocks a richer conversation than Round 1."</p>
+            </div>
+
+            <h4>Round 3 — Ethics (6 min)</h4>
+            <p>Given what you decided in Rounds 1 and 2 — are there risks you haven't considered? Who could be disadvantaged? Would you implement as-is, or adjust?</p>
+            <p><em>If a participant raises job displacement concerns in Round 2, answer: "That is a legitimate question. Hold it — it is exactly what Round 3 is for."</em></p>
+
+            <h3>Plenary debrief (8 min)</h3>
+            <ol class="numbered">
+              <li>One spokesperson per group shares their top decision (30 seconds each)</li>
+              <li>Open: "Which round was the hardest? Why?"</li>
+              <li>Open: "Did any Ethics card change a decision you had already made?"</li>
+              <li>Close: "What you just did is what most organisations skip. They jump to automation, skip augmentation, and discover ethical issues six months later. You just did it in 45 minutes."</li>
+            </ol>
+
+            <h3>Talk-track</h3>
+            <div class="callout">
+              <div class="callout-label">Opening the Automate/Augment distinction</div>
+              <p>"When you look at your work and ask 'how can AI help?', there are two very different questions. The first: can AI do this for me? That's automation — and once you understand what AI can do, the use cases are obvious. The second is much harder: can AI make the person doing this work even better? That's augmentation. It requires first answering a question most organisations never really ask: what is the unique value of a human being in this role? Not what they do — what they are in that role."</p>
+            </div>
+
+            <h3>Tips &amp; pitfalls</h3>
+            <ul class="bullets">
+              <li>If a group only picks automation cards: prompt them with "What happens to the store manager when she no longer spends 90 minutes on the report — what does she do with that time?"</li>
+              <li>If a group uses Ethics cards to veto everything: refocus — "Which of these risks could be mitigated by design?"</li>
+              <li>The flip cards work best when participants are on <code>atelier.html</code> on their own device</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- ACTIVITY 4 -->
+      <div class="activity-wrap" id="a4">
+        <details class="activity" open>
+          <summary>
+            <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <span class="summary-badge">#4</span>
+            <span class="summary-title">Lab Prompting Expert — RACE Method</span>
+            <span class="summary-meta">45 min · Morning</span>
+          </summary>
+          <div class="activity-body">
+            <div class="glance-box">
+              <div class="glance-item"><div class="gi-label">Time</div><div class="gi-value">11:30 – 12:15</div></div>
+              <div class="glance-item"><div class="gi-label">Format</div><div class="gi-value">Individual hands-on (3 exercises)</div></div>
+              <div class="glance-item"><div class="gi-label">Website</div><div class="gi-value">prompting.html</div></div>
+              <div class="glance-item"><div class="gi-label">Materials</div><div class="gi-value">AI tool account required</div></div>
+            </div>
+
+            <h3>Why we run it</h3>
+            <p>This is the first time participants <strong style="color:var(--text-primary)">directly operate an AI tool</strong> in a structured way. The RACE method gives them a replicable framework they can use in their daily work immediately. The three exercises are sequenced from playful (Marc's retirement email) to professional — building confidence progressively.</p>
+
+            <div class="key-message">
+              <div class="km-label">Key message</div>
+              <p>Think of AI as an extremely capable junior who just joined the organisation. They know nothing about your context. The more precisely you brief them — with a role, an action, context, and requirements — the better the output.</p>
+            </div>
+
+            <h3>Main takeaways</h3>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>AI is a reasoning engine, not a search engine — you get out what you put in</span></li>
+              <li><input type="checkbox"><span>The RACE framework produces reliably better results than unstructured requests</span></li>
+              <li><input type="checkbox"><span>Iteration is the rule — the first result is a starting point, not a final answer</span></li>
+              <li><input type="checkbox"><span>Never paste sensitive data into a consumer AI tool</span></li>
+            </ul>
+
+            <h3>The RACE framework</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Letter</th><th>Question</th><th>Example</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>R — Rôle</strong></td><td>Who should the AI be?</td><td>"Act as an experienced project manager at [Company]"</td></tr>
+                  <tr><td><strong>A — Action</strong></td><td>What exactly should it do?</td><td>"Write an invitation email", "Summarise this text"</td></tr>
+                  <tr><td><strong>C — Contexte</strong></td><td>For whom and why?</td><td>"For Marc's retirement — 15 years, cycling fan, Friday 5pm auditorium"</td></tr>
+                  <tr><td><strong>E — Exigences</strong></td><td>Format, tone, constraints?</td><td>"Humorous, max 3 paragraphs, include call to action for online collection"</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tip-box"><div class="tip-label">Note for facilitators</div><p>The deck uses <strong>RTCF</strong> (Rôle, Tâche, Contexte, Format). The website and RACE Builder use <strong>RACE</strong>. Use RACE throughout — it matches the tool participants will use on screen.</p></div>
+
+            <h3>Running the three exercises</h3>
+
+            <h4>Exercise 1 — Free prompt (5 min + 5 min debrief)</h4>
+            <p>Ask participants to open their AI tool and write the Marc retirement email with no guidance. Debrief 2–3 results. Establish the "before" state.</p>
+
+            <h4>Exercise 2 — Apply RACE (5 min + 2 min debrief)</h4>
+            <p>Rewrite the same request using the RACE Builder on <code>prompting.html</code>. Compare outputs — what changed?</p>
+
+            <h4>Exercise 3 — Professional use case (5 min + 5 min debrief)</h4>
+            <p>Participants choose one of two cases from <code>prompting.html</code>:</p>
+            <ul class="bullets">
+              <li><strong>Case A — Le Synthétiseur:</strong> Take a dense document; ask AI to simplify it for frontline staff and extract 3 concrete action items</li>
+              <li><strong>Case B — L'Assistant de Réflexion:</strong> Ask AI to "ask me the right questions first before giving answers" — powerful for senior participants</li>
+            </ul>
+
+            <h3>The three reflexes to reinforce</h3>
+            <ol class="numbered">
+              <li><strong>Critical mind:</strong> AI can hallucinate — always re-read before publishing or acting</li>
+              <li><strong>Data hygiene:</strong> Never paste sensitive data into a consumer AI tool</li>
+              <li><strong>Iteration:</strong> The first output is a draft. The real value comes from the conversation that follows.</li>
+            </ol>
+
+            <h3>Talk-track</h3>
+            <div class="callout">
+              <div class="callout-label">Opening the activity</div>
+              <p>"A prompt is not a search query. When you Google something, you're looking for an existing document. When you prompt AI, you're commissioning something new. Think of AI as a brilliant junior who just walked in the door. They're fast, they're capable, they have no idea how your organisation works, and they will do exactly what you tell them — no more, no less. If your brief is vague, the output will be vague."</p>
+            </div>
+
+            <h3>Tips &amp; pitfalls</h3>
+            <ul class="bullets">
+              <li>Some participants won't have an AI tool account — pair them with someone who does for Exercise 1</li>
+              <li>The Marc email always produces funny outputs — lean into it, laughter builds confidence</li>
+              <li>Case B (reflection assistant) is often the most valuable for senior participants — it shifts AI from writing tool to thinking partner</li>
+              <li>Watch for participants who skip RACE structure and write a long paragraph — gently redirect to the four-field structure</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- ACTIVITY 5 -->
+      <div class="activity-wrap" id="a5">
+        <details class="activity" open>
+          <summary>
+            <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <span class="summary-badge">#5</span>
+            <span class="summary-title">Mon Premier Gem — Personal AI Assistant</span>
+            <span class="summary-meta">45 min · Afternoon</span>
+          </summary>
+          <div class="activity-body">
+            <div class="glance-box">
+              <div class="glance-item"><div class="gi-label">Time</div><div class="gi-value">13:15 – 14:00</div></div>
+              <div class="glance-item"><div class="gi-label">Format</div><div class="gi-value">Individual hands-on</div></div>
+              <div class="glance-item"><div class="gi-label">Website</div><div class="gi-value">gemini.google.com (direct)</div></div>
+              <div class="glance-item"><div class="gi-label">Materials</div><div class="gi-value">Google account required</div></div>
+            </div>
+
+            <div class="tip-box">
+              <div class="tip-label">Site note</div>
+              <p>This activity is in the deck but does not yet have a dedicated page on the training website. Direct participants to <strong>gemini.google.com</strong>. A <code>gem.html</code> page is planned for a future update.</p>
+            </div>
+
+            <h3>Why we run it</h3>
+            <p>Lab Prompting taught participants to write better one-off prompts. This activity takes the next step: a <strong style="color:var(--text-primary)">configured AI assistant that remembers its mission</strong> across every conversation. The Gem is the day's tangible take-away — participants leave with something they built themselves.</p>
+
+            <div class="key-message">
+              <div class="km-label">Key message</div>
+              <p>The shift from "writing a prompt every time" to "having an AI assistant that already knows its mission" is the shift from AI as a tool to AI as a collaborator.</p>
+            </div>
+
+            <h3>Main takeaways</h3>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>A Gem is a persistent AI assistant within Gemini, configured with a specific mission</span></li>
+              <li><input type="checkbox"><span>Building a Gem requires the same thinking as a RACE prompt — just saved permanently</span></li>
+              <li><input type="checkbox"><span>The right use case is any task you perform repeatedly (weekly reports, email drafting, meeting prep…)</span></li>
+            </ul>
+
+            <h3>How to run the activity</h3>
+            <ol class="numbered">
+              <li><strong>Open discussion (3 min):</strong> "What is a Gem on Gemini?" — take 2–3 answers before explaining</li>
+              <li><strong>Demo your pre-built Gem (4 min):</strong> Show a Gem you built before the session. Demonstrate zero context-setting needed.</li>
+              <li><strong>Participants build their Gem (10 min):</strong> gemini.google.com → "My Gems" → "New Gem" → name, description, instructions</li>
+              <li><strong>Test and iterate (10 min):</strong> Each participant opens a new conversation with their Gem and runs a real task</li>
+              <li><strong>Debrief (8 min):</strong> 2–3 participants share their Gem concept and what they discovered</li>
+            </ol>
+
+            <h3>Suggested Gem concepts if participants are stuck</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Gem name</th><th>Use case</th><th>Standing instruction (abbreviated)</th></tr></thead>
+                <tbody>
+                  <tr><td>Mon Assistant Réunion</td><td>Prepare weekly team meeting</td><td>"Act as a meeting facilitator. Generate a structured agenda with time blocks and expected outcomes."</td></tr>
+                  <tr><td>Mon Synthétiseur</td><td>Condense long documents</td><td>"Extract 3 key ideas, 3 action items, 1 open question. Max 150 words, bullet form."</td></tr>
+                  <tr><td>Mon Coach Mail</td><td>Draft professional emails</td><td>"Draft in appropriate tone. Always offer two versions: formal and conversational."</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Tips &amp; pitfalls</h3>
+            <ul class="bullets">
+              <li>Participants sometimes over-engineer their first Gem — encourage simplicity: "Start with one task you do every week"</li>
+              <li>The Gem instructions are essentially a saved RACE prompt — explicitly connect back to Activity #4</li>
+              <li>Some participants won't have a Google account — pair them or have them observe a neighbour's build</li>
+              <li>If time runs short, the "test" phase can be abbreviated — the important outcome is that the Gem exists and has been named</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- ACTIVITY 6 -->
+      <div class="activity-wrap" id="a6">
+        <details class="activity" open>
+          <summary>
+            <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <span class="summary-badge">#6</span>
+            <span class="summary-title">L'Agentique en Action — Live Agentforce Demo</span>
+            <span class="summary-meta">30 min · Afternoon</span>
+          </summary>
+          <div class="activity-body">
+            <div class="glance-box">
+              <div class="glance-item"><div class="gi-label">Time</div><div class="gi-value">14:15 – 14:45</div></div>
+              <div class="glance-item"><div class="gi-label">Format</div><div class="gi-value">Live demo + discussion</div></div>
+              <div class="glance-item"><div class="gi-label">Website</div><div class="gi-value">agentique.html (post-demo)</div></div>
+              <div class="glance-item"><div class="gi-label">Materials</div><div class="gi-value">Agentforce demo environment</div></div>
+            </div>
+
+            <h3>Why we run it</h3>
+            <p>After a morning of AI concepts and an afternoon of hands-on generative tools, participants now see <strong style="color:var(--text-primary)">where the technology is heading</strong>. The Agentforce demo shows the qualitative leap from a copilot to an autonomous enterprise agent — one that handles 80% of a B2C customer service flow without human intervention. This is the day's horizon activity.</p>
+
+            <div class="key-message">
+              <div class="km-label">Key message</div>
+              <p>An AI Agent is not just a faster chatbot. It reasons, acts, remembers, and operates on trusted business data — autonomously, at scale, with humans at the helm for what matters most.</p>
+            </div>
+
+            <h3>Main takeaways</h3>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>Chatbot → Copilot → Agent: each step increases the level of autonomous action</span></li>
+              <li><input type="checkbox"><span>Agentforce can handle 80% of routine cases — freeing agents for the 20% that truly needs them</span></li>
+              <li><input type="checkbox"><span>Three pillars of a responsible Agentic Enterprise: Ethics by Design, Human at the Helm, Efficient Resource Use</span></li>
+            </ul>
+
+            <h3>Demo script (Agentforce B2C E-Commerce)</h3>
+            <ol class="numbered">
+              <li>Customer initiates contact → agent reads order history from Salesforce data</li>
+              <li>Agent verifies return eligibility against policy</li>
+              <li>Agent proposes options (exchange, refund, store credit) and processes the choice</li>
+              <li>Agent logs the resolution and closes the case — zero human intervention</li>
+              <li>Show the <strong>Agentforce Command Center</strong> — where human supervisors monitor and review escalations</li>
+            </ol>
+
+            <h3>The Human vs Agent allocation — use <code>agentique.html</code></h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>What humans keep</th><th>What agents do well</th></tr></thead>
+                <tbody>
+                  <tr><td>Judgment in ambiguity</td><td>Fast, fatigue-free execution</td></tr>
+                  <tr><td>Empathy and active listening</td><td>Pattern identification</td></tr>
+                  <tr><td>Accountability</td><td>Massive data processing</td></tr>
+                  <tr><td>Expression of values</td><td>24/7 availability</td></tr>
+                  <tr><td>Strategic intuition</td><td>Consistent responses</td></tr>
+                  <tr><td>Trust relationships</td><td>Workflow automation</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Ask the room: <em>"Looking at your own role — which tasks from the right column are you currently spending time on? What would you do with that time back?"</em></p>
+
+            <h3>The three pillars of a responsible Agentic Enterprise</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Pillar</th><th>What it means</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Ethics by Design</strong></td><td>5 Trusted AI principles: Human Rights, Privacy, Safety, Transparency, Inclusion — embedded in every product</td></tr>
+                  <tr><td><strong>Human at the Helm</strong></td><td>Humans review critical decisions; Agentforce Command Center for oversight; 80% of customers say human validation is essential</td></tr>
+                  <tr><td><strong>Efficient Resource Use</strong></td><td>Choose most energy-efficient LLM; lowest-carbon hosting; preset efficient prompt guardrails; AI Energy Score</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>Tips &amp; pitfalls</h3>
+            <ul class="bullets">
+              <li><strong>Test the Agentforce demo environment the morning of the training</strong> — live demos carry technical risk</li>
+              <li>Have a backup: a recorded demo video in case the live environment is unavailable</li>
+              <li>The "Human at the Helm" pillar directly answers the job-displacement concerns raised in Activity #3 — connect back explicitly</li>
+              <li>Leave 5 minutes at the end for <code>agentique.html</code> self-exploration</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+
+      <!-- ACTIVITY 7 -->
+      <div class="activity-wrap" id="a7">
+        <details class="activity" open>
+          <summary>
+            <svg class="summary-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            <span class="summary-badge">#7</span>
+            <span class="summary-title">Bilan Profil IA &amp; Conclusion</span>
+            <span class="summary-meta">30 min · Afternoon</span>
+          </summary>
+          <div class="activity-body">
+            <div class="glance-box">
+              <div class="glance-item"><div class="gi-label">Time</div><div class="gi-value">14:45 – 15:15</div></div>
+              <div class="glance-item"><div class="gi-label">Format</div><div class="gi-value">Individual survey + group reflection</div></div>
+              <div class="glance-item"><div class="gi-label">Website</div><div class="gi-value">home.html → Bilan button</div></div>
+              <div class="glance-item"><div class="gi-label">Materials</div><div class="gi-value">Spider Graph template (same as #1)</div></div>
+            </div>
+
+            <h3>Why we run it</h3>
+            <p>This activity <strong style="color:var(--text-primary)">closes the loop</strong> opened at 09:00. Participants re-run the Spider Graph and compare it against their morning baseline. Even after one day, scores shift — particularly on Maîtrise and Vigilance. The comparison is the proof of learning.</p>
+
+            <div class="key-message">
+              <div class="km-label">Key message</div>
+              <p>AI literacy is not a destination — it is a practice. Today was day one. The Spider Graph shows you how far you can move in eight hours.</p>
+            </div>
+
+            <h3>Main takeaways</h3>
+            <ul class="checklist">
+              <li><input type="checkbox"><span>I can see concrete progress between my morning and evening Spider Graph scores</span></li>
+              <li><input type="checkbox"><span>I have a personal next step — one thing I will try differently next week</span></li>
+              <li><input type="checkbox"><span>I know where to go to keep learning (module resource cards, Salesforce Trusted AI, Agentforce docs)</span></li>
+            </ul>
+
+            <h3>How to facilitate</h3>
+            <ol class="numbered">
+              <li>Ask everyone to return to <code>home.html</code> and click the Bilan button (2 min)</li>
+              <li>Redisplay the Spider Graph template while they fill in the form</li>
+              <li>Show-of-hands per dimension — sketch the evening aggregate next to the morning one (5 min)</li>
+              <li>Ask: "What moved for you today? What surprised you about the shift?" (10 min)</li>
+              <li>Each participant names: "One thing I'm doing differently next week" (5 min)</li>
+              <li>Facilitator closing (5 min)</li>
+            </ol>
+
+            <h3>Closing talk-track</h3>
+            <div class="callout">
+              <div class="callout-label">Facilitator closing script</div>
+              <p>"Look at where you started this morning and where you are now. Some of you told me at 09:00 that you'd never really used AI at work. You just spent a day understanding the technology, applying a prompting framework that professional engineers use, and building a personal AI assistant. That's not nothing. The Spider Graph doesn't lie — you moved.</p>
+              <p style="margin-top:10px">AI is not a tool you learn once. It's a practice you develop over time — like managing people, or running meetings. The important thing is not to wait until you understand it perfectly before you start using it. Start with one real task. Use RACE. Iterate. And come back to the training site whenever you need to revisit a concept.</p>
+              <p style="margin-top:10px">Thank you for the energy you brought today."</p>
+            </div>
+
+            <h3>Tips &amp; pitfalls</h3>
+            <ul class="bullets">
+              <li>If time is short, the comparison can be done mentally — ask "On which dimension did you move most?" rather than redrawing the graph</li>
+              <li>Some participants will feel their scores "should" be higher — reassure them the Spider Graph is a tool for direction, not a performance metric</li>
+              <li>The "one thing next week" commitment is powerful — write them on a board or shared doc if possible</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── SECTION 6: QUICK REFERENCE ──────────────────────── -->
+    <section class="section" id="s6">
+      <h2>6. Quick Reference Card</h2>
+
+      <h3>Day-of checklist</h3>
+
+      <h4>Before participants arrive</h4>
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Website accessible and tested on both facilitator and participant devices</span></li>
+        <li><input type="checkbox"><span>Icebreaker survey (Google Form) accessible — test the link from <code>home.html</code></span></li>
+        <li><input type="checkbox"><span>Bilan survey (Google Form) accessible — test the link from <code>home.html</code></span></li>
+        <li><input type="checkbox"><span>Agentforce demo environment tested and logged in</span></li>
+        <li><input type="checkbox"><span>Backup demo video available offline</span></li>
+        <li><input type="checkbox"><span>AI tools accessible: ChatGPT, Claude, Gemini, Le Chat — at least one confirmed working</span></li>
+        <li><input type="checkbox"><span>Gem built and tested in your own Gemini account (demo for Activity #5)</span></li>
+        <li><input type="checkbox"><span>Spider Graph template ready to display on screen</span></li>
+      </ul>
+
+      <h4>At 09:00</h4>
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Send participants to <code>home.html</code></span></li>
+        <li><input type="checkbox"><span>Launch Icebreaker survey</span></li>
+        <li><input type="checkbox"><span>Draw the Spider Graph on screen as results come in</span></li>
+      </ul>
+
+      <h4>At each activity transition</h4>
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Announce the time and the page to open</span></li>
+        <li><input type="checkbox"><span>Confirm everyone can see the website before starting</span></li>
+      </ul>
+
+      <h4>At end of day</h4>
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Send participants to <code>home.html</code></span></li>
+        <li><input type="checkbox"><span>Launch Bilan survey</span></li>
+        <li><input type="checkbox"><span>Compare morning and evening Spider Graph</span></li>
+      </ul>
+
+      <h3>RACE framework — quick reference</h3>
+      <pre>[R — Rôle]      Who should the AI be?
+[A — Action]    What exactly should it do?
+[C — Contexte]  For whom and why?
+[E — Exigences] Format, tone, constraints?</pre>
+
+      <h3>AI tool accounts</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Tool</th><th>URL</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>ChatGPT</td><td><a href="https://chat.openai.com" target="_blank">chat.openai.com</a></td><td>GPT-4o — most widely known</td></tr>
+            <tr><td>Claude</td><td><a href="https://claude.ai" target="_blank">claude.ai</a></td><td>Anthropic — strong on nuance</td></tr>
+            <tr><td>Gemini</td><td><a href="https://gemini.google.com" target="_blank">gemini.google.com</a></td><td>Google — required for Gem activity</td></tr>
+            <tr><td>Le Chat</td><td><a href="https://chat.mistral.ai" target="_blank">chat.mistral.ai</a></td><td>Mistral AI — French/EU sovereign option</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Divergences to flag on the day</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Topic</th><th>Deck</th><th>Website</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td>Prompting framework</td><td>RTCF</td><td>RACE</td><td><strong>RACE</strong></td></tr>
+            <tr><td>Activity #5 page</td><td>Steps in slides</td><td>No page yet</td><td>gemini.google.com</td></tr>
+            <tr><td>Module 4 slot length</td><td>30 min</td><td>75 min on home</td><td>30 min demo + exploration</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- ── SECTION 7: APPENDIX ──────────────────────────────── -->
+    <section class="section" id="s7">
+      <h2>7. Appendix</h2>
+
+      <h3>A. Key glossary</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Term</th><th>Plain-English definition</th></tr></thead>
+          <tbody>
+            <tr><td><strong>LLM</strong></td><td>Large Language Model — the statistical engine behind tools like ChatGPT and Claude; trained on billions of documents</td></tr>
+            <tr><td><strong>Prompt</strong></td><td>The instruction you give to an AI — the quality of the input directly determines the quality of the output</td></tr>
+            <tr><td><strong>Hallucination</strong></td><td>When an AI generates something that looks correct but is factually wrong — it predicts plausibly, not truthfully</td></tr>
+            <tr><td><strong>Token</strong></td><td>The unit of text AI processes — roughly 0.75 words; LLMs have a "context window" limit</td></tr>
+            <tr><td><strong>Copilot</strong></td><td>An AI assistant embedded in a workflow — helps, but doesn't act autonomously</td></tr>
+            <tr><td><strong>Agent IA</strong></td><td>An AI that receives a goal and chains autonomous actions: browse, write, send, book, decide</td></tr>
+            <tr><td><strong>RAG</strong></td><td>Retrieval-Augmented Generation — connects an LLM to a specific knowledge base so it answers using your data</td></tr>
+            <tr><td><strong>Fine-tuning</strong></td><td>Retraining a base LLM on a specific dataset to specialise its behaviour for a particular domain</td></tr>
+            <tr><td><strong>Biais algorithmique</strong></td><td>When AI perpetuates or amplifies the biases present in its training data — subtle and easy to miss</td></tr>
+            <tr><td><strong>Einstein Trust Layer</strong></td><td>Salesforce's data security architecture — your business data is never used to train external LLMs</td></tr>
+            <tr><td><strong>Prompt injection</strong></td><td>A security attack that tries to hijack an AI agent's behaviour by embedding hidden instructions in content it processes</td></tr>
+            <tr><td><strong>Gem</strong></td><td>A saved, persistent AI assistant in Gemini — configured with a standing mission, needs no re-briefing per conversation</td></tr>
+            <tr><td><strong>Agentforce</strong></td><td>Salesforce's agentic AI platform — builds, deploys, and monitors AI agents that act on enterprise data</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>B. External links</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Resource</th><th>URL</th></tr></thead>
+          <tbody>
+            <tr><td>Agentforce platform</td><td><a href="https://www.salesforce.com/agentforce/" target="_blank">salesforce.com/agentforce</a></td></tr>
+            <tr><td>Salesforce Trusted AI Principles</td><td><a href="https://www.salesforce.com/products/einstein/ai-unbiased/" target="_blank">salesforce.com/…/ai-unbiased</a></td></tr>
+            <tr><td>Einstein Trust Layer</td><td><a href="https://www.salesforce.com/products/einstein/trust/" target="_blank">salesforce.com/…/einstein/trust</a></td></tr>
+            <tr><td>AI Acceptable Use Policy</td><td><a href="https://www.salesforce.com/company/legal/acceptable-use-policy/" target="_blank">salesforce.com/…/acceptable-use-policy</a></td></tr>
+            <tr><td>AI Sustainability Outlook Report 2025</td><td><a href="https://www.salesforce.com/resources/research-reports/ai-sustainability-outlook/" target="_blank">salesforce.com/…/ai-sustainability-outlook</a></td></tr>
+            <tr><td>"The Cybernetic Teammate" — Ethan Mollick</td><td><a href="https://www.oneusefulthing.org/p/the-cybernetic-teammate" target="_blank">oneusefulthing.org</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>C. Quote bank</h3>
+
+      <div class="quote-card">
+        <blockquote><p>"We are the last generation to manage only humans."</p></blockquote>
+        <cite>— Marc Benioff, Co-Founder &amp; CEO, Salesforce, World Economic Forum 2026</cite>
+      </div>
+
+      <div class="quote-card">
+        <blockquote><p>"AI sometimes functions more like a teammate than a tool."</p></blockquote>
+        <cite>— Ethan Mollick, Professor of Management, Wharton School</cite>
+      </div>
+
+      <div class="quote-card">
+        <blockquote><p>"We are in the Era of AI Responsibility."</p></blockquote>
+        <cite>— Marc Benioff, World Economic Forum 2026</cite>
+      </div>
+
+      <div class="quote-card">
+        <blockquote><p>"88% of customers say trust becomes more important in times of change."</p></blockquote>
+        <cite>— Salesforce research</cite>
+      </div>
+
+      <div class="quote-card">
+        <blockquote><p>"80% of customers believe it is important for humans to validate AI findings."</p></blockquote>
+        <cite>— Salesforce research</cite>
+      </div>
+
+      <h3>D. Persona framework (post-Spider-Graph calibration)</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Archetype</th><th>AI usage</th><th>Critical thinking</th><th>What they need</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Débutant curieux</strong></td><td>Low</td><td>Low</td><td>Reassurance; quick early wins</td></tr>
+            <tr><td><strong>Hésitant informé</strong></td><td>Low</td><td>Medium</td><td>Concrete examples; low-stakes first steps</td></tr>
+            <tr><td><strong>Praticien en chemin</strong></td><td>Medium</td><td>Medium</td><td>A framework to structure instincts</td></tr>
+            <tr><td><strong>Cow-boy</strong></td><td>High</td><td>Low</td><td>Critical-thinking reframe; data hygiene</td></tr>
+            <tr><td><strong>Expert responsable</strong></td><td>High</td><td>High</td><td>Depth on ethics and strategic augmentation</td></tr>
+            <tr><td><strong>Sceptique éclairé</strong></td><td>Low</td><td>High</td><td>Space to voice tension without being dismissed</td></tr>
+            <tr><td><strong>Stratège observateur</strong></td><td>Low</td><td>High</td><td>The business case; the Benioff quote; the demo</td></tr>
+            <tr><td><strong>Instinctif</strong></td><td>Medium</td><td>Low</td><td>RACE structure to make results more reliable</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:48px; font-size:0.78rem; color:var(--text-muted); text-align:center">
+        Last updated: May 2026 &nbsp;·&nbsp; Agentic Academy — Salesforce × Fondation Simplon &nbsp;·&nbsp; Internal document, not for participants
+      </p>
+    </section>
+
+  </main>
+</div><!-- /.page-body -->
+
+<script>
+  /* ── SMOOTH SCROLL ─────────────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* ── ACTIVE TOC HIGHLIGHTING ───────────────────────────────── */
+  const tocLinks = document.querySelectorAll('#toc a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tocLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + id) link.classList.add('active');
+        });
+      }
+    });
+  }, { rootMargin: '0px 0px -70% 0px', threshold: 0 });
+
+  document.querySelectorAll('section[id], div.activity-wrap[id]').forEach(el => observer.observe(el));
+
+  /* ── EXPAND / COLLAPSE ALL ─────────────────────────────────── */
+  const btn = document.getElementById('expand-all-btn');
+  const activities = document.querySelectorAll('details.activity');
+  let allExpanded = true;
+
+  btn.addEventListener('click', () => {
+    allExpanded = !allExpanded;
+    activities.forEach(d => d.open = allExpanded);
+    btn.innerHTML = allExpanded
+      ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg> Expand all'
+      : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 15 12 9 18 15"/></svg> Collapse all';
+  });
+</script>
+
+</body>
+</html>
