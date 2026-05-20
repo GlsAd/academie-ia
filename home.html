@@ -119,8 +119,8 @@
 
         h1 {
             font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
+            line-height: 1.1;
+            margin-bottom: 28px;
             font-weight: 700;
             background: linear-gradient(to right, #ffffff, #dbe4ff);
             -webkit-background-clip: text;
@@ -131,8 +131,9 @@
             font-size: 1.1rem;
             color: #ccc;
             max-width: 600px;
-            margin-bottom: 50px;
+            margin-bottom: 36px;
             font-weight: 300;
+            line-height: 1.7;
         }
 
         /* --- BOUTON GLASSMORPHISM --- */
@@ -332,21 +333,31 @@
         }
 
         .partner-logo {
-            height: 40px;
             width: auto;
             opacity: 0.95;
             filter: brightness(0) invert(1);
         }
 
+        /* Salesforce cloud mark is compact (273×191) — needs more height */
+        .partners-logos .partner-logo:first-child {
+            height: 52px;
+        }
+
+        /* Fondation Simplon is a wide wordmark (815×288) — smaller height keeps it readable */
+        .partners-logos .partner-logo:last-child {
+            height: 34px;
+        }
+
         .partners-divider {
             width: 1px;
-            height: 28px;
+            height: 32px;
             background: rgba(255,255,255,0.2);
         }
 
         @media (max-width: 600px) {
             .partners-logos { gap: 20px; }
-            .partner-logo { height: 32px; }
+            .partners-logos .partner-logo:first-child { height: 40px; }
+            .partners-logos .partner-logo:last-child { height: 28px; }
         }
 
         /* --- FOOTER --- */
@@ -361,7 +372,7 @@
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
+            h1 { font-size: 2.2rem; line-height: 1.1; }
             .section-title { font-size: 1.6rem; }
             
             .hamburger { display: block; }
