@@ -80,26 +80,49 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            min-height: 85vh;
+            min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 80px 20px;
             position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse 70% 80% at 50% 30%, rgba(0, 161, 224, 0.25) 0%, transparent 65%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(0, 49, 60, 0.6) 0%, transparent 70%),
+                linear-gradient(135deg, #00A1E0 0%, #032D60 30%, #05060f 55%, #00313c 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 161, 224, 0.18) 0%, transparent 70%);
+            top: -100px;
+            left: -100px;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .hero::after {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: #0055FF;
-            filter: blur(150px);
-            opacity: 0.2;
-            z-index: -1;
-            border-radius: 50%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 49, 60, 0.4) 0%, transparent 70%);
+            bottom: -80px;
+            right: -80px;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .badge {
@@ -122,9 +145,11 @@
             line-height: 1.7;
             margin-bottom: 28px;
             font-weight: 700;
-            background: linear-gradient(to right, #ffffff, #dbe4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: #ffffff;
+            color: #ffffff;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
         }
 
         p.subtitle {
@@ -329,35 +354,42 @@
         .partners-logos {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 20px;
+        }
+
+        .partner-logo-wrap {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
 
         .partner-logo {
             width: auto;
-            opacity: 0.95;
-            filter: brightness(0) invert(1);
+            opacity: 1;
         }
 
-        /* Salesforce cloud mark is compact (273×191) — needs more height */
-        .partners-logos .partner-logo:first-child {
-            height: 52px;
+        /* Salesforce cloud (273×191) */
+        .partners-logos .partner-logo-wrap:first-child .partner-logo {
+            height: 38px;
         }
 
-        /* Fondation Simplon is a wide wordmark (815×288) — smaller height keeps it readable */
-        .partners-logos .partner-logo:last-child {
-            height: 34px;
-        }
-
-        .partners-divider {
-            width: 1px;
-            height: 32px;
-            background: rgba(255,255,255,0.2);
+        /* Fondation Simplon wordmark (815×288) */
+        .partners-logos .partner-logo-wrap:last-child .partner-logo {
+            height: 28px;
         }
 
         @media (max-width: 600px) {
-            .partners-logos { gap: 20px; }
-            .partners-logos .partner-logo:first-child { height: 40px; }
-            .partners-logos .partner-logo:last-child { height: 28px; }
+            .partners-logos { gap: 14px; }
+            .partners-logos .partner-logo-wrap:first-child .partner-logo { height: 30px; }
+            .partners-logos .partner-logo-wrap:last-child .partner-logo { height: 22px; }
+            .partner-logo-wrap { padding: 10px 16px; }
         }
 
         /* --- FOOTER --- */
@@ -417,9 +449,12 @@
         <div class="partners-lockup">
             <span class="partners-label">En partenariat avec</span>
             <div class="partners-logos">
-                <img src="logo_source/Salesforce.com_logo.svg" alt="Salesforce" class="partner-logo">
-                <span class="partners-divider"></span>
-                <img src="logo_source/logo foundationSimplon.svg" alt="Fondation Simplon" class="partner-logo">
+                <div class="partner-logo-wrap">
+                    <img src="logo_source/Salesforce.com_logo.svg" alt="Salesforce" class="partner-logo">
+                </div>
+                <div class="partner-logo-wrap">
+                    <img src="logo_source/logo foundationSimplon.svg" alt="Fondation Simplon" class="partner-logo">
+                </div>
             </div>
         </div>
 
