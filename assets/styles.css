@@ -53,7 +53,7 @@
     --font-mono: "Courier New", monospace;
 
     /* Gradients */
-    --gradient-cta: linear-gradient(135deg, #0176D3 0%, #1B96FF 100%);
+    --gradient-cta: linear-gradient(135deg, #0176D3 0%, #7C3AED 100%);
 
     /* Hero ambient background (radial glows over dark base) */
     --bg-hero:
@@ -284,81 +284,92 @@ p.subtitle {
 }
 
 /* ── BUTTONS ─────────────────────────────────────────────────── */
+
+/* Primary — pill shape, dark fill, gradient border (blue → purple) */
 .btn-primary,
 .cta-button {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--gradient-cta);
+    /* gradient border trick: padding-box fills with bg, border-box paints the gradient */
+    background:
+        linear-gradient(var(--bg-base), var(--bg-base)) padding-box,
+        var(--gradient-cta) border-box;
     color: #fff;
-    border: none;
-    padding: 13px 32px;
-    border-radius: var(--radius-sm);
+    border: 2px solid transparent;
+    padding: 13px 36px;
+    border-radius: 100px;
     font-family: var(--font-sans);
     font-weight: 600;
     font-size: 0.92rem;
     cursor: pointer;
-    transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow: 0 2px 12px rgba(1, 118, 211, 0.35);
+    transition: box-shadow 0.25s, transform 0.15s, background 0.25s;
     letter-spacing: 0.1px;
 }
 
 .btn-primary:hover,
 .cta-button:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 24px rgba(1, 118, 211, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px rgba(124, 58, 237, 0.45), 0 0 12px rgba(1, 118, 211, 0.25);
 }
 
 .btn-primary:active,
 .cta-button:active {
     transform: translateY(0);
-    opacity: 1;
+    box-shadow: none;
 }
 
+/* Ghost — same pill, same gradient border, transparent bg */
 .btn-ghost,
 .survey-cta a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: transparent;
-    color: var(--text-primary);
-    border: 1px solid var(--border-hover);
+    background:
+        linear-gradient(var(--bg-base), var(--bg-base)) padding-box,
+        var(--gradient-cta) border-box;
+    color: var(--text-secondary);
+    border: 1px solid transparent;
     padding: 12px 28px;
-    border-radius: var(--radius-sm);
+    border-radius: 100px;
     font-family: var(--font-sans);
     font-weight: 600;
     font-size: 0.92rem;
     cursor: pointer;
-    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    transition: box-shadow 0.25s, transform 0.15s, color 0.2s;
 }
 
 .btn-ghost:hover,
 .survey-cta a:hover {
-    background: var(--bg-surface-hover);
-    border-color: rgba(255, 255, 255, 0.35);
+    color: var(--text-primary);
     transform: translateY(-1px);
+    box-shadow: 0 0 16px rgba(124, 58, 237, 0.30);
 }
 
+/* Copy / generate — same pill gradient-border style */
 .copy-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--gradient-cta);
+    background:
+        linear-gradient(var(--bg-base), var(--bg-base)) padding-box,
+        var(--gradient-cta) border-box;
     color: #fff;
-    border: none;
-    padding: 11px 24px;
-    border-radius: var(--radius-sm);
+    border: 2px solid transparent;
+    padding: 11px 28px;
+    border-radius: 100px;
     font-family: var(--font-sans);
     font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s, transform 0.15s;
-    box-shadow: 0 2px 10px rgba(1, 118, 211, 0.30);
+    transition: box-shadow 0.25s, transform 0.15s;
 }
 
-.copy-btn:hover  { opacity: 0.85; transform: translateY(-1px); }
-.copy-btn:active { transform: translateY(0); }
+.copy-btn:hover  {
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.40);
+}
+.copy-btn:active { transform: translateY(0); box-shadow: none; }
 
 .hero-actions {
     display: flex;
