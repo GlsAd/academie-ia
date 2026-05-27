@@ -171,7 +171,9 @@
     /* ── RESPONSIVE ──────────────────────────────────────────── */
     @media(max-width:900px){
       .page-body{grid-template-columns:1fr;padding:0 16px 80px;}
-      .sidebar{position:static;max-height:none;padding:24px 0 0;border-bottom:1px solid var(--border);margin-bottom:32px;}
+      .sidebar{position:static;max-height:40vh;overflow-y:auto;padding:16px;
+        background:var(--bg-surface);border:1px solid var(--border);
+        border-radius:var(--radius-md);margin-bottom:28px;}
       .main{padding:32px 0 0;}
       .page-hero h1{font-size:1.9rem;}
     }
@@ -180,6 +182,19 @@
       .persona-grid{grid-template-columns:1fr;}
       table{font-size:.80rem;}
       th,td{padding:7px 10px;}
+      details.activity summary{flex-wrap:wrap;gap:8px;}
+      .summary-chevron{order:0;}
+      .summary-badge{order:1;}
+      .summary-title{width:100%;order:2;}
+      .summary-meta{order:3;font-size:.72rem;}
+    }
+    @media(max-width:480px){
+      .page-hero{padding:36px 20px 32px;}
+      .page-hero h1{font-size:1.55rem;line-height:1.3;}
+      h2{font-size:1.2rem;}
+      .activity-body{padding:0 16px 20px;}
+      .glance-box{grid-template-columns:1fr;}
+      .lang-sticky{top:10px;right:10px;}
     }
   </style>
 </head>
