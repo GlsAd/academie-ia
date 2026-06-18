@@ -15,7 +15,7 @@
    - [#1 Baseline Profil IA — Spider Graph Quiz](#activity-1--baseline-profil-ia--30-min)
    - [#2 Changement de Paradigme — AI Paradigm Shift](#activity-2--changement-de-paradigme--45-min)
    - [#3 AI Card Game — Maison Clarté Workshop](#activity-3--ai-card-game--maison-clarté-workshop--45-min)
-   - [#4 Lab Prompting Expert — RACE Method](#activity-4--lab-prompting-expert--45-min)
+   - [#4 Lab Prompting Expert — CARE Method](#activity-4--lab-prompting-expert--45-min)
    - [#5 Mon Premier Gem — Personal AI Assistant](#activity-5--mon-premier-gem--45-min)
    - [#6 L'Agentique en Action — Live Demo](#activity-6--lagentique-en-action--30-min)
    - [#7 Bilan Profil IA & Closing](#activity-7--bilan-profil-ia--conclusion--30-min)
@@ -54,7 +54,7 @@ Participants are professionals from public and private organisations. The cohort
 |---|---|---|
 | **Débutant curieux** | Low usage, open attitude | Reassurance that starting now is fine |
 | **Hésitant informé** | Has heard of AI, hasn't tried it | Concrete, low-stakes first wins |
-| **Praticien en chemin** | Occasional user, wants structure | A framework (RACE) to consolidate instincts |
+| **Praticien en chemin** | Occasional user, wants structure | A framework (CARE) to consolidate instincts |
 | **Cow-boy** | Regular user, skips verification | The critical-thinking reframe |
 | **Expert responsable** | High proficiency, aware of limits | Depth on ethics and augmentation |
 | **Sceptique éclairé** | Informed but doubtful | Space to voice the tension without being dismissed |
@@ -67,7 +67,7 @@ Participants are professionals from public and private organisations. The cohort
 By the end of the day, each participant should be able to say:
 
 - [ ] "I understand the difference between Generative AI and Agentic AI"
-- [ ] "I can write a structured prompt using RACE and get a useful result"
+- [ ] "I can write a structured prompt using CARE and get a useful result"
 - [ ] "I have a personal AI assistant (Gem) configured for a recurring task"
 - [ ] "I know the four ethical considerations to keep in mind when deploying AI"
 - [ ] "I am less afraid and more curious than I was this morning"
@@ -86,7 +86,7 @@ By the end of the day, each participant should be able to say:
 | — | 10:15 – 10:30 | Break | — | 15 min |
 | 3 | 10:30 – 11:15 | **AI Card Game** — Maison Clarté workshop | Group exercise (3 rounds) | 45 min |
 | — | 11:15 – 11:30 | Debrief + transition | Plenary | 15 min |
-| 4 | 11:30 – 12:15 | **Lab Prompting Expert** — RACE method | Individual hands-on | 45 min |
+| 4 | 11:30 – 12:15 | **Lab Prompting Expert** — CARE method | Individual hands-on | 45 min |
 | — | 12:15 – 13:15 | Lunch | — | 60 min |
 | 5 | 13:15 – 14:00 | **Mon Premier Gem** — Personal AI assistant | Individual hands-on | 45 min |
 | — | 14:00 – 14:15 | Break | — | 15 min |
@@ -133,7 +133,7 @@ The training website at `home.html` is the participant's home screen for the day
 | `home.html` | Start and end of day | Launch the Icebreaker; navigate to modules; complete the Bilan |
 | `module1.html` | Activity #2 | Follow along with lecture; click glossary terms to expand definitions |
 | `atelier.html` | Activity #3 | Read the three Maison Clarté scenarios; filter and flip the AI capability cards |
-| `prompting.html` | Activity #4 | Use the live RACE Builder; copy their completed prompt to clipboard |
+| `prompting.html` | Activity #4 | Use the live CARE Builder; copy their completed prompt to clipboard |
 | *(no page yet)* | Activity #5 | Mon Premier Gem — participants open **gemini.google.com** directly |
 | `agentique.html` | Activity #6 | Browse the Chatbot / Copilot / Agent comparator after the live demo |
 
@@ -154,7 +154,7 @@ Direct participants to `home.html` and ask them to click the appropriate button.
 
 | Topic | Deck | Website | Recommended for day-of |
 |---|---|---|---|
-| Prompting framework name | **RTCF** (Rôle, Tâche, Contexte, Format) | **RACE** (Rôle, Action, Contexte, Exigences) | Use **RACE** — it matches the live RACE Builder on `prompting.html` |
+| Prompting framework name | **RTCF** (Rôle, Tâche, Contexte, Format) | **CARE** (Contexte, Action, Rôle, Exigences) | Use **CARE** — it matches the live CARE Builder on `prompting.html` |
 | Activity #5 (Gem) | Full activity with step-by-step instructions | **No page on the site yet** | Ask participants to open gemini.google.com directly |
 | Module 4 duration | 30 min (deck) | 75 min slot on `home.html` | Use 30 min for demo; use remaining time for `agentique.html` exploration |
 | Profil IA quiz | Detailed 5-question Spider Graph in deck | Uses the Icebreaker Google Form as a proxy | Walk participants through the 5 dimensions verbally while they fill the form |
@@ -192,7 +192,7 @@ The Profil IA Spider Graph gives you a live read of the room at 09:00. Use it ac
 
 ### Pacing the group exercises
 
-For the Card Game (Activity #3) and the RACE Builder (Activity #4), manage time actively:
+For the Card Game (Activity #3) and the CARE Builder (Activity #4), manage time actively:
 
 - Announce time checks at the halfway point and at 5 minutes remaining
 - If a group is stuck: ask "What's the simplest task in this scenario that the AI could handle tonight, without anyone noticing?" — this unblocks the automation round immediately
@@ -280,7 +280,7 @@ This activity does two things simultaneously: it **breaks the ice** by making th
 
 **Why we run it**
 
-This module sets the **conceptual frame for the entire day**. Without it, the Card Game becomes a task-sorting exercise; with it, participants understand why Automate vs Augment is a meaningful distinction. The four ethical considerations introduced here will be reactivated in Activity #3. The vocabulary introduced (LLM, Agent, Hallucination, RACE) will be used in every subsequent activity.
+This module sets the **conceptual frame for the entire day**. Without it, the Card Game becomes a task-sorting exercise; with it, participants understand why Automate vs Augment is a meaningful distinction. The four ethical considerations introduced here will be reactivated in Activity #3. The vocabulary introduced (LLM, Agent, Hallucination, CARE) will be used in every subsequent activity.
 
 **Key message**
 
@@ -430,7 +430,7 @@ On the uncomfortable silence in Round 2:
 
 **Why we run it**
 
-This is the first time participants **directly operate an AI tool** in a structured way. The RACE method gives them a replicable framework they can take back to their daily work immediately. The three exercises are deliberately sequenced from playful (Marc's retirement party email) to professional (synthesiser, reflection assistant) — this reduces the intimidation of a first prompt and builds confidence progressively.
+This is the first time participants **directly operate an AI tool** in a structured way. The CARE method gives them a replicable framework they can take back to their daily work immediately. The three exercises are deliberately sequenced from playful (Marc's retirement party email) to professional (synthesiser, reflection assistant) — this reduces the intimidation of a first prompt and builds confidence progressively.
 
 **Key message**
 
@@ -439,11 +439,11 @@ This is the first time participants **directly operate an AI tool** in a structu
 **Main takeaways**
 
 - [ ] AI is a reasoning engine, not a search engine — you get out what you put in
-- [ ] The RACE framework (Rôle, Action, Contexte, Exigences) produces reliably better results than unstructured requests
+- [ ] The CARE framework (Contexte, Action, Rôle, Exigences) produces reliably better results than unstructured requests
 - [ ] Iteration is the rule — the first result is a starting point, not a final answer
 - [ ] Never paste sensitive data (passwords, personal HR data, confidential financials) into a consumer AI tool
 
-**The RACE framework**
+**The CARE framework**
 
 | Letter | Question | Example |
 |---|---|---|
@@ -452,7 +452,7 @@ This is the first time participants **directly operate an AI tool** in a structu
 | **C — Contexte** | For whom and why? | "For Marc's retirement party — 15 years at the company, cycling and cheese enthusiast, Friday 5pm in the auditorium" |
 | **E — Exigences** | Format, tone, constraints? | "Humorous tone, max 3 paragraphs, include a call to action for an online collection" |
 
-> **Note for facilitators:** The deck uses **RTCF** (Rôle, Tâche, Contexte, Format). The training website and the live RACE Builder use **RACE** (Rôle, Action, Contexte, Exigences). Use **RACE** throughout — it matches the tool participants will use on screen.
+> **Note for facilitators:** The deck uses **RTCF** (Rôle, Tâche, Contexte, Format). The training website and the live CARE Builder use **CARE** (Contexte, Action, Rôle, Exigences). Use **CARE** throughout — it matches the tool participants will use on screen.
 
 **How to run the three exercises**
 
@@ -461,10 +461,10 @@ This is the first time participants **directly operate an AI tool** in a structu
 
 Debrief (5 min): Ask 2–3 people to share their result. What was good? What was missing? Establish the "before" state.
 
-**Exercise 2 — Apply RACE (5 min)**
-> "Now rewrite the same request using the RACE framework on `prompting.html`. Use the RACE Builder: fill in Role, Action, Context, Requirements, click 'Copy Prompt', paste it into your AI tool."
+**Exercise 2 — Apply CARE (5 min)**
+> "Now rewrite the same request using the CARE framework on `prompting.html`. Use the CARE Builder: fill in Context, Action, Role, Requirements, click 'Copy Prompt', paste it into your AI tool."
 
-RACE example to show:
+CARE example to show:
 - R: Act as an enthusiastic colleague
 - A: Write an invitation email for Marc's retirement party
 - C: Marc is retiring after 15 years; he is a passionate cycling and cheese fan; the party is Friday at 5pm in the office auditorium
@@ -472,7 +472,7 @@ RACE example to show:
 
 Debrief (2 min): Compare the two outputs. What changed? What does this tell you about how AI processes instructions?
 
-**Exercise 3 — Apply RACE to a professional case (5 min + 5 min debrief)**
+**Exercise 3 — Apply CARE to a professional case (5 min + 5 min debrief)**
 Participants choose one of two cases available on `prompting.html`:
 
 - **Case A — "Le Synthétiseur":** Take a dense document (an internal regulation, a research article). Ask AI to simplify it for frontline staff and extract 3 concrete action items.
@@ -494,14 +494,14 @@ Opening the activity:
 
 On iteration:
 
-> "The golden rule: iteration. You almost never get the perfect result on the first try. AI is conversational — dialogue with it to refine the output. The RACE framework minimises the number of iterations needed, but never eliminates them."
+> "The golden rule: iteration. You almost never get the perfect result on the first try. AI is conversational — dialogue with it to refine the output. The CARE framework minimises the number of iterations needed, but never eliminates them."
 
 **Tips & pitfalls**
 
-- Some participants will not have an AI tool account — pair them with someone who does for Exercise 1; they can use the `prompting.html` RACE Builder independently for Exercises 2 and 3
+- Some participants will not have an AI tool account — pair them with someone who does for Exercise 1; they can use the `prompting.html` CARE Builder independently for Exercises 2 and 3
 - The Marc email exercise always produces funny outputs — lean into it, laughter at this point releases tension and builds confidence
 - The "reflection assistant" case (Case B) is often the most valuable for senior participants — it shifts AI from a writing tool to a thinking partner
-- Watch for participants who skip the RACE structure and just write a long paragraph — gently redirect them to the four-field structure
+- Watch for participants who skip the CARE structure and just write a long paragraph — gently redirect them to the four-field structure
 
 ---
 
@@ -529,7 +529,7 @@ Lab Prompting taught participants to write better one-off prompts. This activity
 **Main takeaways**
 
 - [ ] A Gem is a persistent AI assistant within Gemini, configured with a specific mission
-- [ ] Building a Gem requires the same thinking as a RACE prompt — just saved permanently
+- [ ] Building a Gem requires the same thinking as a CARE prompt — just saved permanently
 - [ ] A well-configured Gem eliminates the need to rewrite context at the start of every conversation
 - [ ] The right use case for a Gem is any task you perform repeatedly (weekly report synthesis, email drafting, meeting preparation…)
 
@@ -551,7 +551,7 @@ A Gem is a customised, specialised version of Gemini for a recurring task. It ha
 3. **Participants build their Gem (10 min):**
    - Go to gemini.google.com → "My Gems" → "New Gem"
    - Give it a name and a description
-   - Write the instructions (this is a saved RACE prompt — role, recurring action, standing context, output requirements)
+   - Write the instructions (this is a saved CARE prompt — role, recurring action, standing context, output requirements)
 4. **Test and iterate (10 min):** Each participant opens a new conversation with their Gem and runs a real task through it
 5. **Debrief (8 min):** 2–3 participants share their Gem concept and what they discovered during testing
 
@@ -567,7 +567,7 @@ A Gem is a customised, specialised version of Gemini for a recurring task. It ha
 
 - Participants sometimes over-engineer their first Gem — encourage simplicity: "Start with one task you do every week"
 - Some participants will not have a Google account — pair them or have them observe a neighbour's build
-- The Gem instructions are essentially a saved RACE prompt — explicitly connect back to Activity #4 to reinforce the framework
+- The Gem instructions are essentially a saved CARE prompt — explicitly connect back to Activity #4 to reinforce the framework
 - If time runs short, the "test" phase can be abbreviated — the important outcome is that the Gem exists and has been named
 
 ---
@@ -690,7 +690,7 @@ This activity **closes the loop** opened at 09:00. Participants re-run the Spide
 
 > "Look at where you started this morning and where you are now. Some of you told me at 09:00 that you'd never really used AI at work. You just spent a day understanding the technology, applying a prompting framework that professional engineers use, and building a personal AI assistant. That's not nothing. The Spider Graph doesn't lie — you moved.
 >
-> AI is not a tool you learn once. It's a practice you develop over time — like managing people, or running meetings. The important thing is not to wait until you understand it perfectly before you start using it. Start with one real task. Use RACE. Iterate. And come back to the training site whenever you need to revisit a concept or a framework.
+> AI is not a tool you learn once. It's a practice you develop over time — like managing people, or running meetings. The important thing is not to wait until you understand it perfectly before you start using it. Start with one real task. Use CARE. Iterate. And come back to the training site whenever you need to revisit a concept or a framework.
 >
 > Thank you for the energy you brought today."
 
@@ -738,7 +738,7 @@ This activity **closes the loop** opened at 09:00. Participants re-run the Spide
 | Bilan de la journée | `home.html` → bottom survey button |
 | Registration (for future cohorts) | `index.html` → embedded Google Form |
 
-### RACE framework — quick reference
+### CARE framework — quick reference
 
 ```
 [R — Rôle]    Who should the AI be?
@@ -760,7 +760,7 @@ This activity **closes the loop** opened at 09:00. Participants re-run the Spide
 
 | Topic | Deck says | Website says | Use |
 |---|---|---|---|
-| Prompting framework | RTCF | RACE | **RACE** |
+| Prompting framework | RTCF | CARE | **CARE** |
 | Activity #5 page | Steps in slides | No website page yet | gemini.google.com |
 | Module 4 slot length | 30 min | 75 min on home | 30 min demo + exploration |
 
@@ -832,7 +832,7 @@ Use this to calibrate your facilitation after seeing the morning Spider Graph re
 | **Expert responsable** | High | High | Depth on ethics and strategic augmentation |
 | **Sceptique éclairé** | Low | High | Space to voice tension without being dismissed |
 | **Stratège observateur** | Low | High | The business case; the Benioff quote; the Agentforce demo |
-| **Instinctif** | Medium | Low | RACE structure to make results more reliable |
+| **Instinctif** | Medium | Low | CARE structure to make results more reliable |
 
 ---
 
