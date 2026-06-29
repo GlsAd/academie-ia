@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Academy — Ma journée</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="home.html" class="logo">
+          <span>Agentic Academy</span>
+        </a>
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="home.html">Accueil</a></li>
+            <li><a href="module1.html">Intro IA</a></li>
+            <li><a href="atelier.html">Atelier</a></li>
+            <li><a href="prompting.html">Prompting</a></li>
+            <li><a href="agentique.html">Agentique</a></li>
+            <li><a href="certificat.html" class="active">Ma journée</a></li>
+        </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="page-hero">
+        <span class="badge">Souvenir de la journée</span>
+        <h1>Partagez votre journée Agentic Academy</h1>
+        <p class="subtitle">Personnalisez votre carte avec votre nom, puis partagez-la sur LinkedIn, X ou téléchargez-la pour l'utiliser où vous voulez.</p>
+    </div>
+
+    <div class="content-wrapper">
+
+        <!-- FORMULAIRE -->
+        <section class="cert-form-block">
+            <div class="cert-form-grid">
+                <div class="cert-field">
+                    <label for="cert-name"><span class="cert-label-icon">👤</span> Votre prénom &amp; nom</label>
+                    <input type="text" id="cert-name" placeholder="ex : Marie Dupont" autocomplete="name" maxlength="60">
+                </div>
+                <div class="cert-field">
+                    <label for="cert-date"><span class="cert-label-icon">📅</span> Date de la journée</label>
+                    <input type="date" id="cert-date">
+                </div>
+                <div class="cert-live-badge">
+                    <span class="cert-live-dot"></span> Mise à jour en direct
+                </div>
+            </div>
+        </section>
+
+        <!-- PREVIEW + ACTIONS -->
+        <section class="cert-preview-block">
+
+            <!-- Capture target -->
+            <div class="cert-capture" id="cert-capture">
+                <div class="cert-logos">
+                    <img src="logo_source/Salesforce.com_logo.svg" alt="Salesforce" class="cert-logo-sf">
+                    <span class="cert-logos-sep"></span>
+                    <img src="logo_source/logo foundationSimplon.svg" alt="Fondation Simplon" class="cert-logo-simplon">
+                </div>
+
+                <div class="cert-card">
+                    <span class="cert-pill">✦ Agentic Academy</span>
+
+                    <h2 class="cert-title">
+                        Ma journée<br>
+                        <span class="cert-title-accent">Agentic Academy</span>
+                    </h2>
+
+                    <p class="cert-blurb">
+                        J'ai exploré l'IA agentique, découvert Agentforce et posé les bases de ma transformation digitale avec Salesforce &amp; Simplon.
+                    </p>
+
+                    <div class="cert-separator"></div>
+
+                    <div class="cert-meta">
+                        <div class="cert-meta-left">
+                            <div class="cert-meta-label">Participant·e</div>
+                            <div class="cert-name" id="cert-name-display">Saisissez votre nom ci-dessus</div>
+                            <div class="cert-date" id="cert-date-display">—</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="cert-actions">
+                <button class="cert-btn cert-btn-linkedin" onclick="shareLinkedIn()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.86 3.37-1.86 3.6 0 4.27 2.37 4.27 5.46v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+                    Partager sur LinkedIn
+                </button>
+                <button class="cert-btn cert-btn-x" onclick="shareX()">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    Partager sur X
+                </button>
+                <button class="cert-btn cert-btn-download" onclick="downloadPNG()">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
+                    Télécharger en PNG
+                </button>
+                <button class="cert-btn cert-btn-share" id="cert-btn-native" onclick="shareNative()" style="display:none;">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v14"/></svg>
+                    Plus d'options
+                </button>
+            </div>
+
+            <p class="cert-helper" id="cert-helper">
+                ✏️ Saisissez votre nom dans le formulaire ci-dessus pour personnaliser la carte.
+            </p>
+
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Agentic Academy — Salesforce × Simplon</p>
+    </footer>
+
+    <!-- Toast -->
+    <div class="cert-toast" id="cert-toast">Carte téléchargée</div>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        const $name    = document.getElementById('cert-name');
+        const $date    = document.getElementById('cert-date');
+        const $nameOut = document.getElementById('cert-name-display');
+        const $dateOut = document.getElementById('cert-date-display');
+        const $helper  = document.getElementById('cert-helper');
+        const $toast   = document.getElementById('cert-toast');
+        const $capture = document.getElementById('cert-capture');
+
+        const MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+
+        // Pré-remplir la date avec aujourd'hui
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        $date.value = `${yyyy}-${mm}-${dd}`;
+
+        function formatDate(value) {
+            if (!value) return '—';
+            const [y, m, d] = value.split('-').map(Number);
+            if (!y || !m || !d) return '—';
+            return `${d} ${MOIS[m - 1]} ${y}`;
+        }
+
+        function update() {
+            const name = $name.value.trim();
+            $nameOut.textContent = name || 'Saisissez votre nom ci-dessus';
+            $nameOut.classList.toggle('placeholder', !name);
+            $dateOut.textContent = formatDate($date.value);
+            $helper.style.display = name ? 'none' : 'block';
+        }
+
+        $name.addEventListener('input', update);
+        $date.addEventListener('input', update);
+        update();
+
+        // ───── Génération PNG ─────
+        async function generatePNG() {
+            const canvas = await html2canvas($capture, {
+                backgroundColor: '#ffffff',
+                scale: 2,
+                useCORS: true,
+                logging: false,
+            });
+            return canvas;
+        }
+
+        async function downloadPNG() {
+            const canvas = await generatePNG();
+            const link = document.createElement('a');
+            const safe = ($name.value.trim() || 'agentic-academy').replace(/[^a-z0-9-]/gi, '-').toLowerCase();
+            link.download = `journee-agentic-academy-${safe}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            showToast('Carte téléchargée — vous pouvez maintenant la partager !');
+        }
+
+        // ───── Partage LinkedIn ─────
+        function shareLinkedIn() {
+            const name = $name.value.trim();
+            const pageUrl = window.location.href;
+            const text = name
+                ? `Je viens de terminer la journée Agentic Academy avec Salesforce × Simplon ! 🚀`
+                : `Découvrez Agentic Academy — la formation IA Salesforce × Simplon.`;
+            const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
+            window.open(url, '_blank', 'width=600,height=600');
+            showToast('💡 Pensez à attacher votre PNG téléchargé au post LinkedIn');
+        }
+
+        // ───── Partage X ─────
+        function shareX() {
+            const name = $name.value.trim();
+            const text = name
+                ? `Je viens de terminer la journée Agentic Academy avec @salesforce × @SimplonCo ! 🚀 #IA #Agentforce`
+                : `Agentic Academy — formation IA @salesforce × @SimplonCo`;
+            const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
+            window.open(url, '_blank', 'width=600,height=600');
+            showToast('💡 Pensez à attacher votre PNG téléchargé au post X');
+        }
+
+        // ───── Partage natif (mobile) ─────
+        if (navigator.canShare && navigator.canShare({ files: [new File([new Blob()], 't.png')] })) {
+            document.getElementById('cert-btn-native').style.display = 'inline-flex';
+        }
+
+        async function shareNative() {
+            try {
+                const canvas = await generatePNG();
+                canvas.toBlob(async (blob) => {
+                    const file = new File([blob], 'agentic-academy.png', { type: 'image/png' });
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            files: [file],
+                            title: 'Ma journée Agentic Academy',
+                            text: 'Je viens de terminer la journée Agentic Academy avec Salesforce × Simplon !',
+                        });
+                    }
+                });
+            } catch (e) {
+                // user cancelled or unsupported
+            }
+        }
+
+        // ───── Toast ─────
+        let toastTimer;
+        function showToast(message) {
+            $toast.textContent = message;
+            $toast.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => $toast.classList.remove('show'), 3500);
+        }
+    </script>
+
+</body>
+</html>
