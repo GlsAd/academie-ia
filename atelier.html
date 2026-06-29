@@ -121,59 +121,113 @@ const cards = [
   // ── AUTOMATISATION ──
   {
     type:'auto', icon:'🔍', name:'Recherche & Extraction',
-    desc:'Scanne instantanément d\'immenses bases de données documentaires pour en extraire la réponse exacte.',
-    question:'(Boutique) Comment éviter aux vendeurs de fouiller dans un intranet peu ergonomique ?',
-    example:'Maison Clarté : Le vendeur pose une question orale à l\'IA sur son outil. L\'IA scanne les 2000 fiches et répond en 2 sec sur la compatibilité.'
+    desc:'Scanne instantanément des bases documentaires (texte, voix, image) pour extraire la réponse exacte.',
+    question:'Comment éviter aux équipes de fouiller dans un intranet ou un drive mal indexé ?',
+    example:'Un vendeur pose une question à l\'oral depuis son outil. L\'IA scanne 2 000 fiches produit et répond en 2 secondes — y compris à partir d\'une photo envoyée par un client.'
   },
   {
-    type:'auto', icon:'🤖', name:'Tri & Réponse Auto (Chatbot)',
+    type:'auto', icon:'🤖', name:'Tri & Réponse automatique',
     desc:'Analyse l\'intention d\'un message entrant, le classifie et génère une réponse type si la question est récurrente.',
-    question:'(Service Client) Que faire des 70% de messages "Où est ma commande" ?',
-    example:'Maison Clarté : L\'IA détecte les questions sur les délais. Elle lit le statut dans l\'ERP et envoie une réponse automatique personnalisée en 1 minute.'
+    question:'Que faire des 70% de messages répétitifs qui saturent les boîtes mail ?',
+    example:'L\'IA détecte les questions sur les délais, lit le statut dans l\'ERP et envoie une réponse personnalisée en moins d\'une minute.'
   },
   {
-    type:'auto', icon:'📋', name:'Synthèse de documents',
-    desc:'Lit des dizaines de documents longs et hétérogènes pour en extraire un résumé exécutif clair.',
-    question:'(Rapports) Comment éviter à la direction de lire 20 documents Word le lundi matin ?',
-    example:'Maison Clarté : L\'IA lit les 20 rapports des managers et génère un tableau de bord d\'une page avec uniquement les alertes critiques.'
+    type:'auto', icon:'📋', name:'Synthèse multi-documents',
+    desc:'Lit des dizaines de documents — texte, comptes-rendus, enregistrements audio — et produit un résumé exécutif structuré.',
+    question:'Comment digérer 20 rapports ou 5h de réunions en quelques minutes ?',
+    example:'L\'IA lit 20 rapports hebdomadaires et 4 réunions enregistrées, puis génère un tableau d\'une page avec seulement les alertes critiques.'
   },
   {
     type:'auto', icon:'📥', name:'Structuration de données',
-    desc:'Transforme du texte libre en données structurées et comparables.',
-    question:'(Rapports) Comment transformer un format Word libre en indicateurs mesurables ?',
-    example:'Maison Clarté : Les managers dictent leur rapport à l\'oral. L\'IA remplit automatiquement les champs (ventes, moral, incidents) dans la base de données.'
+    desc:'Transforme du texte libre, des emails ou de la voix en données structurées et comparables.',
+    question:'Comment transformer un flot de texte libre en indicateurs mesurables ?',
+    example:'Les managers dictent leur rapport à l\'oral. L\'IA remplit automatiquement les champs (ventes, moral, incidents) dans la base.'
   },
   {
     type:'auto', icon:'🚦', name:'Routage intelligent',
-    desc:'Analyse l\'urgence ou la complexité d\'une demande pour l\'assigner à la bonne personne.',
-    question:'(Service Client) Comment s\'assurer que les litiges urgents ne se noient pas dans la masse ?',
-    example:'Maison Clarté : L\'IA détecte la colère ou le mot "défectueux" dans un mail et le place en priorité haute pour les agents.'
+    desc:'Analyse l\'urgence ou la complexité d\'une demande pour l\'assigner à la bonne personne ou au bon flux.',
+    question:'Comment s\'assurer que les cas urgents ne se noient pas dans la masse ?',
+    example:'L\'IA détecte la colère ou le mot "défectueux" dans un mail et le place en priorité haute pour l\'équipe litige.'
+  },
+  {
+    type:'auto', icon:'🚨', name:'Détection d\'anomalies & signaux faibles',
+    desc:'Repère dans un flux ce qui sort de la norme — chiffres atypiques, comportements suspects, tendances émergentes.',
+    question:'Comment voir un problème avant qu\'il ne devienne visible dans les rapports ?',
+    example:'Une boutique présente -40% de ventes vs même semaine N-1. L\'IA alerte le mardi, sans attendre le reporting du vendredi.'
+  },
+  {
+    type:'auto', icon:'👁️', name:'Analyse multimodale (image, audio, vidéo)',
+    desc:'Comprend une photo, un enregistrement vocal ou une vidéo et en extrait du contenu actionnable.',
+    question:'Comment exploiter ce qui n\'est pas du texte — photos clients, appels enregistrés, vidéos terrain ?',
+    example:'Un client envoie la photo d\'un produit défectueux. L\'IA reconnaît le SKU, ouvre le dossier qualité et propose un geste commercial.'
+  },
+  {
+    type:'auto', icon:'🔗', name:'Exécution autonome — chaîne d\'actions', agentic:true,
+    desc:'L\'agent enchaîne plusieurs actions sans validation à chaque étape : il consulte, décide, agit, met à jour les systèmes.',
+    question:'Quels processus peut-on confier entièrement à un agent, du début à la fin ?',
+    example:'Un client demande un retour. L\'agent vérifie la politique, génère l\'étiquette, envoie l\'email de confirmation, met à jour le CRM — sans intervention humaine pour les cas standards.'
+  },
+  {
+    type:'auto', icon:'🕸️', name:'Orchestration multi-agents', agentic:true,
+    desc:'Plusieurs agents spécialisés collaborent — l\'un trie, l\'autre rédige, un troisième escalade — sous une orchestration commune.',
+    question:'Comment couvrir un processus complexe qu\'un seul agent ne peut pas porter ?',
+    example:'Sur le service client : un agent qualifie la demande, un autre cherche les infos, un troisième rédige la réponse, un dernier escalade si besoin vers un humain.'
   },
 
   // ── AUGMENTATION ──
   {
-    type:'aug', icon:'✍️', name:'Rédaction empathique',
-    desc:'Co-rédige une réponse en adaptant le ton (chaleureux, professionnel, apaisant) selon la situation.',
-    question:'(Service Client) Comment aider les 3 agents à formuler des réponses parfaites pour les litiges sans y passer des heures ?',
-    example:'Maison Clarté : L\'agent clique sur "Générer geste commercial". L\'IA rédige un email d\'excuse parfaitement tourné, l\'agent n\'a qu\'à le valider.'
+    type:'aug', icon:'✍️', name:'Co-rédaction adaptée au contexte',
+    desc:'Co-rédige un texte en ajustant le ton (chaleureux, formel, commercial, apaisant) à la situation et au destinataire.',
+    question:'Comment produire des écrits de qualité sans y passer des heures ?',
+    example:'Un agent SAV clique sur "Générer geste commercial". L\'IA rédige un email d\'excuse calibré, l\'agent ajuste et envoie.'
   },
   {
     type:'aug', icon:'🧠', name:'Aide à la recommandation',
-    desc:'Suggère des produits complémentaires basés sur le contexte du client en temps réel.',
-    question:'(Boutique) Comment transformer une question sur le stock en opportunité de vente ?',
-    example:'Maison Clarté : L\'IA confirme qu\'un produit est en rupture, mais glisse au vendeur : "Proposez cette alternative, elle correspond à ses critères".'
+    desc:'Suggère un produit, une action ou un argument adapté en temps réel selon le contexte de l\'interaction.',
+    question:'Comment transformer chaque conversation client en opportunité concrète ?',
+    example:'L\'IA confirme qu\'un produit est en rupture mais glisse au vendeur : "Proposez cette alternative, elle correspond à ses critères."'
   },
   {
-    type:'aug', icon:'🗣️', name:'Préparation d\'entretien',
-    desc:'Analyse un historique complexe pour préparer un résumé des points à aborder lors d\'une interaction.',
-    question:'(Rapports/Siège) Comment la direction peut-elle mieux soutenir les responsables boutique ?',
-    example:'Maison Clarté : Avant son appel avec un manager, le directeur régional a un briefing IA lui signalant que l\'équipe a un moral en baisse depuis 2 semaines.'
+    type:'aug', icon:'🗣️', name:'Briefing avant interaction',
+    desc:'Synthétise un historique complexe en quelques points clés à aborder lors d\'un appel, un rendez-vous, une réunion.',
+    question:'Comment arriver préparé sans passer 30 minutes à fouiller les systèmes ?',
+    example:'Avant son appel avec un manager de boutique, le directeur régional a un briefing IA signalant que l\'équipe a un moral en baisse depuis 2 semaines.'
   },
   {
-    type:'aug', icon:'🤝', name:'Dégager du temps humain',
-    desc:'L\'IA gère l\'administratif pour que l\'humain se concentre sur l\'écoute et la résolution de problèmes complexes.',
-    question:'(Service Client) Que feront les agents s\'ils ne répondent plus aux questions basiques ?',
-    example:'Maison Clarté : Libérés de 70% des tickets, les agents prennent le temps de passer des appels téléphoniques aux clients ayant eu une mauvaise expérience.'
+    type:'aug', icon:'🥊', name:'Sparring partner / coach',
+    desc:'Challenge une idée, joue l\'avocat du diable, simule un interlocuteur difficile ou pose les bonnes questions avant d\'agir.',
+    question:'Comment tester un argumentaire ou un plan avant de le présenter ?',
+    example:'Avant un comité d\'investissement, l\'IA joue le DAF sceptique et liste les 5 objections qu\'il posera — l\'humain affine ses réponses.'
+  },
+  {
+    type:'aug', icon:'📊', name:'Analyse de feedback à l\'échelle',
+    desc:'Lit des milliers d\'avis, verbatims ou emails et en extrait thèmes, émotions et priorités opérationnelles.',
+    question:'Comment écouter à grande échelle ce que les humains ne peuvent plus lire ?',
+    example:'1 200 avis Trustpilot des 6 derniers mois → 4 thèmes prioritaires + verbatims représentatifs. L\'humain priorise les actions.'
+  },
+  {
+    type:'aug', icon:'🎯', name:'Exploration d\'options & variations',
+    desc:'Génère plusieurs angles, variantes ou scénarios d\'un même livrable pour comparer et choisir.',
+    question:'Comment dépasser le premier jet et explorer le champ des possibles ?',
+    example:'Pour une campagne soldes : 6 sujets d\'email pour le segment 18-30 ans, 6 pour le segment 50+, à tester en A/B.'
+  },
+  {
+    type:'aug', icon:'🛠️', name:'Création d\'outils sur mesure (vibe coding)',
+    desc:'Génère scripts, prototypes ou mini-apps à partir d\'une description en langage naturel. L\'humain pilote l\'intention, l\'IA écrit le code et itère.',
+    question:'Comment outiller un besoin métier précis sans passer par un cycle IT classique ?',
+    example:'Julie décrit en 3 phrases l\'outil qu\'elle voudrait pour suivre les retours boutique. L\'IA génère un tableau de bord fonctionnel en 20 minutes — elle teste, itère et déploie sans écrire une ligne de code.'
+  },
+  {
+    type:'aug', icon:'🧩', name:'Planification multi-étapes', agentic:true,
+    desc:'L\'agent propose un plan structuré pour atteindre un objectif — l\'humain valide, ajuste, lance.',
+    question:'Comment poser à plat un projet complexe sans tout penser seul ?',
+    example:'"Organise le lancement produit pour septembre." L\'agent restitue un plan en 12 étapes avec dépendances, ressources et risques. L\'humain arbitre.'
+  },
+  {
+    type:'aug', icon:'💾', name:'Mémoire & contexte long-terme', agentic:true,
+    desc:'L\'agent conserve l\'historique des interactions et le contexte de l\'utilisateur d\'une session à l\'autre.',
+    question:'Comment éviter de ré-expliquer son contexte à chaque sollicitation ?',
+    example:'L\'assistant connaît vos préférences, vos dossiers en cours, vos projets prioritaires — chaque nouvelle requête s\'appuie sur cette continuité.'
   },
 
   // ── ÉTHIQUE ──
@@ -196,10 +250,34 @@ const cards = [
     example:'Maison Clarté : Si les managers gagnent 1h30 par semaine, Julie doit redéfinir comment ce temps doit être réinvesti (formation, temps passé sur la surface de vente).'
   },
   {
-    type:'eth', icon:'🔒', name:'Confidentialité & Biais',
-    desc:'Les modèles IA peuvent laisser fuiter des données ou traiter les requêtes de manière inégale.',
-    question:'(Service Client) L\'IA trie-t-elle les tickets avec les mêmes biais qu\'un humain (ex: ignorer les réclamations mal formulées) ?',
-    example:'Maison Clarté : L\'IA de routage doit être auditée pour s\'assurer qu\'elle ne favorise pas uniquement les clients VIP au détriment des nouveaux clients.'
+    type:'eth', icon:'🔒', name:'Confidentialité des données',
+    desc:'Ne jamais partager de données confidentielles (bancaires, RH, clients, contrats) sans s\'assurer de la politique du fournisseur et de la résidence des données.',
+    question:'(Tous scénarios) Quelles données peut-on légitimement faire passer dans un outil IA — et lesquelles doivent rester en interne ?',
+    example:'Maison Clarté : le service client doit-il copier l\'historique complet d\'un client (adresse, commandes, paiements) dans un LLM grand public ? Non — il faut un environnement enterprise (Trust Layer, tenant dédié).'
+  },
+  {
+    type:'eth', icon:'🪞', name:'Biais & discrimination',
+    desc:'L\'IA reproduit (et parfois amplifie) les biais présents dans ses données d\'entraînement. Elle peut traiter inégalement des profils selon le genre, l\'âge, la langue, le niveau socio-économique.',
+    question:'(Service Client) L\'IA de routage favorise-t-elle inconsciemment les clients VIP au détriment des nouveaux ? Le ton qu\'elle adopte est-il le même selon le profil détecté ?',
+    example:'Maison Clarté : un client qui s\'exprime mal en français reçoit-il le même niveau de service qu\'un client au mail bien rédigé ? L\'IA doit être auditée pour éviter ces angles morts.'
+  },
+  {
+    type:'eth', icon:'🌫️', name:'Hallucinations & fiabilité',
+    desc:'Les LLM produisent parfois des informations fausses avec une apparence de certitude — chiffres inventés, citations inexistantes, politiques imaginaires. Ce n\'est pas un bug, c\'est structurel.',
+    question:'(Boutique) Si le vendeur récite à un client une information générée par l\'IA et qu\'elle est fausse, qui rattrape l\'erreur ?',
+    example:'Maison Clarté : l\'IA invente un délai de livraison ou une garantie qui n\'existe pas. Le client engage l\'enseigne sur cette base. Il faut des garde-fous : sources citées, ancrage CRM/ERP, validation humaine sur les données critiques.'
+  },
+  {
+    type:'eth', icon:'🪟', name:'Transparence & consentement',
+    desc:'Le client a-t-il le droit de savoir qu\'il échange avec un agent ? Peut-on lui expliquer pourquoi sa demande a été priorisée, refusée ou orientée ? L\'AI Act européen (en vigueur depuis 2025) impose cette transparence.',
+    question:'(Service Client) Faut-il annoncer "Vous échangez avec un agent IA" dès le premier message ? Quelle visibilité donner sur ses décisions ?',
+    example:'Maison Clarté : le chatbot SAV est-il identifié comme tel dès le départ ? Quand il refuse un geste commercial, peut-on expliquer pourquoi (politique, historique, scoring) ?'
+  },
+  {
+    type:'eth', icon:'📉', name:'Dépendance & atrophie cognitive',
+    desc:'Une délégation excessive à l\'IA dégrade les compétences humaines : connaissance produit, jugement, recherche autonome. Les études récentes (Microsoft, Mollick) le montrent.',
+    question:'(Boutique) Si les vendeurs s\'appuient toujours sur l\'IA pour répondre aux clients, que reste-t-il de leur expertise produit dans 2 ans ? Quel est leur métier de demain ?',
+    example:'Maison Clarté : Julie doit décider quelles compétences les humains gardent — et lesquelles peuvent être déléguées sans perte stratégique. Risque : une équipe qui ne sait plus opérer sans l\'IA.'
   }
 ];
 
@@ -221,17 +299,18 @@ function filter(type, btn) {
   filtered.forEach(c => {
     const wrap = document.createElement('div');
     wrap.className = `card-wrap type-${c.type}`;
+    const badge = c.agentic ? '<span class="agentic-badge">⚡ Agentique</span>' : '';
     wrap.innerHTML = `
       <div class="card-inner">
         <div class="front">
-          <div class="card-family">${labels[c.type]}</div>
+          <div class="card-family">${labels[c.type]}${badge}</div>
           <span class="card-icon">${c.icon}</span>
           <div class="card-name">${c.name}</div>
           <div class="card-desc">${c.desc}</div>
           <div class="card-hint">Cliquez pour retourner ⤻</div>
         </div>
         <div class="back">
-          <div class="card-family">${c.icon} ${c.name}</div>
+          <div class="card-family">${c.icon} ${c.name}${badge}</div>
           <div class="back-section">
             <div class="back-label">Question pour votre groupe</div>
             <div class="back-question">${c.question}</div>
