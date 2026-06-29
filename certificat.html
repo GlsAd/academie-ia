@@ -158,27 +158,49 @@
         update();
 
         // ───── Génération PNG ─────
-        // html2canvas a du mal avec les <img> externes pointant vers des SVG.
-        // On les inline en data URI une bonne fois — la capture devient fiable.
-        let _svgsInlined = false;
-        async function inlineSvgImages() {
-            if (_svgsInlined) return;
+        // html2canvas peine avec les SVG complexes (masques, defs, use…).
+        // Pour chaque <img> SVG : fetch du contenu, transformation en data URI
+        // (même origine que le document → pas de taint canvas y compris en
+        // file://), chargement dans une Image, rasterisation en PNG via
+        // canvas, puis remplacement du src. html2canvas ne voit que du PNG.
+        let _rasterized = false;
+        async function rasterizeSvgImages() {
+            if (_rasterized) return;
             const imgs = $capture.querySelectorAll('img');
             await Promise.all([...imgs].map(async img => {
                 try {
                     const res = await fetch(img.src);
                     const svgText = await res.text();
-                    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText);
+                    const dataUri = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText);
+
+                    const loader = new Image();
+                    await new Promise((resolve, reject) => {
+                        loader.onload = resolve;
+                        loader.onerror = reject;
+                        loader.src = dataUri;
+                    });
+
+                    const scale = 4;
+                    const w = loader.naturalWidth || 400;
+                    const h = loader.naturalHeight || 200;
+                    const canvas = document.createElement('canvas');
+                    canvas.width  = w * scale;
+                    canvas.height = h * scale;
+                    const ctx = canvas.getContext('2d');
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    ctx.drawImage(loader, 0, 0, w * scale, h * scale);
+                    img.src = canvas.toDataURL('image/png');
                     await img.decode().catch(() => {});
                 } catch (e) {
-                    console.warn('SVG inline failed for', img.src, e);
+                    console.warn('Rasterization failed for', img.src, e);
                 }
             }));
-            _svgsInlined = true;
+            _rasterized = true;
         }
 
         async function generatePNG() {
-            await inlineSvgImages();
+            await rasterizeSvgImages();
             const canvas = await html2canvas($capture, {
                 backgroundColor: '#ffffff',
                 scale: 2,
