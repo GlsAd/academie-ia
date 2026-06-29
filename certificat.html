@@ -47,9 +47,6 @@
                     <label for="cert-date"><span class="cert-label-icon">📅</span> Date de la journée</label>
                     <input type="date" id="cert-date">
                 </div>
-                <div class="cert-live-badge">
-                    <span class="cert-live-dot"></span> Mise à jour en direct
-                </div>
             </div>
         </section>
 
@@ -101,10 +98,6 @@
                 <button class="cert-btn cert-btn-download" onclick="downloadPNG()">
                     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>
                     Télécharger en PNG
-                </button>
-                <button class="cert-btn cert-btn-share" id="cert-btn-native" onclick="shareNative()" style="display:none;">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M16 6l-4-4-4 4M12 2v14"/></svg>
-                    Plus d'options
                 </button>
             </div>
 
@@ -165,7 +158,27 @@
         update();
 
         // ───── Génération PNG ─────
+        // html2canvas a du mal avec les <img> externes pointant vers des SVG.
+        // On les inline en data URI une bonne fois — la capture devient fiable.
+        let _svgsInlined = false;
+        async function inlineSvgImages() {
+            if (_svgsInlined) return;
+            const imgs = $capture.querySelectorAll('img');
+            await Promise.all([...imgs].map(async img => {
+                try {
+                    const res = await fetch(img.src);
+                    const svgText = await res.text();
+                    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText);
+                    await img.decode().catch(() => {});
+                } catch (e) {
+                    console.warn('SVG inline failed for', img.src, e);
+                }
+            }));
+            _svgsInlined = true;
+        }
+
         async function generatePNG() {
+            await inlineSvgImages();
             const canvas = await html2canvas($capture, {
                 backgroundColor: '#ffffff',
                 scale: 2,
@@ -206,29 +219,6 @@
             const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
             window.open(url, '_blank', 'width=600,height=600');
             showToast('💡 Pensez à attacher votre PNG téléchargé au post X');
-        }
-
-        // ───── Partage natif (mobile) ─────
-        if (navigator.canShare && navigator.canShare({ files: [new File([new Blob()], 't.png')] })) {
-            document.getElementById('cert-btn-native').style.display = 'inline-flex';
-        }
-
-        async function shareNative() {
-            try {
-                const canvas = await generatePNG();
-                canvas.toBlob(async (blob) => {
-                    const file = new File([blob], 'agentic-academy.png', { type: 'image/png' });
-                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                        await navigator.share({
-                            files: [file],
-                            title: 'Ma journée Agentic Academy',
-                            text: 'Je viens de terminer la journée Agentic Academy avec Salesforce × Simplon !',
-                        });
-                    }
-                });
-            } catch (e) {
-                // user cancelled or unsupported
-            }
         }
 
         // ───── Toast ─────
