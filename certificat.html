@@ -166,32 +166,48 @@
         let _rasterized = false;
         async function rasterizeSvgImages() {
             if (_rasterized) return;
-            const imgs = $capture.querySelectorAll('img');
-            await Promise.all([...imgs].map(async img => {
+            const imgs = [...$capture.querySelectorAll('img')].filter(img =>
+                img.src.endsWith('.svg') || img.src.includes('image/svg')
+            );
+            await Promise.all(imgs.map(async img => {
                 try {
                     const res = await fetch(img.src);
                     const svgText = await res.text();
-                    const dataUri = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgText);
+
+                    // Use the rendered bounding rect so the canvas matches what's displayed.
+                    // Inject explicit width/height into the SVG (overriding any existing ones)
+                    // so the browser draws the full viewBox at the target resolution.
+                    const rect = img.getBoundingClientRect();
+                    const scale = Math.max((window.devicePixelRatio || 1) * 2, 4);
+                    const w = Math.round(rect.width  * scale) || 400;
+                    const h = Math.round(rect.height * scale) || 200;
+
+                    const sizedSvg = svgText.replace(/<svg\b([^>]*)>/,
+                        (_, attrs) => `<svg${attrs.replace(/\s+(?:width|height)="[^"]*"/g, '')} width="${w}" height="${h}">`
+                    );
+
+                    // Blob URL preserves url(#id) fragment references intact;
+                    // encodeURIComponent would turn them into url(%23id) which
+                    // browsers can't resolve, causing onload to never fire.
+                    const blob = new Blob([sizedSvg], { type: 'image/svg+xml' });
+                    const blobUrl = URL.createObjectURL(blob);
 
                     const loader = new Image();
                     await new Promise((resolve, reject) => {
                         loader.onload = resolve;
                         loader.onerror = reject;
-                        loader.src = dataUri;
+                        loader.src = blobUrl;
                     });
 
-                    const scale = 4;
-                    const w = loader.naturalWidth || 400;
-                    const h = loader.naturalHeight || 200;
                     const canvas = document.createElement('canvas');
-                    canvas.width  = w * scale;
-                    canvas.height = h * scale;
+                    canvas.width  = w;
+                    canvas.height = h;
                     const ctx = canvas.getContext('2d');
                     ctx.imageSmoothingEnabled = true;
                     ctx.imageSmoothingQuality = 'high';
-                    ctx.drawImage(loader, 0, 0, w * scale, h * scale);
+                    ctx.drawImage(loader, 0, 0, w, h);
+                    URL.revokeObjectURL(blobUrl);
                     img.src = canvas.toDataURL('image/png');
-                    await img.decode().catch(() => {});
                 } catch (e) {
                     console.warn('Rasterization failed for', img.src, e);
                 }
