@@ -538,8 +538,8 @@ div.section-divider {
 .contrast-col,
 .scenario-card,
 .principle-card,
-.race-card,
-.race-builder,
+.care-card,
+.care-builder,
 .prompt-box,
 .usecase-card,
 .reflex-item,
@@ -1366,19 +1366,19 @@ div.section-divider {
 .principle-card p { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.65; }
 
 /* ── RACE GRID (prompting) ───────────────────────────────────── */
-.race-grid {
+.care-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 16px;
 }
 
-.race-card {
+.care-card {
     padding: 24px 20px;
     position: relative;
     overflow: hidden;
 }
 
-.race-card::before {
+.care-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -1386,7 +1386,7 @@ div.section-divider {
     background: var(--gradient-cta);
 }
 
-.race-letter {
+.care-letter {
     font-size: 2rem;
     font-weight: 700;
     background: var(--gradient-cta);
@@ -1396,21 +1396,21 @@ div.section-divider {
     margin-bottom: 6px;
 }
 
-.race-card h3 {
+.care-card h3 {
     font-size: 0.92rem;
     font-weight: 600;
     margin-bottom: 10px;
     color: var(--text-primary);
 }
 
-.race-card .race-q {
+.care-card .care-q {
     font-size: 0.80rem;
     color: var(--text-muted);
     margin-bottom: 10px;
     font-style: italic;
 }
 
-.race-card .race-ex {
+.care-card .care-ex {
     font-size: 0.78rem;
     color: var(--text-secondary);
     background: rgba(255, 255, 255, 0.04);
@@ -1421,7 +1421,7 @@ div.section-divider {
 }
 
 /* ── RACE BUILDER (prompting) ────────────────────────────────── */
-.race-builder { padding: 32px; }
+.care-builder { padding: 32px; }
 
 .builder-grid {
     display: grid;
@@ -1524,7 +1524,7 @@ div.section-divider {
     line-height: 1.7;
 }
 
-.prompt-box.apres pre .race-tag {
+.prompt-box.apres pre .care-tag {
     color: var(--sf-sky);
     font-weight: 600;
 }
@@ -1931,11 +1931,11 @@ footer a:hover { color: var(--text-secondary); }
     /* Registration */
     .registration-section { padding: 28px 20px; }
     .programme-grid { grid-template-columns: 1fr; }
-    .race-grid { grid-template-columns: 1fr 1fr; }
+    .care-grid { grid-template-columns: 1fr 1fr; }
 
     /* Grids */
     .grid-3, .grid-4, .resource-grid,
-    .race-grid, .tools-grid, .cap-grid,
+    .care-grid, .tools-grid, .cap-grid,
     .pillar-grid, .comparateur-grid { grid-template-columns: 1fr; }
 
     .grid-2, .contrast-grid, .avant-apres,
@@ -1953,5 +1953,5 @@ footer a:hover { color: var(--text-secondary); }
 
 @media (max-width: 480px) {
     .hero h1 { font-size: 2rem; }
-    .race-grid { grid-template-columns: 1fr; }
+    .care-grid { grid-template-columns: 1fr; }
 }
