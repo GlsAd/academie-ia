@@ -264,14 +264,21 @@ Si vous n'avez pas encore creusé le sujet, c'est le moment.
         }
 
         // ───── Partage X ─────
-        function shareX() {
-            const name = $name.value.trim();
-            const text = name
-                ? `Je viens de terminer la journée Agentic Academy avec @salesforce × @SimplonCo ! 🚀 #IA #Agentforce`
-                : `Agentic Academy — formation IA @salesforce × @SimplonCo`;
-            const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(window.location.href)}`;
+        async function shareX() {
+            // Open X first (must be synchronous — async breaks the browser popup gesture)
+            const text = `Journée complète sur l'IA agentique aujourd'hui.
+
+Ce que je retiens : les agents IA sont déployables maintenant, pas dans 3 ans. La vraie question c'est savoir quoi leur confier.
+
+Le travail humain ne disparaît pas, il se repositionne.
+
+#IA #AgentIA #Agentforce #ApprentissageContinu`;
+            const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
             window.open(url, '_blank', 'width=600,height=600');
-            showToast('💡 Pensez à attacher votre PNG téléchargé au post X');
+
+            // Then download the PNG
+            await downloadPNG();
+            showToast('📎 Attachez votre PNG au post X, puis publiez !');
         }
 
         // ───── Toast ─────
