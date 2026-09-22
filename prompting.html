@@ -76,9 +76,9 @@
                 </div>
                 <div class="care-card">
                     <div class="care-letter">R</div>
-                    <h3>Rôle</h3>
-                    <p class="care-q">Qui l'IA doit-elle incarner ?</p>
-                    <div class="care-ex">« Agis comme un chef de projet expérimenté dans une grande entreprise française. »</div>
+                    <h3>Résultat</h3>
+                    <p class="care-q">Quelle forme et quel contenu pour l'output ?</p>
+                    <div class="care-ex">« Email de 150 mots max, ton professionnel, avec des prochaines étapes claires. »</div>
                 </div>
                 <div class="care-card">
                     <div class="care-letter">E</div>
@@ -107,8 +107,8 @@
                         <textarea id="f-action" placeholder="Ex : Rédige un email d'annonce…" oninput="buildPrompt()"></textarea>
                     </div>
                     <div class="builder-field">
-                        <label>R — Rôle</label>
-                        <textarea id="f-role" placeholder="Ex : Agis comme un expert en communication interne…" oninput="buildPrompt()"></textarea>
+                        <label>R — Résultat</label>
+                        <textarea id="f-role" placeholder="Ex : Email de 150 mots max, ton professionnel, avec des prochaines étapes claires…" oninput="buildPrompt()"></textarea>
                     </div>
                     <div class="builder-field">
                         <label>E — Exigences</label>
@@ -149,9 +149,9 @@
 
 <span class="care-tag">[Action]</span> Rédige un email d'invitation pour le pot de départ de Marc.
 
-<span class="care-tag">[Rôle]</span> Agis comme un collègue boute-en-train qui connaît bien l'équipe.
+<span class="care-tag">[Résultat]</span> Email de 3 paragraphes maximum, ton humoristique mais chaleureux.
 
-<span class="care-tag">[Exigences]</span> Ton humoristique mais chaleureux. 3 paragraphes maximum. Ajouter un appel à contribution pour sa cagnotte en ligne.</pre>
+<span class="care-tag">[Exigences]</span> Ne pas mentionner les prix. Ajouter un appel à contribution pour sa cagnotte en ligne.</pre>
                 </div>
             </div>
         </section>
@@ -167,7 +167,7 @@
                     <span class="uc-tag">Cas A</span>
                     <h3>Le synthétiseur</h3>
                     <p>Vous avez un document dense à digérer : rapport administratif, nouvelle réglementation interne, article de recherche. Demandez à l'IA de le vulgariser pour des opérationnels et d'en tirer 3 actions concrètes.</p>
-                    <p class="uc-tip">Indice CARE → Contexte : le type de document et le profil des lecteurs. Action : résume et extrais 3 actions. Rôle : expert en vulgarisation. Exigences : bullet points, langage terrain.</p>
+                    <p class="uc-tip">Indice CARE → Contexte : le type de document et le profil des lecteurs. Action : résume et extrais 3 actions. Résultat : bullet points, langage terrain. Exigences : pas de jargon technique.</p>
                 </div>
                 <div class="usecase-card">
                     <span class="uc-tag">Cas B</span>
@@ -269,7 +269,7 @@
             const parts = [];
             if (contexte) parts.push('[Contexte] ' + contexte);
             if (action)   parts.push('[Action] ' + action);
-            if (role)     parts.push('[Rôle] ' + role);
+            if (role)     parts.push('[Résultat] ' + role);
             if (exig)     parts.push('[Exigences] ' + exig);
 
             preview.textContent = parts.join('\n\n');
